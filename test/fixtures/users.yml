@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  dni: MyString
+  name: MyString
+  surname: MyString
+  email: MyString
+  phone: MyString
+  password_digest: MyString
+  driver_license_expiration: 2022-10-27
+  birthdate: 2022-10-27
+
+two:
+  dni: MyString
+  name: MyString
+  surname: MyString
+  email: MyString
+  phone: MyString
+  password_digest: MyString
+  driver_license_expiration: 2022-10-27
+  birthdate: 2022-10-27
