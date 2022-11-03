@@ -19,6 +19,12 @@ module Alquilapp
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
 
+    # Lenguajes disponibles 
+    config.i18n.available_locales = [:en, :es]
+
+    # Lenguaje por default
+    config.i18n.default_locale = :es
+
     # Utiliza el archivo local_env.yml para tomar las variables de entorno
     config.before_configuration do
       env_file = File.join(Rails.root, 'config', 'local_env.yml')
