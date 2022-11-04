@@ -5,6 +5,10 @@ es:
       models:
         user:
           attributes:
+            driver_license:
+              bad_driver_license_type: 'La imagen debe estar en formato %{type1} o %{type2}'
+            driver_license_expiration:
+              bad_driver_license_expiration: 'La fecha de vencimiento de la licencia debe ser válida'
             birthdate:
               bad_birthdate: 'Debes tener al menos %{age} años de edad'
   authentication:

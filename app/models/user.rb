@@ -1,9 +1,15 @@
 class User < ApplicationRecord
   # Hace uso de la gema BCrypt para encriptar el password
   has_secure_password 
+  # Hace uso de active_storage para guardar archivos
+  has_one_attached :driver_license, dependent: :destroy
 
   # Validaciones a nivel base de datos
-  validates :dni, presence: true, uniqueness: true, length: { maximum: 8 }
+  validates :dni, presence: true, uniqueness: true, length: { minimum: 7, maximum: 8 },
+    format: {
+      with: /\A\d+\z/,
+      message: :invalid
+    }
   validates :name, presence: true
   validates :surname, presence: true
   validates :email, presence: true, uniqueness: true,
@@ -11,10 +17,17 @@ class User < ApplicationRecord
       with: /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i,
       message: :invalid
     }
-  validates :phone, presence: true, uniqueness: true
+  validates :phone, presence: true, uniqueness: true, 
+    format: {
+      with: /\A(?:\+?\d{1,3}\s*-?)?\(?(?:\d{3})?\)?[- ]?\d{3}[- ]?\d{4}\z/,
+      message: :invalid
+    }
   validates :password, length: { minimum: 6 }
-  validates :driver_license_expiration, presence: true #// validar fecha, que sea posterior al dia actual??
-  validates :birthdate, presence: true #// validar fecha, que tenga >= a 17 años
+  validates :driver_license_expiration, presence: true
+  validate :driver_license_expiration_must_be_valid
+  validates :driver_license, presence: true
+  validate :validate_driver_license_filetype # Validacion del tipo de attachment
+  validates :birthdate, presence: true
   validate :birthdate_must_be_at_least_seventeen_years_old
 
   # Callback antes de guardar
@@ -29,7 +42,22 @@ class User < ApplicationRecord
     self.email = email.downcase
   end
 
+  def validate_driver_license_filetype
+    # Valida el formato del archivo adjunto
+    if driver_license.attached? && !driver_license.content_type.in?(%w(image/jpeg image/png))
+      errors.add(:driver_license, :bad_driver_license_type, type1: ".jpeg", type2: ".png")
+    end
+  end
+
+  def driver_license_expiration_must_be_valid
+    # Valida que la licencia de expiración sea valida
+    if driver_license_expiration.present? && driver_license_expiration <= Date.today
+      errors.add(:driver_license_expiration, :bad_driver_license_expiration)
+    end
+  end
+
   def birthdate_must_be_at_least_seventeen_years_old
+    # Valida que la edad de la persona sea de al menos 17 años
     if (birthdate.present? && birthdate > 17.years.ago.to_date)
       errors.add(:birthdate, :bad_birthdate, age: 17)
     end

@@ -46,7 +46,13 @@
   <%# Input para driver license expiration %>
   <div>
     <%= form.label :driver_license_expiration %>
-    <%= form.date_select :driver_license_expiration, start_year: 1900, end_year: Time.now.year %>
+    <%= form.date_select :driver_license_expiration, start_year: Time.now.year, end_year: Time.now.year + 30 %>
+  </div>
+
+  <%# Input para driver license %>
+  <div>
+    <%= form.label :driver_license %>
+    <%= form.file_field :driver_license %>
   </div>
 
   <%# Input para birthdate %>

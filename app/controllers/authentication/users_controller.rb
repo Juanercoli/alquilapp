@@ -26,6 +26,6 @@ class Authentication::UsersController < ApplicationController
     def user_params
       # Se quiere que tenga un objeto User antes que todo el contenido de parámetros
       # Luego se hace el permit con todo lo que debe tener
-      params.require(:user).permit(:dni, :name, :surname, :email, :phone, :password, :driver_license_expiration, :birthdate)
+      params.require(:user).permit(:dni, :name, :surname, :email, :phone, :password, :driver_license, :driver_license_expiration, :birthdate)
     end
 end 
