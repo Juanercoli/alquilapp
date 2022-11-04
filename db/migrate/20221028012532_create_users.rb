@@ -9,6 +9,8 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.string :password_digest, null: false
       t.date :driver_license_expiration, null: false
       t.date :birthdate, null: false
+      t.boolean :isBlocked, default: false, null: false
+      t.boolean :isAccepted, default: false, null: false
 
       t.timestamps
     end

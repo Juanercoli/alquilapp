@@ -23,6 +23,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_28_012532) do
     t.string "password_digest", null: false
     t.date "driver_license_expiration", null: false
     t.date "birthdate", null: false
+    t.boolean "isBlocked", default: false, null: false
+    t.boolean "isAccepted", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["dni"], name: "index_users_on_dni", unique: true
