@@ -1,2 +1,13 @@
 es:
   app_name: 'Alquilapp'
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            birthdate:
+              bad_birthdate: 'Debes tener al menos %{age} años de edad'
+  authentication:
+    users:
+      create:
+        created: '¡Tu cuenta ha sido creada!'

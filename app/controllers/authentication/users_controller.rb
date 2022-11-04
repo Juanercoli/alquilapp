@@ -13,7 +13,7 @@ class Authentication::UsersController < ApplicationController
       # Si el usuario se guarda correctamente
       # Y se redirige a la página principal
       #!! REDIRECCION A PAGINA PRINCIPAL
-      redirect_to new_user_path, notice: "Usuario creado"
+      redirect_to new_user_path, notice: t(".created")
       else
       # Sino se renderiza de nuevo el formulario new
       # Se pasa como status unprocessable_entity para que TURBO entienda que el formulario no es correcto y se vuelva a renderizar (convención de turbo)

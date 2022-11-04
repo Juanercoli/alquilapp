@@ -3,7 +3,7 @@ class User < ApplicationRecord
   has_secure_password 
 
   # Validaciones a nivel base de datos
-  validates :dni, presence: true, uniqueness: true
+  validates :dni, presence: true, uniqueness: true, length: { maximum: 8 }
   validates :name, presence: true
   validates :surname, presence: true
   validates :email, presence: true, uniqueness: true,
@@ -15,6 +15,7 @@ class User < ApplicationRecord
   validates :password, length: { minimum: 6 }
   validates :driver_license_expiration, presence: true #// validar fecha, que sea posterior al dia actual??
   validates :birthdate, presence: true #// validar fecha, que tenga >= a 17 años
+  validate :birthdate_must_be_at_least_seventeen_years_old
 
   # Callback antes de guardar
   before_save :downcase_attributes
@@ -26,5 +27,11 @@ class User < ApplicationRecord
     self.name = name.downcase
     self.surname = surname.downcase
     self.email = email.downcase
+  end
+
+  def birthdate_must_be_at_least_seventeen_years_old
+    if (birthdate.present? && birthdate > 17.years.ago.to_date)
+      errors.add(:birthdate, :bad_birthdate, age: 17)
+    end
   end
 end
