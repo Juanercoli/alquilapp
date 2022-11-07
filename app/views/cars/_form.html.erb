@@ -1,0 +1,39 @@
+<%= form_with(model: @car) do |form| %>
+  <%# Permite mostrar los mensajes de error asociados %>
+  <% @car.errors.full_messages.each do |error| %>
+    <div>
+      <%= error %>
+    </div>
+
+  <% end %>
+   <%# Input para marca %>
+  <div>
+    <%= form.label :brand %>
+    <%= form.text_field :brand %>
+  </div>
+   <%# Input para color %>
+  <div>
+    <%= form.label :color %>
+    <%= form.text_field :color %>
+  </div>
+    <%# Input para patente %>
+  <div>
+    <%= form.label :patent %>
+    <%= form.text_field :patent %>
+  </div>
+    <%# Input para Nro.de auto %>
+  <div>
+    <%= form.label :vehicle_number %>
+    <%= form.number_field :vehicle_number %>
+  </div>
+  <%# Input para modelo %>
+  <div>
+    <%= form.label :model %>
+    <%= form.text_field :model %>
+  </div>
+
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

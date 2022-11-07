@@ -1,0 +1,29 @@
+<h1>Lista de autos</h1>
+<% if(@cars.count > 0)%>
+  <table class="table table-dark table-striped">
+      <thead>
+          <tr>
+              <th>Patente</th>
+              <th>Número de vehiculo</th>
+              <th>Color</th>
+              <th>Acciones</th>
+              <th>Acciones2</th>
+          </tr>
+      </thead>
+    
+      <tbody>
+          <% @cars.each do |car| %>
+
+              <tr>
+                  <td><%= link_to car.patent, car %></td>
+                  <td><%= car.vehicle_number %></td>
+                  <td><%= car.color %></td>
+                  <td><%= button_to "Delete",logic_delete_car_path(car),data: { turbo_confirm: "Are you sure?" },method: :put %></td>
+                  <td><%= link_to "Edit",edit_car_path(car) %></td>
+              </tr>
+          <% end %>
+      </tbody>
+  </table>
+<% else %>
+  <h4> No hay autos disponibles </h4>
+<% end %>
