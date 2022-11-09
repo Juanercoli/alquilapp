@@ -11,7 +11,39 @@ en:
               bad_driver_license_expiration: 'The expiration date of the driver license must be valid'
             birthdate:
               bad_birthdate: 'You must be at least %{age} years old'
+    models:
+      user: User
+    attributes:
+      user:
+        dni: 'DNI'
+        name: 'Name'
+        surname: 'Surname'
+        email: 'Email'
+        phone: 'Phone'
+        password: 'Password'
+        driver_license_expiration: 'Expiration date of driver license'
+        driver_license: 'Driver license'
+        birthdate: 'Birthdate'
+  shared:
+    header:
+      home: 'Home'
+      register: 'Register'
+      login: 'Access'
+      logout: 'Exit'
   authentication:
     users:
+      new:
+        form_legend: 'REGISTER FORM'
       create:
-        created: '¡Your account has been created!'
+        created: 'Your account has been created!'
+    sessions:
+      new:
+        form_legend: 'Login to your account'
+        placeholder_login: 'DNI or Email'
+        placeholder_password: 'Password'
+        submit: 'Login'
+      create:
+        created: 'Welcome!'
+        failed: 'Invalid login!'
+      destroy:
+        destroyed: 'Session is over! Bye'

@@ -11,7 +11,39 @@ es:
               bad_driver_license_expiration: 'La fecha de vencimiento de la licencia debe ser válida'
             birthdate:
               bad_birthdate: 'Debes tener al menos %{age} años de edad'
+    models:
+      user: Usuario
+    attributes:
+      user:
+        dni: 'DNI'
+        name: 'Nombre'
+        surname: 'Apellido'
+        email: 'Correo electrónico'
+        phone: 'Teléfono'
+        password: 'Contraseña'
+        driver_license_expiration: 'Fecha de vencimiento de licencia de conducir'
+        driver_license: 'Licencia de conducir'
+        birthdate: 'Fecha de nacimiento'
+  shared:
+    header:
+      home: 'Inicio'
+      register: 'Registro'
+      login: 'Acceso'
+      logout: 'Salir'
   authentication:
     users:
+      new:
+        form_legend: 'FORMULARIO DE REGISTRO'
       create:
         created: '¡Tu cuenta ha sido creada!'
+    sessions:
+      new:
+        form_legend: 'Inicie sesión en su cuenta'
+        placeholder_login: 'DNI o Email'
+        placeholder_password: 'Contraseña'
+        submit: 'Iniciar sesión'
+      create:
+        created: '¡Bienvenido!'
+        failed: '¡Inicio de sesión inválido!'
+      destroy:
+        destroyed: '¡Tu sesión ha terminado! Hasta la próxima'

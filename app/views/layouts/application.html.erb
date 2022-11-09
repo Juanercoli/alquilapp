@@ -1,16 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html class="h-full bg-gray-50">
   <head>
     <title> <%= t('app_name') %> </title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    
+    <%# Para poder agregar elementos al <head> utilizo un yield %>
+    <% if content_for? :head %>
+      <%= yield :head %>
+    <% end %>
   </head>
 
-  <body>
+  <body class="h-full">
+    <%= render 'shared/flash' %>
+    <%= render 'shared/header' %>
     <%= yield %>
   </body>
 </html>

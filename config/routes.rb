@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
+  resources :main, only: [:index]
 
   # Defines the root path route ("/")
   # root "articles#index"
@@ -13,5 +13,9 @@ Rails.application.routes.draw do
   # Sino figuraria cómo /authentication/users/new 
   namespace :authentication, path: "", as: "" do
     resources :users, only: [:new, :create]
+    resources :sessions, only: [:new, :create]
   end
+
+  # La ruta principal es:
+  root "main#index"
 end
