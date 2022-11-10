@@ -1,62 +1,150 @@
 <%= content_for :head do %>
   <%= javascript_import_module_tag "example" %>
 <% end %>
-<%= form_with(model: @user) do |form| %>
-  <%# Permite mostrar los mensajes de error asociados %>
-  <% @user.errors.full_messages.each do |error| %>
-    <div>
-      <%= error %>
+<div class="mt-10 sm:mt-0">
+  <div class="md:grid md:grid-cols-2 md:gap-6">
+    <div class="mt-5 md:col-span-2 md:mt-0">
+      <%= form_with(model: @user) do |form| %>
+        <div class="overflow-hidden shadow sm:rounded-md">
+          <div class="bg-white px-4 py-5 sm:p-6">
+            <div class="grid grid-cols-6 gap-6">
+
+              <%# Input para nombre %>
+              <div class="col-span-6 sm:col-span-3">
+                <%= form.label :name, class: "block text-sm font-medium text-gray-700" %>
+                <%= form.text_field :name, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 sm:text-sm" %>
+                <% if @user.errors.full_messages_for(:name).each  do |error| %>
+                    <ul class="list-disc list-inside">
+                      <li class="text-xs text-red-500">
+                        <%= error %>
+                      </li>
+                    </ul>
+                  <% end %>
+                <% end %>
+              </div>
+
+              <%# Input para apellido %>
+              <div class="col-span-6 sm:col-span-3">
+                <%= form.label :surname, class: "block text-sm font-medium text-gray-700" %>
+                <%= form.text_field :surname, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 sm:text-sm" %>
+                <% if @user.errors.full_messages_for(:surname).each  do |error| %>
+                    <ul class="list-disc list-inside">
+                      <li class="text-xs text-red-500">
+                        <%= error %>
+                      </li>
+                    </ul>
+                  <% end %>
+                <% end %>
+              </div>
+
+              <%# Input para birthdate %>
+              <div class="col-span-6 sm:col-span-3">
+                <%= form.label :birthdate, class: "block text-sm font-medium text-gray-700" %>
+                <%= form.date_select :birthdate, { start_year: 1900, end_year: Time.now.year }, { class: "mt-1 rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 sm:text-sm" } %>
+                <% if @user.errors.full_messages_for(:birthdate).each  do |error| %>
+                    <ul class="list-disc list-inside">
+                      <li class="text-xs text-red-500">
+                        <%= error %>
+                      </li>
+                    </ul>
+                  <% end %>
+                <% end %>
+              </div>
+
+              <%# Input para phone %>
+              <div class="col-span-6 sm:col-span-3">
+                <%= form.label :phone, class: "block text-sm font-medium text-gray-700" %>
+                <%= form.text_field :phone, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 sm:text-sm" %>
+                <% if @user.errors.full_messages_for(:phone).each  do |error| %>
+                    <ul class="list-disc list-inside">
+                      <li class="text-xs text-red-500">
+                        <%= error %>
+                      </li>
+                    </ul>
+                  <% end %>
+                <% end %>
+              </div>
+
+              <%# Input para dni %>
+              <div class="col-span-6 sm:col-span-3">
+                <%= form.label :dni, class: "block text-sm font-medium text-gray-700" %>
+                <%= form.text_field :dni, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 sm:text-sm" %>
+                <% if @user.errors.full_messages_for(:dni).each  do |error| %>
+                    <ul class="list-disc list-inside">
+                      <li class="text-xs text-red-500">
+                        <%= error %>
+                      </li>
+                    </ul>
+                  <% end %>
+                <% end %>
+              </div>
+
+              <%# Input para password %>
+              <div class="col-span-6 sm:col-span-3">
+                <%= form.label :password, class: "block text-sm font-medium text-gray-700" %>
+                <%= form.password_field :password, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 sm:text-sm" %>
+                <% if @user.errors.full_messages_for(:password).each  do |error| %>
+                    <ul class="list-disc list-inside">
+                      <li class="text-xs text-red-500">
+                        <%= error %>
+                      </li>
+                    </ul>
+                  <% end %>
+                <% end %>
+              </div>
+
+              <%# Input para email %>
+              <div class="col-span-6 sm:col-span-4">
+                <%= form.label :email, class: "block text-sm font-medium text-gray-700" %>
+                <%= form.email_field :email, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 sm:text-sm" %>
+                <% if @user.errors.full_messages_for(:email).each  do |error| %>
+                    <ul class="list-disc list-inside">
+                      <li class="text-xs text-red-500">
+                        <%= error %>
+                      </li>
+                    </ul>
+                  <% end %>
+                <% end %>
+              </div>
+
+              <%# Input para driver license expiration %>
+              <div class="col-span-6 sm:col-span-3">
+                <%= form.label :driver_license_expiration, class: "block text-sm font-medium text-gray-700" %>
+                <%= form.date_select :driver_license_expiration, { start_year: Time.now.year, end_year: Time.now.year + 30 }, { class: "mt-1 rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 sm:text-sm" } %>
+                <% if @user.errors.full_messages_for(:driver_license_expiration).each  do |error| %>
+                    <ul class="list-disc list-inside">
+                      <li class="text-xs text-red-500">
+                        <%= error %>
+                      </li>
+                    </ul>
+                  <% end %>
+                <% end %>
+              </div>
+
+              <%# Input para driver license %>
+              <div class="col-span-6 sm:col-span-3">
+                <%= form.label :driver_license, class: "block text-sm font-medium text-gray-700" %>
+                <%= form.file_field :driver_license, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 sm:text-sm" %>
+                <% if @user.errors.full_messages_for(:driver_license).each  do |error| %>
+                    <ul class="list-disc list-inside">
+                      <li class="text-xs text-red-500">
+                        <%= error %>
+                      </li>
+                    </ul>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+          <div class="bg-gray-50 px-4 py-3 text-right sm:px-6">
+            <%# Botón de submit %>
+          <%= button_tag(type: "submit", 
+            class: "inline-flex w-full justify-center rounded-md border border-transparent bg-orange-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2") do %>
+            <%= content_tag(:strong, t('.submit')) %>
+          <% end %>
+          </div>
+        </div>
+      <% end %>
     </div>
-  <% end %>
-  <fieldset>
-    <legend><%= t('.form_legend') %></legend>
-    <%# Input para dni %>
-    <div>
-      <%= form.label :dni %>
-      <%= form.text_field :dni %>
-    </div>
-    <%# Input para nombre %>
-    <div>
-      <%= form.label :name %>
-      <%= form.text_field :name %>
-    </div>
-    <%# Input para apellido %>
-    <div>
-      <%= form.label :surname %>
-      <%= form.text_field :surname %>
-    </div>
-    <%# Input para email %>
-    <div>
-      <%= form.label :email %>
-      <%= form.email_field :email %>
-    </div>
-    <%# Input para phone %>
-    <div>
-      <%= form.label :phone %>
-      <%= form.text_field :phone %>
-    </div>
-    <%# Input para password %>
-    <div>
-      <%= form.label :password %>
-      <%= form.password_field :password %>
-    </div>
-    <%# Input para driver license expiration %>
-    <div>
-      <%= form.label :driver_license_expiration %>
-      <%= form.date_select :driver_license_expiration, start_year: Time.now.year, end_year: Time.now.year + 30 %>
-    </div>
-    <%# Input para driver license %>
-    <div>
-      <%= form.label :driver_license %>
-      <%= form.file_field :driver_license %>
-    </div>
-    <%# Input para birthdate %>
-    <div>
-      <%= form.label :birthdate %>
-      <%= form.date_select :birthdate, start_year: 1900, end_year: Time.now.year %>
-    </div>
-    <div>
-      <%= form.submit %>
-    </div>
-  </fieldset>
-<% end %>
+  </div>
+</div>

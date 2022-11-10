@@ -33,6 +33,13 @@ class User < ApplicationRecord
   # Callback antes de guardar
   before_save :downcase_attributes
 
+  # Métodos para validar login 
+  def is_valid? (password)
+    # Un usuario es valido cuando:
+    self.authenticate(password) && !self.isBlocked && self.isAccepted
+  end
+
+  # Métodos privados
   private
 
   def downcase_attributes

@@ -6,11 +6,12 @@ en:
         user:
           attributes:
             driver_license:
+              blank: 'must be attached'
               bad_driver_license_type: 'The image type must be %{type1} or %{type2}'
             driver_license_expiration:
-              bad_driver_license_expiration: 'The expiration date of the driver license must be valid'
+              bad_driver_license_expiration: 'must be valid'
             birthdate:
-              bad_birthdate: 'You must be at least %{age} years old'
+              bad_birthdate: 'must be valid, you must be at least %{age} years old'
     models:
       user: User
     attributes:
@@ -22,10 +23,14 @@ en:
         phone: 'Phone'
         password: 'Password'
         driver_license_expiration: 'Expiration date of driver license'
-        driver_license: 'Driver license'
+        driver_license: 'Driver license photo'
         birthdate: 'Birthdate'
+  common: 
+    confirm: 'Are you sure?'
+    back: 'Go back'
+    not_logged_in: 'You have to login or create an account!'
   shared:
-    header:
+    items:
       home: 'Home'
       register: 'Register'
       login: 'Access'
@@ -39,11 +44,14 @@ en:
     sessions:
       new:
         form_legend: 'Login to your account'
-        placeholder_login: 'DNI or Email'
+        placeholder_login: 'DNI'
         placeholder_password: 'Password'
         submit: 'Login'
       create:
         created: 'Welcome!'
-        failed: 'Invalid login!'
+        failed_not_valid: 'Invalid login!'
+        failed_not_exists: 'Invalid login! The DNI entered is not registered!'
+        failed_is_blocked: 'Invalid login! The user is blocked!'
+        failed_not_accepted: 'Invalid login! You have to wait until a supervisor accepts you'
       destroy:
         destroyed: 'Session is over! Bye'

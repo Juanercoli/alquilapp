@@ -1,4 +1,6 @@
 class Authentication::UsersController < ApplicationController
+    skip_before_action :protect_pages
+
     def new
       # Para la acción view utilizo una variable de instancia vacia
       # Esta variable de instancia vacia se va a rellenar con el formulario correspondiente
@@ -10,13 +12,13 @@ class Authentication::UsersController < ApplicationController
       @user = User.new(user_params)
 
       if @user.save
-      # Si el usuario se guarda correctamente
-      # Y se redirige a la página principal
-      #!! REDIRECCION A PAGINA PRINCIPAL
-      redirect_to new_user_path, notice: t(".created")
+        # Si el usuario se guarda correctamente
+        # Creamos una sesión, parece un hash
+        session[:user_id] = @user.id
+        redirect_to main_index_path, notice: t(".created") 
       else
-      # Sino se renderiza de nuevo el formulario new
-      # Se pasa como status unprocessable_entity para que TURBO entienda que el formulario no es correcto y se vuelva a renderizar (convención de turbo)
+       # Sino se renderiza de nuevo el formulario new
+        # Se pasa como status unprocessable_entity para que TURBO entienda que el formulario no es correcto y se vuelva a renderizar (convención de turbo)
         render :new, status: :unprocessable_entity
       end
 

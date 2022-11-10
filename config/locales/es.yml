@@ -5,12 +5,15 @@ es:
       models:
         user:
           attributes:
+            password:
+              too_short: 'es demasiado corta (%{count} caracteres mínimo)'
             driver_license:
-              bad_driver_license_type: 'La imagen debe estar en formato %{type1} o %{type2}'
+              blank: 'debe ser adjunta'
+              bad_driver_license_type: 'debe estar en formato %{type1} o %{type2}'
             driver_license_expiration:
-              bad_driver_license_expiration: 'La fecha de vencimiento de la licencia debe ser válida'
+              bad_driver_license_expiration: 'debe ser válida'
             birthdate:
-              bad_birthdate: 'Debes tener al menos %{age} años de edad'
+              bad_birthdate: 'debe ser valida, debes tener al menos %{age} años de edad'
     models:
       user: Usuario
     attributes:
@@ -22,14 +25,18 @@ es:
         phone: 'Teléfono'
         password: 'Contraseña'
         driver_license_expiration: 'Fecha de vencimiento de licencia de conducir'
-        driver_license: 'Licencia de conducir'
+        driver_license: 'Foto de licencia de conducir'
         birthdate: 'Fecha de nacimiento'
+  common: 
+    confirm: '¿Quieres realizar esta acción?'
+    back: 'Ir atras'
+    not_logged_in: '¡Tienes que iniciar sesión o crear una cuenta!'
   shared:
-    header:
+    items:
       home: 'Inicio'
-      register: 'Registro'
-      login: 'Acceso'
-      logout: 'Salir'
+      register: 'Registrarse'
+      login: 'Iniciar sesión'
+      logout: 'Cerrar sesión'
   authentication:
     users:
       new:
@@ -39,11 +46,14 @@ es:
     sessions:
       new:
         form_legend: 'Inicie sesión en su cuenta'
-        placeholder_login: 'DNI o Email'
+        placeholder_login: 'DNI'
         placeholder_password: 'Contraseña'
         submit: 'Iniciar sesión'
       create:
         created: '¡Bienvenido!'
-        failed: '¡Inicio de sesión inválido!'
+        failed_not_valid: '¡Inicio de sesión inválido, revise los datos ingresados!'
+        failed_not_exists: '¡Inicio de sesión inválido, el DNI ingresado no está registrado!'
+        failed_is_blocked: '¡Inicio de sesión inválido, el usuario se encuentra bloqueado!'
+        failed_not_accepted: '¡Inicio de sesión inválido, debe esperar a que un supervisor lo acepte!'
       destroy:
         destroyed: '¡Tu sesión ha terminado! Hasta la próxima'
