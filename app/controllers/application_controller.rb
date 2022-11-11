@@ -20,7 +20,13 @@ class ApplicationController < ActionController::Base
     # Atributo disponible a toda la aplicación
     # Solo se realiza si existe una sesión
     # Lo almacena como usuario actual
-    Current.user = User.find_by(id: session[:user_id]) if session[:user_id]
+    if session[:user_role] == "client"
+      Current.user = User.find_by(id: session[:user_id]) if session[:user_id] 
+      Current.role = Current.user.role? if session[:user_role] 
+    else
+      Current.user = SuperUser.find_by(id: session[:user_id]) if session[:user_id] 
+      Current.role = Current.user.role? if session[:user_role] 
+    end
   end
 
   def protect_pages

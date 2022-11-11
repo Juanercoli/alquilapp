@@ -35,10 +35,13 @@ en:
       register: 'Register'
       login: 'Access'
       logout: 'Exit'
+      rent_car: 'Rent a car'
+      add_supervisor: 'Add supervisor'
+      add_car: 'Add car'
+      view_cars: 'View cars'
+      view_preregistered: 'View pre-registered'
   authentication:
     users:
-      new:
-        form_legend: 'REGISTER FORM'
       create:
         created: 'Your account has been created!'
     sessions:
@@ -50,7 +53,7 @@ en:
       create:
         created: 'Welcome!'
         failed_not_valid: 'Invalid login!'
-        failed_not_exists: 'Invalid login! The DNI entered is not registered!'
+        failed_not_exists: 'Invalid login! The entered data is not registered!'
         failed_is_blocked: 'Invalid login! The user is blocked!'
         failed_not_accepted: 'Invalid login! You have to wait until a supervisor accepts you'
       destroy:

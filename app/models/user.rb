@@ -36,7 +36,12 @@ class User < ApplicationRecord
   # Métodos para validar login 
   def is_valid? (password)
     # Un usuario es valido cuando:
-    self.authenticate(password) && !self.isBlocked && self.isAccepted
+    self.authenticate(password) && !self.is_blocked && self.is_accepted
+  end
+
+  # Retorna si el usuario es administrador
+  def role?
+    "client"
   end
 
   # Métodos privados

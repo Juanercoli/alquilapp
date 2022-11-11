@@ -14,10 +14,11 @@ class Authentication::UsersController < ApplicationController
       if @user.save
         # Si el usuario se guarda correctamente
         # Creamos una sesión, parece un hash
-        session[:user_id] = @user.id
+        session[:user_id] = @user.id  
+        session[:user_role] = @user.role?
         redirect_to main_index_path, notice: t(".created") 
       else
-       # Sino se renderiza de nuevo el formulario new
+        # Sino se renderiza de nuevo el formulario new
         # Se pasa como status unprocessable_entity para que TURBO entienda que el formulario no es correcto y se vuelva a renderizar (convención de turbo)
         render :new, status: :unprocessable_entity
       end

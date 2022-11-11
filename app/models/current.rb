@@ -1,4 +1,5 @@
 class Current < ActiveSupport::CurrentAttributes
-  # Atributo visible a toda la aplicación
+  # Atributos visibles a toda la aplicación
   attribute :user
+  attribute :role
 end

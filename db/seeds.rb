@@ -7,6 +7,7 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 User.destroy_all
+SuperUser.destroy_all
 
 juan = User.new(
   name: "Juan",
@@ -17,7 +18,7 @@ juan = User.new(
   password: "asdasd123",
   driver_license_expiration: 5.years.from_now,
   birthdate: 22.years.ago,
-  isAccepted: true
+  is_accepted: true
 )
 
 juan.driver_license.attach(io: File.open(Rails.root.join("public/images/licencia_1.jpg")), filename: "licencia_1.jpg")
@@ -25,7 +26,7 @@ juan.driver_license.attach(io: File.open(Rails.root.join("public/images/licencia
 carlos = User.new(
   name: "Carlos",
   surname: "Brown",
-  dni: "77057624",
+  dni: "42675078",
   email: "a@b.com",
   phone: "2213646992",
   password: "asdasd123",
@@ -38,19 +39,94 @@ carlos.driver_license.attach(io: File.open(Rails.root.join("public/images/licenc
 esteban = User.new(
   name: "Esteban",
   surname: "Quito",
-  dni: "77057625",
+  dni: "42675079",
   email: "a@c.com",
   phone: "2213646990",
   password: "asdasd123",
   driver_license_expiration: 2.years.from_now,
   birthdate: 22.years.ago,
-  isBlocked: true
+  is_blocked: true
 )
 
 esteban.driver_license.attach(io: File.open(Rails.root.join("public/images/licencia_2.jpg")), filename: "licencia_2.jpg")
 
+francisco = SuperUser.new(
+  name: "Francisco",
+  surname: "Alquilapp",
+  dni: "77057625",
+  email: "a@a.com",
+  phone: "2213646990",
+  password: "asdasd123",
+  is_admin: true
+)
+
+eduardo = SuperUser.new(
+  name: "Eduardo",
+  surname: "Alquilapp",
+  dni: "77057626",
+  email: "a@b.com",
+  phone: "2213646991",
+  password: "asdasd123",
+  is_admin: true
+)
+
+supervisor_1 = SuperUser.new(
+  name: "Luna",
+  surname: "Lunes",
+  dni: "77057620",
+  email: "b@a.com",
+  phone: "2213646900",
+  password: "asdasd123"
+)
+
+supervisor_2 = SuperUser.new(
+  name: "Martin",
+  surname: "Martes",
+  dni: "77057621",
+  email: "b@b.com",
+  phone: "2213646901",
+  password: "asdasd123"
+)
+
+supervisor_3 = SuperUser.new(
+  name: "Marcos",
+  surname: "Miercoles",
+  dni: "77057622",
+  email: "b@c.com",
+  phone: "2213646902",
+  password: "asdasd123"
+)
+
+supervisor_4 = SuperUser.new(
+  name: "Joaquin",
+  surname: "Jueves",
+  dni: "77057623",
+  email: "b@d.com",
+  phone: "2213646903",
+  password: "asdasd123"
+)
+
+supervisor_5 = SuperUser.new(
+  name: "Valija",
+  surname: "Viernes",
+  dni: "77057624",
+  email: "b@e.com",
+  phone: "2213646904",
+  password: "asdasd123",
+  is_blocked: true
+)
+
 juan.save!
 carlos.save!
 esteban.save!
+francisco.save!
+eduardo.save!
+supervisor_1.save!
+supervisor_2.save!
+supervisor_3.save!
+supervisor_4.save!
+supervisor_5.save!
+
 
 p "Created #{User.count} users"
+p "Created #{SuperUser.count} super users"

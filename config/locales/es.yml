@@ -37,10 +37,13 @@ es:
       register: 'Registrarse'
       login: 'Iniciar sesión'
       logout: 'Cerrar sesión'
+      rent_car: 'Alquilar auto'
+      add_supervisor: 'Agregar supervisor'
+      add_car: 'Agregar auto'
+      view_cars: 'Ver autos'
+      view_preregistered: 'Ver pre-registrados'
   authentication:
     users:
-      new:
-        form_legend: 'FORMULARIO DE REGISTRO'
       create:
         created: '¡Tu cuenta ha sido creada!'
     sessions:
@@ -52,7 +55,7 @@ es:
       create:
         created: '¡Bienvenido!'
         failed_not_valid: '¡Inicio de sesión inválido, revise los datos ingresados!'
-        failed_not_exists: '¡Inicio de sesión inválido, el DNI ingresado no está registrado!'
+        failed_not_exists: '¡Inicio de sesión inválido, los datos ingresados no están registrados!'
         failed_is_blocked: '¡Inicio de sesión inválido, el usuario se encuentra bloqueado!'
         failed_not_accepted: '¡Inicio de sesión inválido, debe esperar a que un supervisor lo acepte!'
       destroy:

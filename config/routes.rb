@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   # No se quiere que el namespace figure en la ruta, entonces se pasa vacio al path
   # Sino figuraria cómo /authentication/users/new 
   namespace :authentication, path: "", as: "" do
+    resources :super_users, only: [:index, :new, :create]
     resources :users, only: [:new, :create], path: '/register', path_names: { new: '/' }
     resources :sessions, only: [:new, :create, :destroy], path: '/login', path_names: { new: '/' }
   end
