@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   around_action :switch_locale # Por cada petición HTTP se llama a este método
   before_action :set_current_user # Antes de cualquier acción
-  before_action :protect_pages # Protege todas las páginas, debo indicar en cada controller si quiero skipear esta acción
+  #before_action :protect_pages # Protege todas las páginas, debo indicar en cada controller si quiero skipear esta acción
 
   def switch_locale(&action)
     # Se cambia el idioma para la petición en concreto
@@ -31,6 +31,18 @@ class ApplicationController < ActionController::Base
 
   def protect_pages
     # Si no se estableció un usuario entonces redirigir a pagina princiapl
-    redirect_to main_index_path, alert: t('common.not_logged_in') unless Current.user
+    redirect_to main_index_path, alert: t('common.not_logged_inaaaaa') unless Current.user&.role? == "client"
+  end
+
+  def protect_pages_supervisor
+    # Si no se estableció un usuario supervisor entonces redirigir a página principal
+    redirect_to main_index_path, alert: t('common.not_logged_inbbbbb') unless Current.user&.role? == "supervisor"
+  end
+
+  def protect_pages_admin
+    # Si no se estableció un usuario administrador entonces redirigir a página principal
+    pp Current.user&.role?
+    pp "ARRIBA ROL"
+    redirect_to main_index_path, alert: t('common.not_logged_incccc') unless Current.user&.role? == "admin"
   end
 end

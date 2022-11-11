@@ -8,6 +8,7 @@ class Car < ApplicationRecord
   validates :vehicle_number, presence: true, uniqueness: true
   validates :model, presence: true
   validates :photo, presence: true
+  validate :validate_photo_filetype
   # Callback antes de guardar
   before_save :downcase_attributes
 
@@ -19,5 +20,12 @@ class Car < ApplicationRecord
     self.color = color.downcase
     self.patent = patent.downcase
     self.model = model.downcase
+  end
+
+  def validate_photo_filetype
+    # Valida el formato del archivo adjunto
+    if photo.attached? && !photo.content_type.in?(%w(image/jpeg image/png))
+      errors.add(:photo, :bad_photo_type, type1: ".jpg", type2: ".png")
+    end
   end
 end

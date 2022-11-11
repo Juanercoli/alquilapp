@@ -1,5 +1,4 @@
 class Authentication::UsersController < ApplicationController
-    skip_before_action :protect_pages
 
     def new
       # Para la acción view utilizo una variable de instancia vacia

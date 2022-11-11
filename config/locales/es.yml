@@ -3,6 +3,10 @@ es:
   activerecord:
     errors:
       models:
+        car:
+          attributes:
+            photo:
+              bad_photo_type: 'debe estar en formato %{type1} o %{type2}'
         user:
           attributes:
             password:
@@ -16,6 +20,7 @@ es:
               bad_birthdate: 'debe ser valida, debes tener al menos %{age} años de edad'
     models:
       user: Usuario
+      car: Auto
     attributes:
       user:
         dni: 'DNI'
@@ -27,6 +32,13 @@ es:
         driver_license_expiration: 'Fecha de vencimiento de licencia de conducir'
         driver_license: 'Foto de licencia de conducir'
         birthdate: 'Fecha de nacimiento'
+      car:
+        brand: 'Marca'
+        patent: 'Patente'
+        model: 'Modelo'
+        vehicle_number: 'Número de vehículo'
+        color: 'Color'
+        photo: 'Foto'
   common: 
     confirm: '¿Quieres realizar esta acción?'
     back: 'Ir atras'
@@ -42,10 +54,21 @@ es:
       add_car: 'Agregar auto'
       view_cars: 'Ver autos'
       view_preregistered: 'Ver pre-registrados'
+  cars:
+    create:
+      created: '¡El auto ha sido creado!'
+    update:
+      updated: '¡El auto ha sido actualizado!'
+    destroy:
+      destroyed: '¡El auto ha sido eliminado!'
+    form:
+      submit: "Guardar"
   authentication:
     users:
       create:
         created: '¡Tu cuenta ha sido creada!'
+      new:
+        submit: 'Registrarse'
     sessions:
       new:
         form_legend: 'Inicie sesión en su cuenta'

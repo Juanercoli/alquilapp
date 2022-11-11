@@ -1,44 +1,106 @@
-<%= form_with(model: @car) do |form| %>
-  <%# Permite mostrar los mensajes de error asociados %>
-  <% @car.errors.full_messages.each do |error| %>
-    <div>
-      <%= error %>
+<div class="mt-10 sm:mt-0">
+  <div class="md:grid md:grid-cols-2 md:gap-6">
+    <div class="mt-5 md:col-span-2 md:mt-0">
+      <%= form_with(model: @car) do |form| %>
+        <div class="overflow-hidden shadow sm:rounded-md">
+          <div class="bg-white px-4 py-5 sm:p-6">
+            <div class="grid grid-cols-6 gap-6">
+
+              <%# Input para brand %>
+              <div class="col-span-6 sm:col-span-3">
+                <%= form.label :brand, class: "block text-sm font-medium text-gray-700" %>
+                <%= form.text_field :brand, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 sm:text-sm" %>
+                <% if @car.errors.full_messages_for(:brand).each  do |error| %>
+                    <ul class="list-disc list-inside">
+                      <li class="text-xs text-red-500">
+                        <%= error %>
+                      </li>
+                    </ul>
+                  <% end %>
+                <% end %>
+              </div>
+
+              <%# Input para color %>
+              <div class="col-span-6 sm:col-span-3">
+                <%= form.label :color, class: "block text-sm font-medium text-gray-700" %>
+                <%= form.text_field :color, class: "mt-1 rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 sm:text-sm" %>
+                <% if @car.errors.full_messages_for(:color).each  do |error| %>
+                    <ul class="list-disc list-inside">
+                      <li class="text-xs text-red-500">
+                        <%= error %>
+                      </li>
+                    </ul>
+                  <% end %>
+                <% end %>
+              </div>
+
+              <%# Input para patent %>
+              <div class="col-span-6 sm:col-span-3">
+                <%= form.label :patent, class: "block text-sm font-medium text-gray-700" %>
+                <%= form.text_field :patent, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 sm:text-sm" %>
+                <% if @car.errors.full_messages_for(:patent).each  do |error| %>
+                    <ul class="list-disc list-inside">
+                      <li class="text-xs text-red-500">
+                        <%= error %>
+                      </li>
+                    </ul>
+                  <% end %>
+                <% end %>
+              </div>
+
+              <%# Input para vehicle_number %>
+              <div class="col-span-6 sm:col-span-3">
+                <%= form.label :vehicle_number, class: "block text-sm font-medium text-gray-700" %>
+                <%= form.number_field :vehicle_number, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 sm:text-sm" %>
+                <% if @car.errors.full_messages_for(:vehicle_number).each  do |error| %>
+                    <ul class="list-disc list-inside">
+                      <li class="text-xs text-red-500">
+                        <%= error %>
+                      </li>
+                    </ul>
+                  <% end %>
+                <% end %>
+              </div>
+
+              <%# Input para password %>
+              <div class="col-span-6 sm:col-span-3">
+                <%= form.label :model, class: "block text-sm font-medium text-gray-700" %>
+                <%= form.text_field :model, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 sm:text-sm" %>
+                <% if @car.errors.full_messages_for(:model).each  do |error| %>
+                    <ul class="list-disc list-inside">
+                      <li class="text-xs text-red-500">
+                        <%= error %>
+                      </li>
+                    </ul>
+                  <% end %>
+                <% end %>
+              </div>
+              
+              <%# Input para photo %>
+              <div class="col-span-6 sm:col-span-3">
+                <%= form.label :photo, class: "block text-sm font-medium text-gray-700" %>
+                <%= form.file_field :photo, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 sm:text-sm" %>
+                <% if @car.errors.full_messages_for(:photo).each  do |error| %>
+                    <ul class="list-disc list-inside">
+                      <li class="text-xs text-red-500">
+                        <%= error %>
+                      </li>
+                    </ul>
+                  <% end %>
+                <% end %>
+              </div>
+
+            </div>
+          </div>
+          <div class="bg-gray-50 px-4 py-3 text-right sm:px-6">
+            <%# Botón de submit %>
+          <%= button_tag(type: "submit", 
+            class: "inline-flex w-full justify-center rounded-md border border-transparent bg-orange-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2") do %>
+            <%= content_tag(:strong, t('.submit')) %>
+          <% end %>
+          </div>
+        </div>
+      <% end %>
     </div>
-
-  <% end %>
-   <%# Input para marca %>
-  <div>
-    <%= form.label :brand %>
-    <%= form.text_field :brand %>
   </div>
-   <%# Input para color %>
-  <div>
-    <%= form.label :color %>
-    <%= form.text_field :color %>
-  </div>
-    <%# Input para patente %>
-  <div>
-    <%= form.label :patent %>
-    <%= form.text_field :patent %>
-  </div>
-    <%# Input para Nro.de auto %>
-  <div>
-    <%= form.label :vehicle_number %>
-    <%= form.number_field :vehicle_number %>
-  </div>
-  <%# Input para modelo %>
-  <div>
-    <%= form.label :model %>
-    <%= form.text_field :model %>
-  </div>
-  <%# Input para foto %>
-  <div>
-    <%= form.label :photo %>
-    <%= form.file_field :photo %>
-  </div>
-
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

@@ -51,7 +51,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_10_195841) do
     t.boolean "is_deleted", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["brand"], name: "index_cars_on_brand", unique: true
+    t.index ["patent"], name: "index_cars_on_patent", unique: true
     t.index ["vehicle_number"], name: "index_cars_on_vehicle_number", unique: true
   end
 

@@ -1,34 +1,10 @@
-<h1>Lista de autos</h1>
+<h1 class="text-2xl bold">FLOTA DE AUTOS</h1>
 <% if(@cars.count > 0)%>
-  <table class="table table-dark table-striped">
-      <thead>
-          <tr>
-              <th>Patente</th>
-              <th>Número de vehiculo</th>
-              <th>Color</th>
-              <th>Acciones</th>
-              <th>Acciones2</th>
-              <th>Foto</th>
-          </tr>
-      </thead>
-    
-      <tbody>
-          <% @cars.each do |car| %>
-
-              <tr>
-                  <td><%= link_to car.patent, car %></td>
-                  <td><%= car.vehicle_number %></td>
-                  <td><%= car.color %></td>
-                  <td><%= link_to "Delete",car_path(car.id),data: {
-                      turbo_method: :delete,
-                      turbo_confirm: t('common.confirm')
-                      } %></td>
-                  <td><%= link_to "Edit",edit_car_path(car) %></td>
-                  <td><%= image_tag car.photo.attached? ? car.photo : 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Horacio-Rodriguez-Larreta_%28cropped%29.jpg/800px-Horacio-Rodriguez-Larreta_%28cropped%29.jpg', style: 'width: 360px; height: 280px' %>
-              </tr>
-          <% end %>
-      </tbody>
-  </table>
+  <div class="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
+      <% @cars.each do |car| %>
+        <%= render "card", car: car %>
+      <% end %>
+  </div>
 <% else %>
   <h4> No hay autos disponibles </h4>
 <% end %>

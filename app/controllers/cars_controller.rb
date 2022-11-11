@@ -1,4 +1,5 @@
 class CarsController < ApplicationController
+
   def index
     @cars = Car.where(is_deleted: false)
   end
@@ -16,7 +17,7 @@ class CarsController < ApplicationController
     # Si el auto se guarda correctamente
     # Y se redirige a la página principal
     #!! REDIRECCION A PAGINA PRINCIPAL
-    redirect_to new_car_path, notice: "t('.created')"
+    redirect_to cars_path, notice: t('.created')
     else
     # Sino se renderiza de nuevo el formulario new
     # Se pasa como status unprocessable_entity para que TURBO entienda que el formulario no es correcto y se vuelva a renderizar (convención de turbo)
@@ -29,7 +30,7 @@ class CarsController < ApplicationController
   def update
     car
     if car.update(car_params)
-      redirect_to cars_path, notice: "updated"
+      redirect_to cars_path, notice: t('.updated')
     else
       render :edit, status: :unprocessable_entity
     end
@@ -39,13 +40,13 @@ class CarsController < ApplicationController
   end
   def logic_delete
     car
-    car.update_attribute(:is_deleted,true)
+    car.update_attribute(:is_deleted, true)
     redirect_to cars_path
   end
   def destroy
     car
-    car.update_attribute(:is_deleted,true)
-    redirect_to cars_path, notice: "Borrado"
+    car.update_attribute(:is_deleted, true)
+    redirect_to cars_path, notice: t('.destroyed')
   end
 
   private

@@ -3,17 +3,22 @@ en:
   activerecord:
     errors:
       models:
+        car:
+          attributes:
+            photo:
+              bad_photo_type: 'must be %{type1} or %{type2}'      
         user:
           attributes:
             driver_license:
               blank: 'must be attached'
-              bad_driver_license_type: 'The image type must be %{type1} or %{type2}'
+              bad_driver_license_type: 'must be %{type1} or %{type2}'
             driver_license_expiration:
               bad_driver_license_expiration: 'must be valid'
             birthdate:
               bad_birthdate: 'must be valid, you must be at least %{age} years old'
     models:
       user: User
+      car: Car
     attributes:
       user:
         dni: 'DNI'
@@ -25,6 +30,13 @@ en:
         driver_license_expiration: 'Expiration date of driver license'
         driver_license: 'Driver license photo'
         birthdate: 'Birthdate'
+      car:
+        brand: 'Brand'
+        patent: 'Patent'
+        model: 'Model'
+        vehicle_number: 'Vehicle number'
+        color: 'Color'
+        photo: 'Photo'        
   common: 
     confirm: 'Are you sure?'
     back: 'Go back'
@@ -40,10 +52,19 @@ en:
       add_car: 'Add car'
       view_cars: 'View cars'
       view_preregistered: 'View pre-registered'
+  cars:
+    create:
+      created: 'The car has been created!'
+    update:
+      updated: 'The car has been updated!'
+    destroy:
+      destroyed: 'The car has been deleted!'      
   authentication:
     users:
       create:
         created: 'Your account has been created!'
+      new:
+        submit: 'Sign up'        
     sessions:
       new:
         form_legend: 'Login to your account'

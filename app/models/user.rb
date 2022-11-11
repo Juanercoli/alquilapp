@@ -57,7 +57,7 @@ class User < ApplicationRecord
   def validate_driver_license_filetype
     # Valida el formato del archivo adjunto
     if driver_license.attached? && !driver_license.content_type.in?(%w(image/jpeg image/png))
-      errors.add(:driver_license, :bad_driver_license_type, type1: ".jpeg", type2: ".png")
+      errors.add(:driver_license, :bad_driver_license_type, type1: ".jpg", type2: ".png")
     end
   end
 

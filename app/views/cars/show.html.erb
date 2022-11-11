@@ -1,23 +1,32 @@
-<h1>
-  <%= @car.brand %>
-</h1>
-<h1>
-  <%= @car.patent %>
-</h1>
-<h1>
-  <%= @car.model %>
-</h1>
-<h1>
-  <%= @car.vehicle_number %>
-</h1>
-<h1>
-  <%= @car.color %>
-</h1>
-<h1>
-  <%= image_tag @car.photo.attached? ? @car.photo : 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Horacio-Rodriguez-Larreta_%28cropped%29.jpg/800px-Horacio-Rodriguez-Larreta_%28cropped%29.jpg', style: 'width: 360px; height: 280px' %>
-</h1>
-<%= link_to "t('.delete')", cars_path(@car), 
-      data: { 
-        turbo_method: :delete,
-        turbo_confirm: "t('common.confirm')"
-      } %>
+<div class="overflow-hidden bg-white shadow sm:rounded-lg">
+  <div class="px-4 py-5 sm:px-6">
+    <h3 class="text-lg font-medium leading-6 text-gray-900">Información del vehículo</h3>
+  </div>
+  <div class="border-t border-gray-200">
+    <dl>
+      <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <%= image_tag @car.photo.attached? ? @car.photo : 'https://fotos.perfil.com/2020/01/08/con-el-vision-s-sony-incursiona-en-el-mundo-de-los-autos-853254.jpg', style: 'width: 360px; height: 280px' %>
+      </div>
+      <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">Marca</dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"><%= @car.brand.upcase %></dd>
+      </div>
+      <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">Patente</dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"><%= @car.patent.upcase %></dd>
+      </div>
+      <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">Modelo</dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"><%= @car.model.upcase %></dd>
+      </div>
+      <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">Número de vehículo</dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"><%= @car.vehicle_number %></dd>
+      </div>
+      <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">Color</dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"><%= @car.color.upcase %></dd>
+      </div>
+    </dl>
+  </div>
+</div>

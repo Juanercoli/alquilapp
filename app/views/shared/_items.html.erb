@@ -1,12 +1,12 @@
 <p class="bold inline"><%= Current.user&.name&.capitalize %></p>
 <%= link_to t('.home'), root_path, class: "mx-2 text-orange-300 font-bold" %>
+<%= link_to t('.view_cars'), cars_path, class: "mx-2 text-orange-300 font-bold" %>
 <%= link_to t('.register'), new_user_path, class: "mx-2 text-orange-300 font-bold" unless Current.user %>
 <%= link_to t('.login'), new_session_path, class: "mx-2 text-orange-300 font-bold" unless Current.user %>
-<%= link_to t('.rent_car'), new_session_path, class: "mx-2 text-orange-300 font-bold" if Current.user&.role? == "client" %>
-<%= link_to t('.add_supervisor'), new_session_path, class: "mx-2 text-orange-300 font-bold" if Current.user&.role? == "admin" %>
-<%= link_to t('.add_car'), new_session_path, class: "mx-2 text-orange-300 font-bold" if Current.user&.role? == "admin" %>
-<%= link_to t('.view_cars'), new_session_path, class: "mx-2 text-orange-300 font-bold" if Current.user&.role? == "admin" || Current.user&.role? == "supervisor" %>
-<%= link_to t('.view_preregistered'), new_session_path, class: "mx-2 text-orange-300 font-bold" if Current.user&.role? == "supervisor" %>
+<%# link_to t('.rent_car'), new_session_path, class: "mx-2 text-orange-300 font-bold" if Current.user&.role? == "client" %>
+<%# link_to t('.add_supervisor'), new_session_path, class: "mx-2 text-orange-300 font-bold" if Current.user&.role? == "admin" %>
+<%= link_to t('.add_car'), new_car_path, class: "mx-2 text-orange-300 font-bold" if Current.user&.role? == "admin" %>
+<%# link_to t('.view_preregistered'), new_session_path, class: "mx-2 text-orange-300 font-bold" if Current.user&.role? == "supervisor" %>
 <%= link_to t('.logout'), session_path(Current.user.id), data: {
   turbo_method: :delete,
   turbo_confirm: t('common.confirm')

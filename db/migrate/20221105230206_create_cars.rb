@@ -10,7 +10,7 @@ class CreateCars < ActiveRecord::Migration[7.0]
       
       t.timestamps
     end
-    add_index :cars, :brand, unique: true
+    add_index :cars, :patent, unique: true
     add_index :cars, :vehicle_number, unique: true
   end
 end

@@ -1,0 +1,17 @@
+  <div class="rounded overflow-hidden shadow-lg">
+  <%= image_tag car.photo, alt: "car", class: "object-cover w-200 h-200" %>
+  <div class="px-6 py-4 flex flex-col">
+    <div class="font-bold text-xl mb-2">Modelo: <%= car.model %></div>
+    <p class="text-gray-700 text-base mb-2">
+      Número de vehículo: <%= car.vehicle_number %>
+    </p>
+    <div>
+      <%= link_to "Ver detalle", car_path(car.id), class: "focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 dark:focus:ring-yellow-900 my-10 py-3" %>
+      <%= link_to "Eliminar", car_path(car.id),data: {
+                        turbo_method: :delete,
+                        turbo_confirm: t('common.confirm')
+                        }, class: "focus:outline-none text-white bg-red-400 hover:bg-red-500 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 dark:focus:ring-red-900 my-10 py-3" if Current.user&.role? == "admin" %>
+      <%= link_to "Editar", edit_car_path(car), class: "focus:outline-none text-white bg-blue-400 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 dark:focus:ring-blue-900 my-10 py-3" if Current.user&.role? == "admin" %>
+    </div>
+  </div>
+</div>
