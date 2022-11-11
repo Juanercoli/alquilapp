@@ -1,0 +1,20 @@
+<h1>
+  <%= @car.brand %>
+</h1>
+<h1>
+  <%= @car.patent %>
+</h1>
+<h1>
+  <%= @car.model %>
+</h1>
+<h1>
+  <%= @car.vehicle_number %>
+</h1>
+<h1>
+  <%= @car.color %>
+</h1>
+<%= link_to "t('.delete')", cars_path(@car), 
+      data: { 
+        turbo_method: :delete,
+        turbo_confirm: "t('common.confirm')"
+      } %>

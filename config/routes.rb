@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :cars do 
+    member do
+      put :logic_delete
+    end
+  end
+  
   # Existe una jerarquia top-down
 
   # Se quiere organizar grupos de controllers bajo un namespace
