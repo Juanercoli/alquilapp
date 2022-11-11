@@ -42,6 +42,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_10_195841) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "cars", force: :cascade do |t|
+    t.string "brand", null: false
+    t.string "patent", null: false
+    t.string "model", null: false
+    t.integer "vehicle_number", null: false
+    t.string "color", null: false
+    t.boolean "is_deleted", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["brand"], name: "index_cars_on_brand", unique: true
+    t.index ["vehicle_number"], name: "index_cars_on_vehicle_number", unique: true
+  end
+
   create_table "super_users", force: :cascade do |t|
     t.string "name", null: false
     t.string "surname", null: false
