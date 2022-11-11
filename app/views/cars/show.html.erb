@@ -13,6 +13,9 @@
 <h1>
   <%= @car.color %>
 </h1>
+<h1>
+  <%= image_tag @car.photo.attached? ? @car.photo : 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Horacio-Rodriguez-Larreta_%28cropped%29.jpg/800px-Horacio-Rodriguez-Larreta_%28cropped%29.jpg', style: 'width: 360px; height: 280px' %>
+</h1>
 <%= link_to "t('.delete')", cars_path(@car), 
       data: { 
         turbo_method: :delete,
