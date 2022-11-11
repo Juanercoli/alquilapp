@@ -43,6 +43,9 @@ class CarsController < ApplicationController
     redirect_to cars_path
   end
   def destroy
+    car
+    car.update_attribute(:is_deleted,true)
+    redirect_to cars_path, notice: "Borrado"
   end
 
   private
@@ -52,7 +55,7 @@ class CarsController < ApplicationController
   def car_params
     # Se quiere que tenga un objeto Car antes que todo el contenido de parámetros
     # Luego se hace el permit con todo lo que debe tener
-    params.require(:car).permit(:patent, :model, :vehicle_number, :color, :brand)
+    params.require(:car).permit(:patent, :model, :vehicle_number, :color, :brand, :photo)
   end
 end 
 

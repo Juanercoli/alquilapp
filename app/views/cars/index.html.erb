@@ -8,6 +8,7 @@
               <th>Color</th>
               <th>Acciones</th>
               <th>Acciones2</th>
+              <th>Foto</th>
           </tr>
       </thead>
     
@@ -18,8 +19,12 @@
                   <td><%= link_to car.patent, car %></td>
                   <td><%= car.vehicle_number %></td>
                   <td><%= car.color %></td>
-                  <td><%= button_to "Delete",logic_delete_car_path(car),data: { turbo_confirm: "Are you sure?" },method: :put %></td>
+                  <td><%= link_to "Delete",car_path(car.id),data: {
+                      turbo_method: :delete,
+                      turbo_confirm: t('common.confirm')
+                      } %></td>
                   <td><%= link_to "Edit",edit_car_path(car) %></td>
+                  <td><%= image_tag car.photo.attached? ? car.photo : 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Horacio-Rodriguez-Larreta_%28cropped%29.jpg/800px-Horacio-Rodriguez-Larreta_%28cropped%29.jpg', style: 'width: 360px; height: 280px' %>
               </tr>
           <% end %>
       </tbody>
