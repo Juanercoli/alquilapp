@@ -4,7 +4,11 @@ class Car < ApplicationRecord
   # Validaciones a nivel base de datos
   validates :brand, presence: true
   validates :color, presence: true
-  validates :patent, presence: true, uniqueness: true
+  validates :patent, presence: true, uniqueness: true,
+    format: {
+      with: /\A([A-Z]{2,3}[0-9]{3}[A-Z]{0,2})?\z/,
+      message: 'tiene que ser en formato AAA111 o AA11AA'
+  }
   validates :vehicle_number, presence: true, uniqueness: true
   validates :model, presence: true
   validates :photo, presence: true
