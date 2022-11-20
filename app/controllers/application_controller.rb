@@ -28,21 +28,4 @@ class ApplicationController < ActionController::Base
       Current.role = Current.user.role? if session[:user_role] 
     end
   end
-
-  def protect_pages
-    # Si no se estableció un usuario entonces redirigir a pagina princiapl
-    redirect_to main_index_path, alert: t('common.not_logged_inaaaaa') unless Current.user&.role? == "client"
-  end
-
-  def protect_pages_supervisor
-    # Si no se estableció un usuario supervisor entonces redirigir a página principal
-    redirect_to main_index_path, alert: t('common.not_logged_inbbbbb') unless Current.user&.role? == "supervisor"
-  end
-
-  def protect_pages_admin
-    # Si no se estableció un usuario administrador entonces redirigir a página principal
-    pp Current.user&.role?
-    pp "ARRIBA ROL"
-    redirect_to main_index_path, alert: t('common.not_logged_incccc') unless Current.user&.role? == "admin"
-  end
 end
