@@ -5,6 +5,8 @@ es:
       models:
         car:
           attributes:
+            patent:
+              bad_patent_type: 'debe estar en formato AAA000 o AA000AA (acepta minúsculas)'
             photo:
               bad_photo_type: 'debe estar en formato %{type1} o %{type2}'
         user:
