@@ -1,9 +1,12 @@
 class User < ApplicationRecord
+  # Cada usuario tiene su wallet
+  has_one :wallet , dependent: :destroy
   # Hace uso de la gema BCrypt para encriptar el password
   has_secure_password 
   # Hace uso de active_storage para guardar archivos
   has_one_attached :driver_license, dependent: :destroy
-
+ 
+ 
   # Validaciones a nivel base de datos
   validates :dni, presence: true, uniqueness: true, length: { minimum: 7, maximum: 8 },
     format: {
