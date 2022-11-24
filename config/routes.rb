@@ -20,6 +20,13 @@ Rails.application.routes.draw do
 
   resources :main, only: [:index]
   
+
+  namespace :wallet_managment, path: "", as:"" do
+    resources :wallets, only: [:show] 
+    put 'wallets(/:id)' , to: 'wallets#cargar_saldo'
+  end
+  
   # La ruta principal es:
   root "main#index"
+
 end

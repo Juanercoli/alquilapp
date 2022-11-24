@@ -18,6 +18,10 @@ auto = Car.new(
       color: "Rojo"
 )
 auto.photo.attach(io: File.open(Rails.root.join("public/images/auto_1.jpg")), filename: "auto_1.jpg")
+# esto pa la demo va servir 
+Wallet.destroy_all
+
+asd=Wallet.new(balance: -200 )
 
 juan = User.new(
   name: "Juan",
@@ -28,7 +32,8 @@ juan = User.new(
   password: "asdasd123",
   driver_license_expiration: 5.years.from_now,
   birthdate: 22.years.ago,
-  is_accepted: true
+  is_accepted: true,
+  wallet: asd
 )
 
 juan.driver_license.attach(io: File.open(Rails.root.join("public/images/licencia_1.jpg")), filename: "licencia_1.jpg")
