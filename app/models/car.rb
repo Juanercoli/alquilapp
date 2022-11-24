@@ -1,4 +1,5 @@
 class Car < ApplicationRecord
+  has_many :car_usage_history, dependent: :destroy
   # Imagen del autos
   has_one_attached :photo, dependent: :destroy
   # Validaciones a nivel base de datos

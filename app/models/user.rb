@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_many :car_usage_history
   # Hace uso de la gema BCrypt para encriptar el password
   has_secure_password 
   # Hace uso de active_storage para guardar archivos

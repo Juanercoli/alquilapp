@@ -4,7 +4,7 @@ Rails.application.routes.draw do
       put :logic_delete
     end
   end
-  
+  resources :cars_usage_histories,only: [:show], path: '/history', path_names: { show: '/' }
   # Existe una jerarquia top-down
 
   # Se quiere organizar grupos de controllers bajo un namespace

@@ -1,0 +1,28 @@
+<div class="flex flex-col justify-center overflow-x-auto relative shadow-md sm:rounded-lg">
+  <h1 class="text-2xl bold">Historial</h1>
+    <% if(@history.count > 0)%>
+    <table class="w-22 text-sm text-left text-orange-500">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="py-3 px-6">Inicio</th>
+                <th scope="col" class="py-3 px-6">Fin</th>
+                <th scope="col" class="py-3 px-6">user</th>
+                <th scope="col" class="py-3 px-6">car</th>
+            </tr>
+        </thead>
+
+        <tbody>
+          <% @history.each do |history| %>
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                      <td class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"><%= history.start.to_formatted_s(:long) %></td>
+                      <td class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"><%= history.end.to_formatted_s(:long) %></td>
+                      <td class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"><%= history.user.inspect %></td>
+                      <td class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"><%= history.car.inspect %></td>
+            </tr>   
+          <% end %>
+        </tbody>
+    </table>
+    <% else %>
+      <h4> No se encontraron movimientos </h4>
+    <% end %>
+</div>

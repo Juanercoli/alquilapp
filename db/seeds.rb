@@ -8,6 +8,16 @@
 
 User.destroy_all
 SuperUser.destroy_all
+Car.destroy_all
+
+auto = Car.new(
+      brand: "Ford",
+      patent: "ABC111",
+      model: "AX2010",
+      vehicle_number: "1234",
+      color: "Rojo"
+)
+auto.photo.attach(io: File.open(Rails.root.join("public/images/auto_1.jpg")), filename: "auto_1.jpg")
 
 juan = User.new(
   name: "Juan",
@@ -126,7 +136,8 @@ supervisor_2.save!
 supervisor_3.save!
 supervisor_4.save!
 supervisor_5.save!
-
+auto.save!
 
 p "Created #{User.count} users"
 p "Created #{SuperUser.count} super users"
+p "Created #{Car.count} cars"
