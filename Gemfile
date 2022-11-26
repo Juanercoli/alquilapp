@@ -70,10 +70,19 @@ group :development do
   # gem "spring"
 end
 
+
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+
 end
 
+ # gema de mercadopago
+
+gem "mercadopago-sdk"
+ # gema ffi 
+gem "ffi"
+ # gema para validad tarjetas
+gem 'credit_card_validations'

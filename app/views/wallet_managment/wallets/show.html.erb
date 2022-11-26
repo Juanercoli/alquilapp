@@ -1,18 +1,12 @@
 <h1>wallet</h1>
-
-
-
-
-
-
-
-
+<%# Muestra el saldo total%>
 <% if @wallet&.balance >= 0 %>
-        <h1 class="m-4" style="color: green" id="saldo_verde">$ <%= @wallet&.balance %></h1>
+        <h1 class="m-4" style="color: green" id="saldo_verde">$ <%= @wallet.balance %></h1>
     <% else %>
-        <h1 class="m-4" style="color: red">$ <%= @wallet&.balance %></h1>
+        <h1 class="m-4" style="color: red">$ <%= @wallet.balance %></h1>
     <%end%>
 
+<%# el mete la cantidad que quiere cargar el cliente %>
 <% if Current.user&.role? == "client" %>
  <%= form_for(@wallet, as: :wallet, url: "/wallets/#{@wallet.user_id}" , html: { method: :put, id:"form2" }) do |form| %>
         <div class="row m-4">
@@ -28,6 +22,8 @@
         </div>
    <% end %>
 <% end %>
+
+<%# el mete la cantidad que quiere cargar o descontar el supervisor %>
 <% if Current.user&.role? == "supervisor" %>
   <%= form_for(@wallet, as: :wallet, url: "/wallets/#{@wallet.user_id}" , html: { method: :put, id:"form2" } ) do |form| %>
         <div class="row m-4" >
@@ -43,3 +39,6 @@
         </div>
    <% end %>
 <% end %>
+
+
+<%=link_to "añadir tarjeta" , new_card_path ,class: "mx-2 text-orange-300 font-bold" if Current.user&.role? == 'client' && !Current.user.card %>

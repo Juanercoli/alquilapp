@@ -24,7 +24,12 @@ Rails.application.routes.draw do
   namespace :wallet_managment, path: "", as:"" do
     resources :wallets, only: [:show] 
     put 'wallets(/:id)' , to: 'wallets#cargar_saldo'
+    get 'wallets(/:id)' , to: 'wallets#show'
+    resources :cards, only: [:new ,:create] 
+    #get 'cards(/:id)' , to: 'cards#new'
+    #post 'cards(/:id)' , to: 'cards#create'
   end
+  
   
   # La ruta principal es:
   root "main#index"

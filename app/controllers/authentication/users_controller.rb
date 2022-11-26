@@ -9,7 +9,7 @@ class Authentication::UsersController < ApplicationController
     def create
       # Se filtran los parámetros instanciando de nuevo
       @user = User.new(user_params)
-
+      @user.wallet= Wallet.create(balance: 0)
       if @user.save
         # Si el usuario se guarda correctamente
         # Creamos una sesión, parece un hash
