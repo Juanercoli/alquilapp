@@ -24,7 +24,7 @@ class WalletManagment::CardsController < ApplicationController
     end
 
     def edit
-      @card = Card.find_by(id: params[:id])
+      @card = Card.find_by(user_id: params[:id])
     end
     
     def update
