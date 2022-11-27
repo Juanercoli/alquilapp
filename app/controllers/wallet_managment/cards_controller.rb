@@ -23,6 +23,19 @@ class WalletManagment::CardsController < ApplicationController
          end
     end
 
+    def edit
+      @card = Card.find_by(id: params[:id])
+    end
+    
+    def update
+      @card = Card.find_by(id: params[:id])
+      if @card.update(card_params)
+        redirect_to wallet_path, notice: t('tarjeta editada')
+      else
+        render :edit, status: :unprocessable_entity
+      end
+    end
+
     private
 
     def card_params

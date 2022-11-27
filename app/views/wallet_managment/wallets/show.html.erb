@@ -7,16 +7,17 @@
     <%end%>
 
 <%# el mete la cantidad que quiere cargar el cliente %>
-<% if Current.user&.role? == "client" %>
+<% if Current.user&.role? == "client" && Current.user.card %>
  <%= form_for(@wallet, as: :wallet, url: "/wallets/#{@wallet.user_id}" , html: { method: :put, id:"form2" }) do |form| %>
         <div class="row m-4">
           <div class="col-7">
             <div class="form-outline">
               <div class="input-group mb-3">
               <span class="input-group-text" id="basic-addon1">$</span>
-              <%= form.number_field :charge_wallet, class: "form-control", min: "0", required: true %>
-              </div>
-              <%= form.label "Cantidad" %>
+              
+                <%= form.number_field :charge_wallet, class: "form-control", min: "0", required: true %>
+                </div>
+                <%= form.label "Cantidad" %>
             </div>
           </div>
         </div>
@@ -40,5 +41,7 @@
    <% end %>
 <% end %>
 
-
+<%#link para agregar tarjeta%>
 <%=link_to "añadir tarjeta" , new_card_path ,class: "mx-2 text-orange-300 font-bold" if Current.user&.role? == 'client' && !Current.user.card %>
+
+<%#=link_to "editar tarjeta" ,edit_card_path ,class: "mx-2 text-orange-300 font-bold" if Current.user&.role? == 'client' && Current.user.card %>
