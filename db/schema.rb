@@ -49,6 +49,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_10_195841) do
     t.integer "vehicle_number", null: false
     t.string "color", null: false
     t.boolean "is_deleted", default: false, null: false
+    t.boolean "is_visible", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["patent"], name: "index_cars_on_patent", unique: true
@@ -64,6 +65,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_10_195841) do
     t.string "password_digest", null: false
     t.boolean "is_admin", default: false, null: false
     t.boolean "is_blocked", default: false, null: false
+    t.boolean "is_deleted", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["dni"], name: "index_super_users_on_dni", unique: true
@@ -82,6 +84,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_10_195841) do
     t.date "birthdate", null: false
     t.boolean "is_blocked", default: false, null: false
     t.boolean "is_accepted", default: false, null: false
+    t.boolean "is_deleted", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["dni"], name: "index_users_on_dni", unique: true

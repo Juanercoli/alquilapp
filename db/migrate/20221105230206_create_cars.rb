@@ -7,6 +7,7 @@ class CreateCars < ActiveRecord::Migration[7.0]
       t.integer :vehicle_number, null: false
       t.string :color, null: false
       t.boolean :is_deleted, null: false, default: false
+      t.boolean :is_visible, null: false, default: true
       
       t.timestamps
     end

@@ -11,6 +11,7 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.date :birthdate, null: false
       t.boolean :is_blocked, default: false, null: false
       t.boolean :is_accepted, default: false, null: false
+      t.boolean :is_deleted, default: false, null: false
 
       t.timestamps
     end

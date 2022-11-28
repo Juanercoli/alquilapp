@@ -1,32 +1,39 @@
-<div class="overflow-hidden bg-white shadow sm:rounded-lg">
-  <div class="px-4 py-5 sm:px-6">
-    <h3 class="text-lg font-medium leading-6 text-gray-900">Información del vehículo</h3>
-  </div>
-  <div class="border-t border-gray-200">
-    <dl>
-      <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-        <%= image_tag @car.photo.attached? ? @car.photo : 'https://fotos.perfil.com/2020/01/08/con-el-vision-s-sony-incursiona-en-el-mundo-de-los-autos-853254.jpg', style: 'width: 360px; height: 280px' %>
-      </div>
-      <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-        <dt class="text-sm font-medium text-gray-500">Marca</dt>
-        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"><%= @car.brand.upcase %></dd>
-      </div>
-      <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-        <dt class="text-sm font-medium text-gray-500">Patente</dt>
-        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"><%= @car.patent.upcase %></dd>
-      </div>
-      <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-        <dt class="text-sm font-medium text-gray-500">Modelo</dt>
-        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"><%= @car.model.upcase %></dd>
-      </div>
-      <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-        <dt class="text-sm font-medium text-gray-500">Número de vehículo</dt>
-        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"><%= @car.vehicle_number %></dd>
-      </div>
-      <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-        <dt class="text-sm font-medium text-gray-500">Color</dt>
-        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"><%= @car.color.upcase %></dd>
-      </div>
-    </dl>
-  </div>
-</div>
+<!-- Título detalles de auto -->
+<section class="mx-4 mb-2 p-4 bg-gray-800 text-gray-200 rounded-b-lg border-2 border-black">
+  <h4 class="text-2xl uppercase text-center">
+    <%= t('.title') %>
+  </h4>
+</section>
+
+<!-- Detalles de auto -->
+<section class="flex flex-col p-2 pt-4 md:px-4 md:pt-4 mx-4">
+  <article class="bg-gray-700 text-gray-200 flex rounded-lg shadow-xl overflow-hidden mb-8 bg-gradient-to-r from-orange-800 to-orange-400 md:flex-nowrap flex-wrap border-2 border-black">
+    <%= image_tag @car.photo, alt: "car", class: "relative w-full md:max-w-xs md:max-h-full max-h-48 object-cover border-1 border-black" %>
+    <div class="flex flex-col w-full justify-center">
+      <ul class="flex flex-col gap-2 px-2 my-2">
+        <li class="bg-gray-700 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 rounded-lg border-2 border-black">
+          <dt class="text-sm font-medium text-orange-300"><%= t('.brand') %></dt>
+          <dd class="mt-1 text-sm text-gray-200 sm:col-span-2 sm:mt-0"><%= @car.brand.upcase %></dd>
+        </li>
+        <li class="bg-gray-700 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 rounded-lg border-2 border-black">
+          <dt class="text-sm font-medium text-orange-300"><%= t('.model') %></dt>
+          <dd class="mt-1 text-sm text-gray-200 sm:col-span-2 sm:mt-0"><%= @car.model.upcase %></dd>
+        </li>
+        <% if Current.user&.role? == "admin" || Current.user&.role? == "supervisor" %>
+          <li class="bg-gray-700 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 rounded-lg border-2 border-black">
+            <dt class="text-sm font-medium text-orange-300"><%= t('.patent') %></dt>
+            <dd class="mt-1 text-sm text-gray-200 sm:col-span-2 sm:mt-0"><%= @car.patent.upcase %></dd>
+          </li>
+          <li class="bg-gray-700 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 rounded-lg border-2 border-black">
+            <dt class="text-sm font-medium text-orange-300"><%= t('.vehicle_number') %></dt>
+            <dd class="mt-1 text-sm text-gray-200 sm:col-span-2 sm:mt-0"><%= @car.vehicle_number %></dd>
+          </li>
+        <% end %>
+        <li class="bg-gray-700 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 rounded-lg border-2 border-black">
+          <dt class="text-sm font-medium text-orange-300"><%= t('.color') %></dt>
+          <dd class="mt-1 text-sm text-gray-200 sm:col-span-2 sm:mt-0"><%= @car.color.upcase %></dd>
+        </li>
+      </ul>
+    </div>
+  </article>
+</section>

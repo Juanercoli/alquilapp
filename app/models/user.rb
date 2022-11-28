@@ -22,7 +22,7 @@ class User < ApplicationRecord
       with: /\A(?:\+?\d{1,3}\s*-?)?\(?(?:\d{3})?\)?[- ]?\d{3}[- ]?\d{4}\z/,
       message: :invalid
     }
-  validates :password, length: { minimum: 6 }
+  validates :password, length: { minimum: 6 }, unless: proc { |x| x.password.blank? }
   validates :driver_license_expiration, presence: true
   validate :driver_license_expiration_must_be_valid
   validates :driver_license, presence: true
@@ -36,7 +36,7 @@ class User < ApplicationRecord
   # Métodos para validar login 
   def is_valid? (password)
     # Un usuario es valido cuando:
-    self.authenticate(password) && !self.is_blocked && self.is_accepted
+    self.authenticate(password) && !self.is_blocked && self.is_accepted && !self.is_deleted
   end
 
   # Retorna si el usuario es administrador

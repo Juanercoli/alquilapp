@@ -9,6 +9,7 @@ class CreateSuperUsers < ActiveRecord::Migration[7.0]
       t.string :password_digest, null: false
       t.boolean :is_admin, null: false, default: false
       t.boolean :is_blocked, null: false, default: false
+      t.boolean :is_deleted, null: false, default: false
 
       t.timestamps
     end

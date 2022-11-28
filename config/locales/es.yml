@@ -1,5 +1,6 @@
 es:
   app_name: 'Alquilapp'
+  app_subtitle: 'Facilitando tus traslados'
   activerecord:
     errors:
       models:
@@ -8,6 +9,7 @@ es:
             patent:
               bad_patent_type: 'debe estar en formato AAA000 o AA000AA (acepta minúsculas)'
             photo:
+              blank: 'debe ser adjunta'
               bad_photo_type: 'debe estar en formato %{type1} o %{type2}'
         user:
           attributes:
@@ -23,6 +25,7 @@ es:
     models:
       user: Usuario
       car: Auto
+      super_user: SuperUsuario
     attributes:
       user:
         dni: 'DNI'
@@ -41,6 +44,13 @@ es:
         vehicle_number: 'Número de vehículo'
         color: 'Color'
         photo: 'Foto'
+      super_user:
+        name: 'Nombre'
+        surname: 'Apellido'
+        phone: 'Teléfono'
+        dni: 'DNI'
+        email: 'Email'
+        password: 'Contraseña'
   common: 
     confirm: '¿Quieres realizar esta acción?'
     back: 'Ir atras'
@@ -55,33 +65,199 @@ es:
       add_supervisor: 'Agregar supervisor'
       add_car: 'Agregar auto'
       view_cars: 'Ver autos'
-      view_preregistered: 'Ver pre-registrados'
+      view_users: 'Ver usuarios'
+      view_pre_registered: 'Ver pre-registrados'
+      view_supervisors: 'Ver supervisores'
   cars:
+    visible:
+      visible_toggled: '¡Cambiada visibilidad!'
+      error_visible_toggled: '¡Error al cambiar visibilidad!'
+    table:
+      state: 'Estado'
+      brand: 'Marca'
+      model: 'Modelo'
+      patent: 'Patente'
+      vehicle_number: 'Número de vehículo'
+      actions: 'Acciones'
+      no_records_available: 'No hay autos disponibles'
+      visible: 'Visible'
+      non_visible: 'No visible'
+      view_details: 'Ver detalles'
+      edit: 'Editar'
+      visibility: 'Visibilidad'
+      delete: 'Eliminar'
+    index:
+      title: 'Flota de autos'
+      no_records_available: 'No hay autos disponibles'
+    card:
+      view_details: 'Ver detalles'  
     create:
       created: '¡El auto ha sido creado!'
     update:
       updated: '¡El auto ha sido actualizado!'
     destroy:
       destroyed: '¡El auto ha sido eliminado!'
+    show:
+      brand: 'Marca'
+      model: 'Modelo'
+      patent: 'Patente'
+      vehicle_number: 'Número de vehículo'
+      color: 'Color'
+      title: 'Detalles del auto'
     form:
+      placeholder_brand: 'Marca'
+      placeholder_model: 'Modelo'
+      placeholder_patent: 'Patente'
+      placeholder_vehicle_number: 'Número de vehículo'
+      placeholder_color: 'Color'
       submit: "Guardar"
   authentication:
     users:
+      show:
+        title: 'Detalles del usuario'
+        name: 'Nombre'
+        surname: 'Apellido'
+        phone: 'Teléfono'
+        dni: 'DNI'
+        email: 'Email'
+        birthdate: 'Fecha de nacimiento'
+        driver_license_expiration: 'Fecha de expiración de licencia'
+      destroy:
+        destroyed: '¡El usuario ha sido eliminado!'
+      accept:
+        accepted: '¡El usuario ha sido aprobado!'
+      reject:
+        rejected: '¡El usuario ha sido rechazado!'
+      reject_message: 
+        title: 'Rechazo de pre-registro'
+        motive: 'Motivo'
+        observations: 'Observaciones'
+        placeholder_observations: 'Ingrese aqui sus observaciones sobre el cliente'
+        submit: 'Rechazar'
+        first_motive: 'licencia de conducir invalida y/o datos incorrectos'
+        second_motive: 'las siguientes observaciones'
+      table_pre_registered:
+        driver_license: 'Licencia'
+        state: 'Estado'
+        name: 'Nombre'
+        surname: 'apellido'
+        dni: 'DNI'
+        email: 'Email'
+        phone: 'Tel.'
+        driver_license_expiration: 'Venc. licencia'
+        actions: 'Acciones'
+        not_accepted: 'No aceptado'
+        accepted: 'Aceptado'
+        view_details: 'Ver detalles'
+        accept: 'Aceptar'
+        reject: 'Rechazar' 
+        no_records_available: 'No hay usuarios disponibles'
+      pre_registered:
+        title: 'Tabla de pre-registrados'
+      block:
+        block_toggled: "Bloqueado/desbloqueado con éxito"
+        error_block_toggled: "Error al bloquear/desbloquear"
+      table:
+        driver_license: 'Licencia'
+        state: 'Estado'
+        name: 'Nombre'
+        surname: 'apellido'
+        dni: 'DNI'
+        email: 'Email'
+        phone: 'Tel.'
+        driver_license_expiration: 'Venc. licencia'
+        actions: 'Acciones'
+        non_blocked: 'No bloqueado'
+        blocked: 'Bloqueado'
+        view_details: 'Ver detalles' 
+        block: 'Bloquear/Desbloquear'
+        delete: 'Eliminar'
+        no_records_available: 'No hay usuarios disponibles'
+      index:
+        title: 'Tabla de usuarios'
       create:
-        created: '¡Tu cuenta ha sido creada!'
+        created: '¡Tu cuenta ha sido creada, debes esperar a que un supervisor apruebe tu registro, revisa tu mail!'
       new:
+        placeholder_name: 'Nombre'
+        placeholder_surname: 'Apellido'
+        placeholder_phone: 'Teléfono'
+        placeholder_dni: 'DNI'
+        placeholder_password: 'Contraseña'
+        placeholder_email: 'Email'
         submit: 'Registrarse'
+    super_users:
+      show:
+        title: 'Detalles del supervisor'
+        name: 'Nombre'
+        surname: 'Apellido'
+        phone: 'Teléfono'
+        dni: 'DNI'
+        email: 'Email'
+      update:
+        updated: '¡El supervisor ha sido editado!'
+      create:
+        created: '!El supervisor ha sido creado!'
+      destroy:
+        destroyed: '¡El supervisor ha sido eliminado!'
+      block:
+        block_toggled: "Bloqueado/desbloqueado con éxito"
+        error_block_toggled: "Error al bloquear/desbloquear"
+      table:
+        state: 'Estado'
+        name: 'Nombre'
+        surname: 'Apellido'
+        dni: 'DNI'
+        email: 'Email'
+        phone: 'Tel.'
+        actions: 'Acciones'
+        non_blocked: 'No bloqueado'
+        blocked: 'Bloqueado'
+        block: 'Bloquear/Desbloquear'
+        delete: 'Eliminar'
+        edit: 'Editar'
+        view_details: 'Ver detalles' 
+        no_records_available: 'No hay usuarios disponibles'
+      index:
+        title: 'Lista de supervisores'
+      form:
+        placeholder_name: 'Nombre'
+        placeholder_surname: 'Apellido'
+        placeholder_phone: 'Teléfono'
+        placeholder_dni: 'DNI'
+        placeholder_password: 'Contraseña'
+        placeholder_email: 'Email'
+        submit: 'Guardar supervisor'
     sessions:
       new:
-        form_legend: 'Inicie sesión en su cuenta'
+        form_legend: 'Inicia sesión'
+        login: 'DNI (o Email si eres un superusuario)'
+        password: 'Contraseña'
         placeholder_login: 'DNI'
         placeholder_password: 'Contraseña'
-        submit: 'Iniciar sesión'
+        submit: 'Ingresar'
+        forgot_password: ¿Olvidaste tu contraseña?
       create:
-        created: '¡Bienvenido!'
+        created: '¡Bienvenid@!'
         failed_not_valid: '¡Inicio de sesión inválido, revise los datos ingresados!'
         failed_not_exists: '¡Inicio de sesión inválido, los datos ingresados no están registrados!'
         failed_is_blocked: '¡Inicio de sesión inválido, el usuario se encuentra bloqueado!'
         failed_not_accepted: '¡Inicio de sesión inválido, debe esperar a que un supervisor lo acepte!'
       destroy:
         destroyed: '¡Tu sesión ha terminado! Hasta la próxima'
+  user_mailer:
+      welcome:
+        subject: '¡Bienvenid@ a Alquilapp!'
+        welcome_message: 'Hola %{name}! Bienvenid@ a Alquilapp :), para poder utilizar el servicio debe esperar a que un supervisor apruebe su registro, saludos.'
+      block:
+        subject: 'Su cuenta fue bloqueada'
+        block_message: 'Hola %{name}, lamentamos comunicarle que su cuenta ha sido bloqueada, para conocer los motivos comuniquese con supervisores@alquilapp.com, saludos.'
+      unblock:
+        subject: 'Su cuenta fue desbloqueada'
+        unblock_message: 'Hola %{name}, le informamos que su cuenta ha sido desbloqueada, saludos.'
+      reject:
+        subject: 'Su registro fue rechazado'
+        reject_message: 'Hola %{name}, le informamos que su registro ha sido rechazado debido a %{motive}, saludos.'
+        reject_observations: '%{observations}'
+      accept:
+        subject: 'Su registro fue aprobado'
+        accept_message: 'Hola %{name}, le informamos que su registro ha sido aprobado exitosamente! Ya puede utilizar el servicio de Alquilapp, se le han cargado $%{amount} a la billetera virtual, saludos.'

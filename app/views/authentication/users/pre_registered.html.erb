@@ -1,0 +1,11 @@
+<section class="mx-4 mb-2 p-4 bg-gray-800 text-gray-200 rounded-b-lg border-2 border-black">
+  <h4 class="text-2xl uppercase text-center">
+    <%= t('.title') %>
+  </h4>
+</section>
+
+<% if Current.user&.role? == "admin" || Current.user&.role? == "supervisor" %>
+  <%# Renderizo tabla %>
+  <%= render 'table_pre_registered', users: @users %>
+<% end %>
+

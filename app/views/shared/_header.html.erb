@@ -1,28 +1,35 @@
-<div class="bg-white flex justify-between items-center px-2" data-controller="menu">
+<!-- Header de la aplicación -->
+
+<header class="bg-orange-700 flex justify-between items-center py-2 px-2 rounded-b-lg mx-2 border-2 border-black" data-controller="menu">
   
+  <!-- Logo de la aplicación -->
   <%= link_to root_path do %>
-    <h1 class="text-2xl font-bold text-orange-400"><%= t('app_name') %></h1>
+    <div class="flex flex-col bg-orange-300 py-1 px-2 rounded hover:brightness-110 transition-color duration-200 delay-50 border border-black">
+      <h1 class="text-2xl font-bold text-zinc-900"><%= t('app_name') %></h1>
+      <h2 class="text-xs font-bold text-orange-600"><%= t('app_subtitle').upcase %></h2>
+    </div>
   <% end %>
-
-  <button class="sm:hidden" data-action="click->menu#toggle">
-    <%= image_tag 'icons/menu.svg', width: 35, height: 35 %>
-  </button>
-
-  <div class="hidden sm:block">
+  
+  <!-- Menu desktop -->
+  <div class="hidden  sm:flex sm:flex-wrap sm:gap-1 ">
       <%= render partial: 'shared/items' %>
   </div>
 
   <!-- Menu mobile -->
-  <div class="gap-4 sm:hidden absolute bg-white top-0 right-0 shadow z-10 h-full flex flex-col min-w-[45%] overflow-y-scroll ease-in-out duration-200 p-5 translate-x-full" data-menu-target="items">
-    <button class="mb-4" data-action="click->menu#toggle">
-      <%= image_tag 'icons/close.svg', width: 35, height: 35 %>
-    </button>
+
+  <!-- Menu cerrado -->
+  <button class="sm:hidden bg-orange-300 rounded hover:brightness-110 border border-black" data-action="click->menu#toggle">
+    <%= image_tag 'icons/menu.svg', width: 35, height: 35 %>
+  </button>
+
+  <!-- Menu abierto -->
+  <div class="gap-4 sm:hidden absolute bg-orange-700 top-0 right-0 shadow z-10 h-full flex flex-col min-w-[45%] overflow-y-scroll ease-in-out duration-200 p-5 translate-x-full mt-2 border-2 border-black" data-menu-target="items">
+    <div class="flex flex-col items-start">
+      <button class="mb-4 bg-orange-300 rounded hover:brightness-110 border border-black" data-action="click->menu#toggle">
+        <%= image_tag 'icons/close.svg', width: 35, height: 35 %>
+      </button>
+    </div>
     <%= render partial: 'shared/items' %>
   </div>
 
-</div>
-
-<div>
-  <p><%# Current.user.inspect %></p>
-  <p><%# Current.role.inspect %></p>
-</div>
+</header>

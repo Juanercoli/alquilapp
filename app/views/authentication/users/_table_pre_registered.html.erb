@@ -1,0 +1,113 @@
+<section class="m-8">
+  <%# Se puede agregar algun elemento por aqui %>
+  <article class="overflow-auto rounded-lg shadow hidden md:block select-none">
+    <table class="w-full">
+      <thead class="text-xs uppercase bg-gray-800 text-gray-200">
+        <tr class="border-2 border-black">
+          <th class="w-16 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.driver_license') %></th>
+          <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.state') %></th>
+          <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.name') %></th>
+          <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.surname') %></th>
+          <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.dni') %></th>
+          <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.email') %></th>
+          <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.phone') %></th>
+          <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.driver_license_expiration') %></th>
+          <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.actions') %></th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-100">  
+        <% if users.count > 0 %>
+          <%# En caso de haber usuarios %>
+          <% users.each do |user| %>
+            <tr class="<%= class_names('hover:bg-gray-400', {'bg-red-200': !user.is_accepted}) %>">
+              <td class="p-3 text-sm">
+                <%= link_to rails_blob_url(user.driver_license), target: :blank do %>
+                  <%= image_tag user.driver_license, alt: "driver license", class: "w-10 h-10 object-cover border border-black max-w-none" %>
+                <% end %>
+              </td>
+              <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase">
+                <span class="<%= class_names('p-1.5 text-xs font-medium uppercase tracking-wider text-gray-200 rounded-lg bg-green-400 border-2 border-black', {'bg-red-500': !user.is_accepted}) %>"><%= user.is_accepted ? t('.accepted') : t('.not_accepted') %></span>
+              </td>
+              <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"><%= user.name %></td>
+              <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"><%= user.surname %></td>
+              <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"><%= user.dni %></td>
+              <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"><%= user.email %></td>
+              <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"><%= user.phone %></td>
+              <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"><%= user.driver_license_expiration %></td>
+              <td class="p-3 text-gray-700 whitespace-nowrap uppercase">
+                <%= link_to t('.view_details'), show_client_path(user.id), class: "p-1.5 focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm dark:focus:ring-yellow-900 border border-black" if Current.user&.role? == "supervisor" %>
+                <%= button_to t('.accept'), accept_client_path(user.id), method: :patch, form_class: "contents", class: "inline p-1 focus:outline-none text-white bg-violet-400 hover:bg-violet-500 focus:ring-4 focus:ring-violet-300 font-medium rounded-lg text-sm dark:focus:ring-violet-900 border border-black uppercase" if Current.user&.role? == "supervisor" %>
+                <%= link_to t('.reject'), reject_message_client_path(user.id), data: {
+                turbo_confirm: t('common.confirm')
+                }, class: "p-1.5 focus:outline-none text-white bg-red-400 hover:bg-red-500 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm dark:focus:ring-red-900 border border-black" if Current.user&.role? == "supervisor" %>     
+              </td>
+            </tr>
+          <% end %>
+        <% else %>
+          <%# En caso de no haber usuarios %>
+          <tr>
+            <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"> <%= t('.no_records_available') %> </td>
+          </tr>
+        <% end %>
+      </tbody>  
+    </table>
+  </article>
+  
+  <%# Para la vista mobile %>
+  <article class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:hidden">
+    <% if users.count > 0 %>
+      <%# En caso de haber autos %>
+      <% users.each do |user| %>
+        <div class="space-y-3 p-4 rounded-lg shadow border-2 border-black bg-gray-800">
+          <div class="flex items-center space-x-2 text-sm flex-wrap gap-2">
+              <div>
+                <%= link_to rails_blob_url(user.driver_license), target: :blank do %>
+                  <%= image_tag user.driver_license, alt: "driver license", class: "w-10 h-10 object-cover border border-black max-w-none" %>
+                <% end %>
+              </div>
+              <div>
+                <span class="<%= class_names('p-1.5 text-xs font-medium uppercase tracking-wider text-gray-200 rounded-lg bg-green-400 border-2 border-black whitespace-nowrap', {'bg-red-500': !user.is_accepted}) %>"><%= user.is_accepted ? t('.accepted') : t('.not_accepted') %></span>
+                </span>
+              </div>
+          </div>
+          <div class="text-sm text-gray-200 flex flex-col">
+            <p>
+              <span class="text-sm text-gray-200 uppercase font-bold"><%= t('.name') %>:</span>
+              <span class="text-sm text-gray-200 uppercase"><%= user.name %></span>
+            </p>
+            <p>
+              <span class="text-sm text-gray-200 uppercase font-bold"><%= t('.surname') %>:</span>
+              <span class="text-sm text-gray-200 uppercase"><%= user.surname %></span>
+            </p>
+            <p>
+              <span class="text-sm text-gray-200 uppercase font-bold"><%= t('.dni') %>:</span>
+              <span class="text-sm text-gray-200 uppercase"><%= user.dni %></span>
+            </p>
+            <p>
+              <span class="text-sm text-gray-200 uppercase font-bold"><%= t('.email') %>:</span>
+              <span class="text-sm text-gray-200 uppercase"><%= user.email %></span>
+            </p>
+            <p>
+              <span class="text-sm text-gray-200 uppercase font-bold"><%= t('.phone') %>:</span>
+              <span class="text-sm text-gray-200 uppercase"><%= user.phone %></span>
+            </p>
+            <p>
+              <span class="text-sm text-gray-200 uppercase font-bold"><%= t('.driver_license_expiration') %>:</span>
+              <span class="text-sm text-gray-200 uppercase"><%= user.driver_license_expiration %></span>
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-2 uppercase">
+            <%= link_to t('.view_details'), show_client_path(user.id), class: "p-1.5 focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm dark:focus:ring-yellow-900 border border-black" if Current.user&.role? == "supervisor" %>
+            <%= button_to t('.accept'), accept_client_path(user.id), method: :patch, form_class: "contents", class: "inline p-1 focus:outline-none text-white bg-violet-400 hover:bg-violet-500 focus:ring-4 focus:ring-violet-300 font-medium rounded-lg text-sm dark:focus:ring-violet-900 border border-black uppercase" if Current.user&.role? == "supervisor" %>
+            <%= link_to t('.reject'), reject_message_client_path(user.id), data: {
+            turbo_confirm: t('common.confirm')
+            }, class: "p-1.5 focus:outline-none text-white bg-red-400 hover:bg-red-500 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm dark:focus:ring-red-900 border border-black" if Current.user&.role? == "supervisor" %>   
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <%# En caso de no haber usuarios %>
+      <h4 class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"> <%= t('.no_records_available') %></h4>
+    <% end %>
+  </article>
+</section>

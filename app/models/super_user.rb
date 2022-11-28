@@ -20,7 +20,7 @@ class SuperUser < ApplicationRecord
       with: /\A(?:\+?\d{1,3}\s*-?)?\(?(?:\d{3})?\)?[- ]?\d{3}[- ]?\d{4}\z/,
       message: :invalid
     }
-  validates :password, length: { minimum: 6 }
+  validates :password, length: { minimum: 6 }, unless: proc { |x| x.password.blank? }
 
     # Callback antes de guardar
   before_save :downcase_attributes
@@ -28,7 +28,7 @@ class SuperUser < ApplicationRecord
   # Métodos para validar login 
   def is_valid? (password)
     # Un usuario es valido cuando:
-    self.authenticate(password) && !self.is_blocked
+    self.authenticate(password) && !self.is_blocked && !self.is_deleted
   end
 
   # Retorna si el usuario es administrador

@@ -1,17 +1,21 @@
-  <div class="rounded overflow-hidden shadow-lg">
-  <%= image_tag car.photo, alt: "car", class: "object-cover w-200 h-200" %>
-  <div class="px-6 py-4 flex flex-col">
-    <div class="font-bold text-xl mb-2">Modelo: <%= car.model %></div>
-    <p class="text-gray-700 text-base mb-2">
-      Número de vehículo: <%= car.vehicle_number %>
-    </p>
-    <div>
-      <%= link_to "Ver detalle", car_path(car.id), class: "focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 dark:focus:ring-yellow-900 my-10 py-3" %>
-      <%= link_to "Eliminar", car_path(car.id),data: {
-                        turbo_method: :delete,
-                        turbo_confirm: t('common.confirm')
-                        }, class: "focus:outline-none text-white bg-red-400 hover:bg-red-500 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 dark:focus:ring-red-900 my-10 py-3" if Current.user&.role? == "admin" %>
-      <%= link_to "Editar", edit_car_path(car), class: "focus:outline-none text-white bg-blue-400 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 dark:focus:ring-blue-900 my-10 py-3" if Current.user&.role? == "admin" %>
+<!-- Tarjeta de auto -->
+<section class="flex flex-col p-2 pt-4 md:px-4 md:pt-4 mx-4">
+  <article class="bg-gray-700 text-gray-200 flex rounded-lg shadow-xl overflow-hidden mb-8 bg-gradient-to-r from-orange-600 to-gray-800 md:flex-nowrap flex-wrap border-2 border-black">
+    <%= link_to car_path(car.id), class: "contents" do %>
+      <%= image_tag car.photo, alt: "car", class: "relative w-full md:max-w-xs md:max-h-full max-h-48 object-cover border-1 border-black" %>
+    <% end %>
+    <div class="relative flex flex-col p-4">
+      <h1 class="text-3xl mb-2 uppercase font-bold">
+        <%= car.brand + " " + car.model + " " + car.color  %>
+      </h1>
+      <div class="text-justify">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ultrices massa vel mattis varius. Morbi finibus, risus quis tincidunt vestibulum, erat magna hendrerit orci, nec faucibus turpis enim ac arcu. Sed lacinia finibus ante, sed feugiat orci vestibulum id. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Cras porta, libero et maximus dignissim, tortor arcu dictum libero, vel consequat diam ipsum a nisi. Donec facilisis scelerisque nulla, at elementum justo porttitor vel. Nunc sit amet fringilla nisl. Aenean fermentum, mauris ac blandit commodo, libero libero vehicula neque, vel finibus orci magna eget ligula. 
+        </p>
+      </div>
+      <ul class="flex flex-row flex-wrap justify-center md:justify-start mt-8">
+        <li class="mx-1 text-orange-300 font-bold bg-orange-900 py-2 px-2 rounded hover:brightness-110 border-2 border-black focus:border-orange-900 focus:outline-none focus:ring-orange-900 cursor-pointer"><%= link_to t('.view_details'), car_path(car.id) %></li>
+      </ul>
     </div>
-  </div>
-</div>
+  </article>
+</section>

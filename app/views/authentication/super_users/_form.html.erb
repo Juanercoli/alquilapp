@@ -1,18 +1,18 @@
-<!-- Formulario de autos -->
+<!-- Registro de super usuarios -->
 <section class="md:grid md:grid-cols-2 md:gap-6">
   <article class="mt-1 md:col-span-2 md:mt-1">
-    <%= form_with(model: @car) do |form| %>
+    <%= form_with(model: super_user) do |form| %>
       <div class="overflow-hidden shadow sm:rounded-md">
         <div class="bg-white px-4 sm:mt-4">
           <div class="grid grid-cols-6 gap-4">
 
-            <%# Input para marca %>
+            <%# Input para nombre %>
             <div class="col-span-6 sm:col-span-3">
-              <%= form.label :brand, class: "block font-semibold" %>
-              <%= form.text_field :brand, 
-                placeholder: t('.placeholder_brand'),
+              <%= form.label :name, class: "block font-semibold" %>
+              <%= form.text_field :name, 
+                placeholder: t('.placeholder_name'),
                 class: "border w-full h-5 px-3 py-5 mt-1 focus:z-10 focus:border-orange-700 focus:outline-none focus:ring-orange-700 rounded-md" %>
-              <% if @car.errors.full_messages_for(:brand).each  do |error| %>
+              <% if super_user.errors.full_messages_for(:name).each  do |error| %>
                   <ul class="list-disc list-inside">
                     <li class="text-xs text-red-500">
                       <%= error %>
@@ -22,13 +22,13 @@
               <% end %>
               </div>
 
-            <%# Input para modelo %>
+            <%# Input para apellido %>
             <div class="col-span-6 sm:col-span-3">
-              <%= form.label :model, class: "block font-semibold" %>
-              <%= form.text_field :model, 
-                placeholder: t('.placeholder_model'),
+              <%= form.label :surname, class: "block font-semibold" %>
+              <%= form.text_field :surname, 
+                placeholder: t('.placeholder_surname'),
                 class: "border w-full h-5 px-3 py-5 mt-1 focus:z-10 focus:border-orange-700 focus:outline-none focus:ring-orange-700 rounded-md" %>
-              <% if @car.errors.full_messages_for(:model).each  do |error| %>
+              <% if super_user.errors.full_messages_for(:surname).each  do |error| %>
                   <ul class="list-disc list-inside">
                     <li class="text-xs text-red-500">
                       <%= error %>
@@ -38,13 +38,13 @@
               <% end %>
             </div>
 
-            <%# Input para patente %>
+            <%# Input para phone %>
             <div class="col-span-6 sm:col-span-3">
-              <%= form.label :patent, class: "block font-semibold" %>
-              <%= form.text_field :patent, 
-                placeholder: t('.placeholder_patent'),
+              <%= form.label :phone, class: "block font-semibold" %>
+              <%= form.text_field :phone, 
+                placeholder: t('.placeholder_phone'),
                 class: "border w-full h-5 px-3 py-5 mt-1 focus:z-10 focus:border-orange-700 focus:outline-none focus:ring-orange-700 rounded-md" %>
-              <% if @car.errors.full_messages_for(:patent).each  do |error| %>
+              <% if super_user.errors.full_messages_for(:phone).each  do |error| %>
                   <ul class="list-disc list-inside">
                     <li class="text-xs text-red-500">
                       <%= error %>
@@ -54,13 +54,13 @@
               <% end %>
             </div>
 
-            <%# Input para número de vehículo %>
+            <%# Input para dni %>
             <div class="col-span-6 sm:col-span-3">
-              <%= form.label :vehicle_number, class: "block font-semibold" %>
-              <%= form.number_field :vehicle_number, 
-                placeholder: t('.placeholder_vehicle_number'),
+              <%= form.label :dni, class: "block font-semibold" %>
+              <%= form.text_field :dni, 
+                placeholder: t('.placeholder_dni'),
                 class: "border w-full h-5 px-3 py-5 mt-1 focus:z-10 focus:border-orange-700 focus:outline-none focus:ring-orange-700 rounded-md" %>
-              <% if @car.errors.full_messages_for(:vehicle_number).each  do |error| %>
+              <% if super_user.errors.full_messages_for(:dni).each  do |error| %>
                   <ul class="list-disc list-inside">
                     <li class="text-xs text-red-500">
                       <%= error %>
@@ -70,13 +70,13 @@
               <% end %>
             </div>
 
-            <%# Input para color %>
+            <%# Input para email %>
             <div class="col-span-6 sm:col-span-3">
-              <%= form.label :color, class: "block font-semibold" %>
-              <%= form.text_field :color, 
-                placeholder: t('.placeholder_color'),
+              <%= form.label :email, class: "block font-semibold" %>
+              <%= form.email_field :email, 
+                placeholder: t('.placeholder_email'),
                 class: "border w-full h-5 px-3 py-5 mt-1 focus:z-10 focus:border-orange-700 focus:outline-none focus:ring-orange-700 rounded-md" %>
-              <% if @car.errors.full_messages_for(:color).each  do |error| %>
+              <% if super_user.errors.full_messages_for(:email).each  do |error| %>
                   <ul class="list-disc list-inside">
                     <li class="text-xs text-red-500">
                       <%= error %>
@@ -86,14 +86,16 @@
               <% end %>
             </div>
 
-            <%# Input para foto %>
+            <%# Input para password %>
             <div class="col-span-6 sm:col-span-3">
-              <%= form.label :photo, class: "block font-semibold" %>
-              <%= form.file_field :photo, class: "border w-full px-3 mt-1 focus:z-10 focus:border-orange-700 focus:outline-none focus:ring-orange-700 rounded-md" %>
-              <% if @car.errors.full_messages_for(:photo).each  do |error| %>
+              <%= form.label :password, class: "block font-semibold" %>
+              <%= form.password_field :password, 
+                placeholder: t('.placeholder_password'),
+                class: "border w-full h-5 px-3 py-5 mt-1 focus:z-10 focus:border-orange-700 focus:outline-none focus:ring-orange-700 rounded-md" %>
+              <% if super_user.errors.full_messages_for(:password).each  do |error| %>
                   <ul class="list-disc list-inside">
-                    <li class="text-xs text-red-500">
-                      <%= error %>
+                      <li class="text-xs text-red-500">
+                        <%= error %>
                     </li>
                   </ul>
                 <% end %>
@@ -102,7 +104,7 @@
 
           </div>
         </div>
-        <div class="flex justify-center bg-gray-50 text-right sm:px-6 mt-2">
+        <div class="flex justify-center bg-gray-50 text-right sm:px-6 mt-4">
           <%# Botón de submit %>
           <%= button_tag(type: "submit", 
             class: "mt-2 sm:mt-0 mb-1 text-orange-100 font-bold bg-orange-500 py-2 px-2 rounded hover:brightness-110 border-2 border-black focus:z-10 focus:border-orange-900 focus:outline-none focus:ring-orange-900") do %>

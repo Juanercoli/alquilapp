@@ -1,0 +1,101 @@
+<section class="m-8">
+  <%# Se puede agregar algun elemento por aqui %>
+  <article class="overflow-auto rounded-lg shadow hidden md:block select-none">
+    <table class="w-full">
+      <thead class="text-xs uppercase bg-gray-800 text-gray-200">
+        <tr class="border-2 border-black">
+          <th class="w-16 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"></th>
+          <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.state') %></th>
+          <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.brand') %></th>
+          <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.model') %></th>
+          <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.patent') %></th>
+          <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.vehicle_number') %></th>
+          <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.actions') %></th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-100">  
+        <% if cars.count > 0 %>
+          <%# En caso de haber autos %>
+          <% cars.each do |car| %>
+            <tr class="<%= class_names('hover:bg-gray-400', {'bg-red-200': !car.is_visible}) %>">
+              <td class="p-3 text-sm">
+                <%= image_tag car.photo, alt: "car", class: "w-10 h-10 object-cover border border-black max-w-none" %>
+              </td>
+              <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase">
+                <span class="<%= class_names('p-1.5 text-xs font-medium uppercase tracking-wider text-gray-200 rounded-lg bg-green-400 border-2 border-black', {'bg-red-500': !car.is_visible}) %>"><%= car.is_visible ? t('.visible') : t('.non_visible') %></span>
+              </td>
+              <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"><%= car.brand %></td>
+              <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"><%= car.model %></td>
+              <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"><%= car.patent %></td>
+              <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"><%= car.vehicle_number %></td>
+              <td class="p-3 text-gray-700 whitespace-nowrap uppercase">
+                <%= link_to t('.view_details'), car_path(car.id), class: "p-1.5 focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm dark:focus:ring-yellow-900 border border-black" %>
+                <%= link_to t('.edit'), edit_car_path(car), class: "p-1.5 focus:outline-none text-white bg-blue-400 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm dark:focus:ring-blue-900 border border-black" if Current.user&.role? == "admin" %>
+                <%= button_to t('.visibility'), visible_car_path(car.id), method: :put, form_class: "contents", class: "inline p-1 focus:outline-none text-white bg-violet-400 hover:bg-violet-500 focus:ring-4 focus:ring-violet-300 font-medium rounded-lg text-sm dark:focus:ring-violet-900 border border-black uppercase" if Current.user&.role? == "admin" %>
+                <%= link_to t('.delete'), car_path(car.id), data: {
+                                  turbo_method: :delete,
+                                  turbo_confirm: t('common.confirm')
+                                  }, class: "p-1.5 focus:outline-none text-white bg-red-400 hover:bg-red-500 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm dark:focus:ring-red-900 border border-black" if Current.user&.role? == "admin" %>
+              </td>
+            </tr>
+          <% end %>
+        <% else %>
+          <%# En caso de no haber autos %>
+          <tr>
+            <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"> <%= t('.no_records_available') %> </td>
+          </tr>
+        <% end %>
+      </tbody>  
+    </table>
+  </article>
+  
+  <%# Para la vista mobile %>
+  <article class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:hidden">
+    <% if cars.count > 0 %>
+      <%# En caso de haber autos %>
+      <% cars.each do |car| %>
+        <div class="space-y-3 p-4 rounded-lg shadow border-2 border-black bg-gray-800">
+          <div class="flex items-center space-x-2 text-sm flex-wrap gap-2">
+              <div>
+                <%= image_tag car.photo, alt: "car", class: "w-10 h-10 object-cover border border-black max-w-none" %>
+              </div>
+              <div>
+                <span class="<%= class_names('p-1.5 text-xs font-medium uppercase tracking-wider text-gray-200 rounded-lg bg-green-400 border-2 border-black whitespace-nowrap', {'bg-red-500': !car.is_visible}) %>"><%= car.is_visible ? t('.visible') : t('.non_visible') %></span>
+                </span>
+              </div>
+          </div>
+          <div class="text-sm text-gray-200 flex flex-col">
+            <p>
+              <span class="text-sm text-gray-200 uppercase font-bold"><%= t('.brand') %>:</span>
+              <span class="text-sm text-gray-200 uppercase"><%= car.brand %></span>
+            </p>
+            <p>
+              <span class="text-sm text-gray-200 uppercase font-bold"><%= t('.model') %>:</span>
+              <span class="text-sm text-gray-200 uppercase"><%= car.model %></span>
+            </p>
+            <p>
+              <span class="text-sm text-gray-200 uppercase font-bold"><%= t('.patent') %>:</span>
+              <span class="text-sm text-gray-200 uppercase"><%= car.patent %></span>
+            </p>
+            <p>
+              <span class="text-sm text-gray-200 uppercase font-bold"><%= t('.vehicle_number') %>:</span>
+              <span class="text-sm text-gray-200 uppercase"><%= car.vehicle_number %></span>
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-2 uppercase">
+            <%= link_to "Ver detalle", car_path(car.id), class: "p-1.5 focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm dark:focus:ring-yellow-900 border border-black" %>
+            <%= link_to "Editar", edit_car_path(car), class: "p-1.5 focus:outline-none text-white bg-blue-400 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm dark:focus:ring-blue-900 border border-black" if Current.user&.role? == "admin" %>
+            <%= button_to "Visibilidad", visible_car_path(car.id), method: :put, form_class: "contents", class: "inline p-1 focus:outline-none text-white bg-violet-400 hover:bg-violet-500 focus:ring-4 focus:ring-violet-300 font-medium rounded-lg text-sm dark:focus:ring-violet-900 border border-black uppercase" if Current.user&.role? == "admin" %>
+            <%= link_to "Eliminar", car_path(car.id), data: {
+                              turbo_method: :delete,
+                              turbo_confirm: t('common.confirm')
+                              }, class: "p-1.5 focus:outline-none text-white bg-red-400 hover:bg-red-500 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm dark:focus:ring-red-900 border border-black" if Current.user&.role? == "admin" %>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <%# En caso de no haber autos %>
+      <h4 class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"> <%= t('.no_records_available') %></h4>
+    <% end %>
+  </article>
+</section>

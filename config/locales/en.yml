@@ -1,11 +1,15 @@
 en:
   app_name: 'Alquilapp'
+  app_subtitle: 'Facilitando tus traslados'
   activerecord:
     errors:
       models:
         car:
           attributes:
+            patent:
+              bad_patent_type: 'must have a format like AAA000 or AA000AA'
             photo:
+              blank: 'must be attached'
               bad_photo_type: 'must be %{type1} or %{type2}'      
         user:
           attributes:
@@ -19,6 +23,7 @@ en:
     models:
       user: User
       car: Car
+      super_user: SuperUser
     attributes:
       user:
         dni: 'DNI'
@@ -36,7 +41,14 @@ en:
         model: 'Model'
         vehicle_number: 'Vehicle number'
         color: 'Color'
-        photo: 'Photo'        
+        photo: 'Photo'  
+      super_user:
+        name: 'Name'
+        surname: 'Surname'
+        phone: 'Phone'
+        dni: 'DNI'
+        email: 'Email'
+        password: 'Password'      
   common: 
     confirm: 'Are you sure?'
     back: 'Go back'
@@ -51,26 +63,174 @@ en:
       add_supervisor: 'Add supervisor'
       add_car: 'Add car'
       view_cars: 'View cars'
-      view_preregistered: 'View pre-registered'
+      view_users: 'View users'
+      view_pre_registered: 'View pre-registered'  
+      view_supervisors: 'View supervisors'
   cars:
+    visible:
+      visible_toggled: 'Toggled visibility!'
+      error_visible_toggled: 'Error on visibility toggle!'      
+    table:
+      state: 'State'
+      brand: 'Brand'
+      model: 'Model'
+      patent: 'Patent'
+      vehicle_number: 'Vehicle number'
+      actions: 'Actions'
+      no_records_available: 'No cars available'
+      visible: 'Visible'
+      non_visible: 'Non visible'
+      view_details: 'View details'
+      edit: 'Edit'
+      visibility: 'Visibility'
+      delete: 'Delete'
+    index:
+      title: 'Flota de autos'
+      no_records_available: 'No cars available'
+    card:
+      view_details: 'View details'
     create:
       created: 'The car has been created!'
     update:
       updated: 'The car has been updated!'
     destroy:
-      destroyed: 'The car has been deleted!'      
+      destroyed: 'The car has been deleted!'
+    show:
+      brand: 'Marca'
+      model: 'Modelo'
+      patent: 'Patente'
+      vehicle_number: 'Número de vehículo'
+      color: 'Color' 
+      title: 'Car details'
+    form:
+      placeholder_brand: 'Brand'
+      placeholder_model: 'Model'
+      placeholder_patent: 'Patent'
+      placeholder_vehicle_number: 'Vehicle number'
+      placeholder_color: 'Color'
+      submit: "Save"
   authentication:
     users:
+      show:
+        title: 'User details'
+        name: 'Name'
+        surname: 'Surname'
+        phone: 'Phone'
+        dni: 'DNI'
+        email: 'Email'
+        birthdate: 'Birthdate'
+        driver_license_expiration: 'Driver license expiration'
+      destroy:
+        destroyed: 'The user has been deleted!'
+      accept:
+        accepted: The user has been accepted!'
+      reject:
+        rejected: 'The user has been rejected!'
+      reject_message: 
+        title: 'Pre-register reject'
+        motive: 'Motive'
+        observations: 'Observations'
+        placeholder_observations: 'Observations about the client'
+        submit: 'Reject'
+        first_motive: 'invalid driver license and/or incorrect data'
+        second_motive: 'the next observations'
+      table_pre_registered:
+        driver_license: 'License'
+        state: 'State'
+        name: 'Name'
+        surname: 'Surname'
+        dni: 'DNI'
+        email: 'Email'
+        phone: 'Phone.'
+        driver_license_expiration: 'License expiration'
+        actions: 'Actions'
+        not_accepted: 'No aceptado'
+        accepted: 'Accepted'
+        view_details: 'Ver detalles'
+        accept: 'Accept'
+        reject: 'Reject' 
+      pre_registered:
+        title: 'Pre-registered table'
+      block:
+        block_toggled: "Blocked/unblocked success"
+        error_block_toggled: "Blocked/unblocked error"
+      table:
+        driver_license: 'License'
+        state: 'State'
+        name: 'Name'
+        surname: 'Surname'
+        dni: 'DNI'
+        email: 'Email'
+        phone: 'Phone.'
+        driver_license_expiration: 'License expiration'
+        actions: 'Actions'
+        non_blocked: 'Non blocked'
+        blocked: 'Blocked'
+        block: 'Block/Unblock'
+        delete: 'Delete'
+      index:
+        title: 'Users table'
       create:
         created: 'Your account has been created!'
       new:
-        submit: 'Sign up'        
+        placeholder_name: 'Name'
+        placeholder_surname: 'Surname'
+        placeholder_phone: 'Phone'
+        placeholder_dni: 'DNI'
+        placeholder_password: 'Password'
+        placeholder_email: 'Email'
+        submit: 'Sign up'   
+    super_users:
+      show:
+        title: 'Supervisor details'
+        name: 'Name'
+        surname: 'Surname'
+        phone: 'Phone'
+        dni: 'DNI'
+        email: 'Email'    
+      update:
+        updated: 'The supervisor has been edited!'
+      create:
+        created: 'The supervisor has been created!'            
+      destroy:
+        destroyed: 'The supervisor has been deleted!'
+      block:
+        block_toggled: "Successfully blocked/unblocked"
+        error_block_toggled: "Blocked/unblocked error"    
+      table:
+        state: 'State'
+        name: 'Name'
+        surname: 'Surname'
+        dni: 'DNI'
+        email: 'Email'
+        phone: 'Phone'
+        actions: 'Actions'
+        non_blocked: 'Non blocked'
+        blocked: 'Blocked'
+        block: 'Block/Unblock'
+        delete: 'Delete'
+        edit: 'Edit'
+        view_details: 'View details'
+        no_records_available: 'No users available'
+      index:
+        title: 'Supervisors table'
+      form:
+        placeholder_name: 'Name'
+        placeholder_surname: 'Surname'
+        placeholder_phone: 'Phone'
+        placeholder_dni: 'DNI'
+        placeholder_password: 'Password'
+        placeholder_email: 'Email'
+        submit: 'Guardar supervisor'     
     sessions:
       new:
         form_legend: 'Login to your account'
+        login: 'DNI (or Email if you are superuser)'
+        password: 'Password'
         placeholder_login: 'DNI'
         placeholder_password: 'Password'
         submit: 'Login'
+        forgot_password: Forgot password?
       create:
         created: 'Welcome!'
         failed_not_valid: 'Invalid login!'
@@ -79,3 +239,20 @@ en:
         failed_not_accepted: 'Invalid login! You have to wait until a supervisor accepts you'
       destroy:
         destroyed: 'Session is over! Bye'
+  user_mailer:
+    welcome:
+      subject: 'Welcome to Alquilapp!'
+      welcome_message: 'Hey %{name}! Welcome to Alquilapp :), to use the service you must wait until a supervisor accepts your register.'
+    block:
+      subject: 'Your account has been blocked'
+      block_message: 'Hello %{name}, we are sorry to comunicate that your account has been blocked, to understand the motives send a mail to supervisores@alquilapp.com, bye.'
+    unblock:
+      subject: 'Your account has been unblocked'
+      unblock_message: 'Hello %{name}, we are happy to tell you that you account has been unblocked, bye.'
+    reject:
+      subject: 'Your registration has been rejected'
+      reject_message: 'Hello %{name}, your register has been rejected because of %{motive}, bye.'
+      reject_observations: '%{observations}'
+      accept:
+        subject: 'Your registration has been accepted'
+        accept_message: 'Hello %{name}, we want to inform you that the registration has been succesfully approved! You can already start using Alquilapp service, you have been gifted $%{amount} to your wallet, bye.'

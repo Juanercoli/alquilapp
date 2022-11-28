@@ -16,9 +16,10 @@
     <% end %>
   </head>
 
-  <body class="h-full">
+  <body class="h-full overflow-x-hidden">
     <%= render 'shared/flash' %>
     <%= render 'shared/header' %>
+    <%= render partial: 'shared/tool_items' %>
     <%= yield %>
   </body>
 </html>
