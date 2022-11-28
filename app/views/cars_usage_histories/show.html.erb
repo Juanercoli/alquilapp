@@ -1,28 +1,79 @@
-<div class="flex flex-col justify-center overflow-x-auto relative shadow-md sm:rounded-lg">
-  <h1 class="text-2xl bold">Historial</h1>
-    <% if(@history.count > 0)%>
-    <table class="w-22 text-sm text-left text-orange-500">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-                <th scope="col" class="py-3 px-6">Inicio</th>
-                <th scope="col" class="py-3 px-6">Fin</th>
-                <th scope="col" class="py-3 px-6">user</th>
-                <th scope="col" class="py-3 px-6">car</th>
-            </tr>
-        </thead>
+<!-- Título historial de autos -->
+<section class="mx-4 mb-2 p-4 bg-gray-800 text-gray-200 rounded-b-lg border-2 border-black">
+  <h4 class="text-2xl uppercase text-center">
+    <%= t('.title') %>
+  </h4>
+</section>
 
-        <tbody>
+
+<section class="m-8">
+  <%# Se puede agregar algun elemento por aqui %>
+  <article class="overflow-auto rounded-lg shadow hidden md:block select-none">
+    <table class="w-full">
+      <thead class="text-xs uppercase bg-gray-800 text-gray-200">
+        <tr class="border-2 border-black">
+          <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.start_time') %></th>
+          <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.end_time') %></th>
+          <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.name') %></th>
+          <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.surname') %></th>
+          <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.dni') %></th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-100">  
+        <% if @history.count > 0 %>
+          <%# En caso de haber historial  %>
           <% @history.each do |history| %>
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                      <td class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"><%= history.start.to_formatted_s(:long) %></td>
-                      <td class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"><%= history.end.to_formatted_s(:long) %></td>
-                      <td class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"><%= history.user.inspect %></td>
-                      <td class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"><%= history.car.inspect %></td>
-            </tr>   
+            <tr class="hover:bg-gray-400">
+              <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"><%= history.start %></td>
+              <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"><%= history.end %></td>
+              <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"><%= history.user.name %></td>
+              <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"><%= history.user.surname %></td>
+              <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"><%= history.user.dni %></td>
+            </tr>
           <% end %>
-        </tbody>
+        <% else %>
+          <%# En caso de no haber historial %>
+          <tr>
+            <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"> <%= t('.no_records_available') %> </td>
+          </tr>
+        <% end %>
+      </tbody>  
     </table>
+  </article>
+  
+  <%# Para la vista mobile %>
+  <article class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:hidden">
+    <% if @history.count > 0 %>
+      <%# En caso de haber autos %>
+      <% @history.each do |history| %>
+        <div class="space-y-3 p-4 rounded-lg shadow border-2 border-black bg-gray-800">
+          <div class="text-sm text-gray-200 flex flex-col">
+            <p>
+              <span class="text-sm text-gray-200 uppercase font-bold"><%= t('.start_time') %>:</span>
+              <span class="text-sm text-gray-200 uppercase"><%= history.start %></span>
+            </p>
+            <p>
+              <span class="text-sm text-gray-200 uppercase font-bold"><%= t('.end_time') %>:</span>
+              <span class="text-sm text-gray-200 uppercase"><%= history.end %></span>
+            </p>
+            <p>
+              <span class="text-sm text-gray-200 uppercase font-bold"><%= t('.name') %>:</span>
+              <span class="text-sm text-gray-200 uppercase"><%= history.user.name %></span>
+            </p>
+            <p>
+              <span class="text-sm text-gray-200 uppercase font-bold"><%= t('.surname') %>:</span>
+              <span class="text-sm text-gray-200 uppercase"><%= history.user.surname %></span>
+            </p>
+            <p>
+              <span class="text-sm text-gray-200 uppercase font-bold"><%= t('.dni') %>:</span>
+              <span class="text-sm text-gray-200 uppercase"><%= history.user.dni %></span>
+            </p>
+          </div>
+        </div>
+      <% end %>
     <% else %>
-      <h4> No se encontraron movimientos </h4>
+      <%# En caso de no haber historial %>
+      <h4 class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"> <%= t('.no_records_available') %></h4>
     <% end %>
-</div>
+  </article>
+</section>

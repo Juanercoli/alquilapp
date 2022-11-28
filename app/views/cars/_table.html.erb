@@ -32,6 +32,7 @@
                 <%= link_to t('.view_details'), car_path(car.id), class: "p-1.5 focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm dark:focus:ring-yellow-900 border border-black" %>
                 <%= link_to t('.edit'), edit_car_path(car), class: "p-1.5 focus:outline-none text-white bg-blue-400 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm dark:focus:ring-blue-900 border border-black" if Current.user&.role? == "admin" %>
                 <%= button_to t('.visibility'), visible_car_path(car.id), method: :put, form_class: "contents", class: "inline p-1 focus:outline-none text-white bg-violet-400 hover:bg-violet-500 focus:ring-4 focus:ring-violet-300 font-medium rounded-lg text-sm dark:focus:ring-violet-900 border border-black uppercase" if Current.user&.role? == "admin" %>
+                <%= link_to "Ver Historial", cars_usage_history_path(car.id), class: "p-1.5 focus:outline-none text-white bg-pink-400 hover:bg-pink-500 focus:ring-4 focus:ring-pink-300 font-medium rounded-lg text-sm dark:focus:ring-pink-900 border border-black" %>
                 <%= link_to t('.delete'), car_path(car.id), data: {
                                   turbo_method: :delete,
                                   turbo_confirm: t('common.confirm')
@@ -86,6 +87,7 @@
             <%= link_to "Ver detalle", car_path(car.id), class: "p-1.5 focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm dark:focus:ring-yellow-900 border border-black" %>
             <%= link_to "Editar", edit_car_path(car), class: "p-1.5 focus:outline-none text-white bg-blue-400 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm dark:focus:ring-blue-900 border border-black" if Current.user&.role? == "admin" %>
             <%= button_to "Visibilidad", visible_car_path(car.id), method: :put, form_class: "contents", class: "inline p-1 focus:outline-none text-white bg-violet-400 hover:bg-violet-500 focus:ring-4 focus:ring-violet-300 font-medium rounded-lg text-sm dark:focus:ring-violet-900 border border-black uppercase" if Current.user&.role? == "admin" %>
+            <%= link_to "Ver Historial", cars_usage_history_path(car.id), class: "p-1.5 focus:outline-none text-white bg-pink-400 hover:bg-pink-500 focus:ring-4 focus:ring-pink-300 font-medium rounded-lg text-sm dark:focus:ring-pink-900 border border-black" %>
             <%= link_to "Eliminar", car_path(car.id), data: {
                               turbo_method: :delete,
                               turbo_confirm: t('common.confirm')

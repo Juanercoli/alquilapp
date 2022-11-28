@@ -10,8 +10,7 @@
 <%= link_to t('.view_cars'), cars_path, class: "mx-1 text-orange-600 font-bold bg-orange-300 py-2 px-2 rounded hover:brightness-110 border border-black focus:border-orange-900 focus:outline-none focus:ring-orange-900" unless Current.user&.role? == "admin" || Current.user&.role? == "supervisor"%>
 <%= link_to t('.register'), new_user_path, class: "mx-1 text-orange-600 font-bold bg-orange-300 py-2 px-2 rounded hover:brightness-110 border border-black focus:border-orange-900 focus:outline-none focus:ring-orange-900" unless Current.user %>
 <%= link_to t('.login'), new_session_path, class: "mx-1 text-orange-100 font-bold bg-orange-500 py-2 px-2 rounded hover:brightness-110 border-2 border-black focus:z-10 focus:border-orange-900 focus:outline-none focus:ring-orange-900" unless Current.user %>
-<%# link_to t('.rent_car'), new_session_path, class: "mx-2 text-orange-300 font-bold" if Current.user&.role? == "client" %>
-<%# link_to t('.add_supervisor'), new_session_path, class: "mx-2 text-orange-300 font-bold" if Current.user&.role? == "admin" %>
+<%= link_to t('.view_wallet'), wallet_path(Current.user.id), class: "mx-1 text-orange-100 font-bold bg-orange-500 py-2 px-2 rounded hover:brightness-110 border-2 border-black focus:z-10 focus:border-orange-900 focus:outline-none focus:ring-orange-900" if Current.user&.role? == 'client' %> 
 <%= link_to t('.logout'), session_path(Current.user.id), data: {
   turbo_method: :delete,
   turbo_confirm: t('common.confirm')

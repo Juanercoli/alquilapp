@@ -9,20 +9,29 @@
 User.destroy_all
 SuperUser.destroy_all
 Car.destroy_all
-# esto pa la demo va servir 
 Wallet.destroy_all
-auto = Car.new(
+
+auto_1 = Car.new(
       brand: "Ford",
       patent: "ABC111",
       model: "AX2010",
       vehicle_number: "1234",
       color: "Rojo"
 )
-auto.photo.attach(io: File.open(Rails.root.join("public/images/auto_1.jpg")), filename: "auto_1.jpg")
+auto_1.photo.attach(io: File.open(Rails.root.join("public/images/auto_1.jpg")), filename: "auto_1.jpg")
 
+auto_2 = Car.new(
+  brand: "BMW",
+  patent: "AA111CD",
+  model: "2022",
+  vehicle_number: "12",
+  color: "Azul"
+)
+auto_2.photo.attach(io: File.open(Rails.root.join("public/images/auto_2.png")), filename: "auto_2.png")
 
+wallet_1 = Wallet.new(balance: 400 )
+wallet_2 = Wallet.new(balance: 1000 )
 
-asd = Wallet.new(balance: 400 )
 
 juan = User.new(
   name: "Juan",
@@ -34,7 +43,7 @@ juan = User.new(
   driver_license_expiration: 5.years.from_now,
   birthdate: 22.years.ago,
   is_accepted: true,
-  wallet: asd
+  wallet: wallet_1
 )
 
 juan.driver_license.attach(io: File.open(Rails.root.join("public/images/licencia_1.jpg")), filename: "licencia_1.jpg")
@@ -47,7 +56,9 @@ carlos = User.new(
   phone: "2213646992",
   password: "asdasd123",
   driver_license_expiration: 2.years.from_now,
-  birthdate: 22.years.ago
+  birthdate: 22.years.ago,
+  is_accepted: true,
+  wallet: wallet_2
 )
 
 carlos.driver_license.attach(io: File.open(Rails.root.join("public/images/licencia_2.jpg")), filename: "licencia_2.jpg")
@@ -142,8 +153,14 @@ supervisor_2.save!
 supervisor_3.save!
 supervisor_4.save!
 supervisor_5.save!
-auto.save!
+auto_1.save!
+auto_2.save!
 
+CarUsageHistory.create(start: Time.now, end: Time.now.advance(hours:5), car_id: auto_1.id, user_id: juan.id)
+CarUsageHistory.create(start: Time.now, end: Time.now.advance(hours:3), car_id: auto_1.id, user_id: carlos.id)
+CarUsageHistory.create(start: Time.now, end: Time.now.advance(hours:3), car_id: auto_1.id, user_id: carlos.id)
+
+p "Created #{CarUsageHistory.count} histories"
 p "Created #{User.count} users"
 p "Created #{SuperUser.count} super users"
 p "Created #{Car.count} cars"

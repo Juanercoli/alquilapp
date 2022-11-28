@@ -4,6 +4,12 @@ es:
   activerecord:
     errors:
       models:
+        card:
+          attributes:
+            expiration_date:
+              bad_expiration_date: 'debe ser válida'
+            card_number:
+              invalid_format: 'debe ser mastercard o visa'
         car:
           attributes:
             patent:
@@ -26,6 +32,7 @@ es:
       user: Usuario
       car: Auto
       super_user: SuperUsuario
+      card: Tarjeta
     attributes:
       user:
         dni: 'DNI'
@@ -51,6 +58,13 @@ es:
         dni: 'DNI'
         email: 'Email'
         password: 'Contraseña'
+      card:
+        card_number: 'Número de tarjeta'
+        name: 'Nombre'
+        surname: 'Apellido'
+        expiration_date: 'Fecha de expiración'
+        security_code: 'Código de seguridad'
+        card_balance: 'Balance de tarjeta'
   common: 
     confirm: '¿Quieres realizar esta acción?'
     back: 'Ir atras'
@@ -68,6 +82,16 @@ es:
       view_users: 'Ver usuarios'
       view_pre_registered: 'Ver pre-registrados'
       view_supervisors: 'Ver supervisores'
+      view_wallet: 'Ver billetera'
+  cars_usage_histories:
+    show:
+      title: 'Historial de movimientos del auto'
+      start_time: 'Fecha inicio'
+      end_time: 'Fecha fin'
+      name: 'Nombre'
+      surname: 'Apellido'
+      dni: 'DNI'
+      no_records_available: 'No se encontraron movimientos'
   cars:
     visible:
       visible_toggled: '¡Cambiada visibilidad!'
@@ -111,6 +135,10 @@ es:
       placeholder_vehicle_number: 'Número de vehículo'
       placeholder_color: 'Color'
       submit: "Guardar"
+  wallet_management:
+    wallets:
+      show:
+        title: 'Detalles de la billetera'
   authentication:
     users:
       show:

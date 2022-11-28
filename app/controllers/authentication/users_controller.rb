@@ -16,8 +16,11 @@ class Authentication::UsersController < ApplicationController
 
     def accept
       user
+      @amount = 400
+      user.wallet.balance = @amount
       user.update_attribute(:is_accepted, true)
-      UserMailer.with(user: user, amount: "400").accept.deliver_later
+      user.wallet.save
+      UserMailer.with(user: user, amount: @amount).accept.deliver_later
       redirect_to pre_registered_path, notice: t('.accepted')
     end
 
@@ -37,7 +40,7 @@ class Authentication::UsersController < ApplicationController
     def create
       # Se filtran los parámetros instanciando de nuevo
       @user = User.new(user_params)
-
+      @user.wallet = Wallet.new(balance: 0)
       if @user.save
         # Envio mail de bienvenida
         UserMailer.with(user: @user).welcome.deliver_later

@@ -37,10 +37,14 @@ Rails.application.routes.draw do
   resources :main, only: [:index]
   
 
-  namespace :wallet_managment, path: "", as:"" do
+  #ruteo de la wallet management
+  namespace :wallet_management, path: "", as:"" do
     resources :wallets, only: [:show] 
     put 'wallets(/:id)' , to: 'wallets#cargar_saldo'
+    get 'wallets(/:id)' , to: 'wallets#show'
+    resources :cards
   end
+
   resources :rentals
   # La ruta principal es:
   root "main#index"

@@ -42,6 +42,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_25_024743) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "banca_apps", force: :cascade do |t|
+    t.integer "total_balance"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "car_usage_histories", force: :cascade do |t|
     t.time "start"
     t.time "end"
@@ -51,6 +57,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_25_024743) do
     t.datetime "updated_at", null: false
     t.index ["car_id"], name: "index_car_usage_histories_on_car_id"
     t.index ["user_id"], name: "index_car_usage_histories_on_user_id"
+  end
+
+  create_table "cards", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "card_number"
+    t.string "name"
+    t.string "surname"
+    t.date "expiration_date"
+    t.integer "security_code"
+    t.integer "card_balance"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_cards_on_user_id", unique: true
   end
 
   create_table "cars", force: :cascade do |t|
@@ -130,6 +149,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_25_024743) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "car_usage_histories", "cars"
   add_foreign_key "car_usage_histories", "users"
+  add_foreign_key "cards", "users"
   add_foreign_key "rentals", "cars"
   add_foreign_key "rentals", "users"
   add_foreign_key "wallets", "users"

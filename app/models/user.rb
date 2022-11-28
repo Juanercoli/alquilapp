@@ -1,8 +1,11 @@
 class User < ApplicationRecord
+  # Cada usuario tiene su wallet
+  has_one :wallet , dependent: :destroy
+  has_one :card , dependent: :destroy
   # Cada usuario tiene su historial de compra
   has_many :rental, dependent: :destroy
   # Cada usuario tiene su historial
-  has_many :car_usage_history
+  has_many :car_usage_history, dependent: :destroy
   # Cada usuario tiene su wallet
   has_one :wallet , dependent: :destroy
   # Hace uso de la gema BCrypt para encriptar el password
