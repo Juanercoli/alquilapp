@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  hora_inicio: 2022-11-24
+  horas_extras: 2022-11-24
+
+two:
+  hora_inicio: 2022-11-24
+  horas_extras: 2022-11-24

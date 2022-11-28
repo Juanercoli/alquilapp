@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  # Cada usuario tiene su historial de compra
+  has_many :rental, dependent: :destroy
+  # Cada usuario tiene su historial
   has_many :car_usage_history
   # Cada usuario tiene su wallet
   has_one :wallet , dependent: :destroy

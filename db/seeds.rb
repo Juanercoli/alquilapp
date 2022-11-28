@@ -9,7 +9,8 @@
 User.destroy_all
 SuperUser.destroy_all
 Car.destroy_all
-
+# esto pa la demo va servir 
+Wallet.destroy_all
 auto = Car.new(
       brand: "Ford",
       patent: "ABC111",
@@ -18,10 +19,10 @@ auto = Car.new(
       color: "Rojo"
 )
 auto.photo.attach(io: File.open(Rails.root.join("public/images/auto_1.jpg")), filename: "auto_1.jpg")
-# esto pa la demo va servir 
-Wallet.destroy_all
 
-asd=Wallet.new(balance: -200 )
+
+
+asd = Wallet.new(balance: 400 )
 
 juan = User.new(
   name: "Juan",
@@ -146,3 +147,4 @@ auto.save!
 p "Created #{User.count} users"
 p "Created #{SuperUser.count} super users"
 p "Created #{Car.count} cars"
+p "Created #{Wallet.count} wallets"

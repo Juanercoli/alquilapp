@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       put :logic_delete
     end
   end
+  
   resources :cars_usage_histories,only: [:show], path: '/history', path_names: { show: '/' }
   # Existe una jerarquia top-down
 
@@ -25,8 +26,8 @@ Rails.application.routes.draw do
     resources :wallets, only: [:show] 
     put 'wallets(/:id)' , to: 'wallets#cargar_saldo'
   end
-  
+  resources :rentals
   # La ruta principal es:
   root "main#index"
-
+  
 end
