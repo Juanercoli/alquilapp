@@ -20,7 +20,7 @@ Rails.application.routes.draw do
 
   resources :main, only: [:index]
   
-  #ruteo de la wallet managment
+  # Ruteo de la wallet managment
   namespace :wallet_managment, path: "", as:"" do
     resources :wallets, only: [:show] 
     put 'wallets(/:id)' , to: 'wallets#cargar_saldo'

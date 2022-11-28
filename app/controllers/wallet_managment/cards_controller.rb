@@ -12,6 +12,7 @@ class WalletManagment::CardsController < ApplicationController
         # Se filtran los parámetros instanciando de nuevo
         
         @card = Card.new(card_params)
+        # Cada tarjeta por defecto tiene 1000 pesos
         @card.card_balance = 1000
         @card.user_id=Current.user.id
         if @card.save
@@ -23,10 +24,12 @@ class WalletManagment::CardsController < ApplicationController
          end
     end
 
+    # editar tarjeta
     def edit
       @card = Card.find_by(user_id: params[:id])
     end
     
+    # update de la tarjeta despues de editar
     def update
       @card = Card.find_by(id: params[:id])
       if @card.update(card_params)
@@ -39,7 +42,7 @@ class WalletManagment::CardsController < ApplicationController
     private
 
     def card_params
-      # Se quiere que tenga un objeto User antes que todo el contenido de parámetros
+      # Se quiere que tenga un objeto Card antes que todo el contenido de parámetros
       # Luego se hace el permit con todo lo que debe tener
       params.require(:card).permit(:card_number, :name, :surname, :expiration_date,:security_code)
     end

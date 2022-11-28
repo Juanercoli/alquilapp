@@ -1,11 +1,12 @@
 class Card < ApplicationRecord
 
     
-    
+    # Pertenece a usuario
     belongs_to :user
+    # Validaciones de los campos
     validates :card_number, presence: true,
     format: {
-        #este regex sirve para tarjetas visa y mastercard
+        # Este regex sirve para tarjetas visa y mastercard
         with: /\A(?:4\d([\- ])?\d{6}\1\d{5}|(?:4\d{3}|5[1-5]\d{2}|6011)([\- ])?\d{4}\2\d{4}\2\d{4})\z/i,
         message: :invalid
       }
