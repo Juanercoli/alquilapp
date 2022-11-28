@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_10_195841) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_25_024743) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +42,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_10_195841) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "car_usage_histories", force: :cascade do |t|
+    t.time "start"
+    t.time "end"
+    t.bigint "car_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["car_id"], name: "index_car_usage_histories_on_car_id"
+    t.index ["user_id"], name: "index_car_usage_histories_on_user_id"
+  end
+
   create_table "cars", force: :cascade do |t|
     t.string "brand", null: false
     t.string "patent", null: false
@@ -54,6 +65,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_10_195841) do
     t.datetime "updated_at", null: false
     t.index ["patent"], name: "index_cars_on_patent", unique: true
     t.index ["vehicle_number"], name: "index_cars_on_vehicle_number", unique: true
+  end
+
+  create_table "rentals", force: :cascade do |t|
+    t.integer "initial_hours_quantity"
+    t.integer "extra_hours_quantity"
+    t.bigint "car_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["car_id"], name: "index_rentals_on_car_id"
+    t.index ["user_id"], name: "index_rentals_on_user_id"
   end
 
   create_table "super_users", force: :cascade do |t|
@@ -92,6 +114,23 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_10_195841) do
     t.index ["phone"], name: "index_users_on_phone", unique: true
   end
 
+  create_table "wallets", force: :cascade do |t|
+    t.bigint "user_id"
+    t.integer "balance"
+    t.integer "resume"
+    t.integer "charge_wallet"
+    t.integer "dni"
+    t.boolean "verification"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_wallets_on_user_id", unique: true
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "car_usage_histories", "cars"
+  add_foreign_key "car_usage_histories", "users"
+  add_foreign_key "rentals", "cars"
+  add_foreign_key "rentals", "users"
+  add_foreign_key "wallets", "users"
 end

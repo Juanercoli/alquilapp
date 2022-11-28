@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     end
   end
   
+  resources :cars_usage_histories,only: [:show], path: '/history', path_names: { show: '/' }
   # Existe una jerarquia top-down
 
   # Se quiere organizar grupos de controllers bajo un namespace
@@ -35,6 +36,13 @@ Rails.application.routes.draw do
 
   resources :main, only: [:index]
   
+
+  namespace :wallet_managment, path: "", as:"" do
+    resources :wallets, only: [:show] 
+    put 'wallets(/:id)' , to: 'wallets#cargar_saldo'
+  end
+  resources :rentals
   # La ruta principal es:
   root "main#index"
+  
 end

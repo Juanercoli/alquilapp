@@ -8,6 +8,21 @@
 
 User.destroy_all
 SuperUser.destroy_all
+Car.destroy_all
+# esto pa la demo va servir 
+Wallet.destroy_all
+auto = Car.new(
+      brand: "Ford",
+      patent: "ABC111",
+      model: "AX2010",
+      vehicle_number: "1234",
+      color: "Rojo"
+)
+auto.photo.attach(io: File.open(Rails.root.join("public/images/auto_1.jpg")), filename: "auto_1.jpg")
+
+
+
+asd = Wallet.new(balance: 400 )
 
 juan = User.new(
   name: "Juan",
@@ -18,7 +33,8 @@ juan = User.new(
   password: "asdasd123",
   driver_license_expiration: 5.years.from_now,
   birthdate: 22.years.ago,
-  is_accepted: true
+  is_accepted: true,
+  wallet: asd
 )
 
 juan.driver_license.attach(io: File.open(Rails.root.join("public/images/licencia_1.jpg")), filename: "licencia_1.jpg")
@@ -126,7 +142,9 @@ supervisor_2.save!
 supervisor_3.save!
 supervisor_4.save!
 supervisor_5.save!
-
+auto.save!
 
 p "Created #{User.count} users"
 p "Created #{SuperUser.count} super users"
+p "Created #{Car.count} cars"
+p "Created #{Wallet.count} wallets"

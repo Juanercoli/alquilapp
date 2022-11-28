@@ -1,0 +1,10 @@
+<%= form_with(model: @rental) do |form| %>
+  <%= hidden_field_tag(:car_id, @car_id) %>
+  <div>
+    <%= form.label :initial_hours_quantity, class: "block text-sm font-medium text-gray-700" %>
+    <%= form.select :initial_hours_quantity, options_for_select(1..24) %>
+  </div>
+  <%= button_tag(type: "submit", class: "focus:outline-none text-white bg-red-400 hover:bg-red-500 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 dark:focus:ring-red-900 my-10 py-3") do %>
+    <%= content_tag(:strong, t('.pagar')) %>
+  <% end %>
+<% end %>
