@@ -31,6 +31,8 @@ auto_2.photo.attach(io: File.open(Rails.root.join("public/images/auto_2.png")), 
 
 wallet_1 = Wallet.new(balance: 400 )
 wallet_2 = Wallet.new(balance: 1000 )
+wallet_3 = Wallet.new(balance: 0 )
+wallet_4 = Wallet.new(balance: 0 )
 
 
 juan = User.new(
@@ -72,10 +74,25 @@ esteban = User.new(
   password: "asdasd123",
   driver_license_expiration: 2.years.from_now,
   birthdate: 22.years.ago,
-  is_blocked: true
+  wallet: wallet_3
 )
 
 esteban.driver_license.attach(io: File.open(Rails.root.join("public/images/licencia_2.jpg")), filename: "licencia_2.jpg")
+
+mosca = User.new(
+  name: "Mister",
+  surname: "Mosca",
+  dni: "12345678",
+  email: "a@d.com",
+  phone: "2213336990",
+  password: "asdasd123",
+  driver_license_expiration: 2.years.from_now,
+  birthdate: 22.years.ago,
+  wallet: wallet_4
+)
+
+mosca.driver_license.attach(io: File.open(Rails.root.join("public/images/licencia_2.jpg")), filename: "licencia_2.jpg")
+
 
 francisco = SuperUser.new(
   name: "Francisco",
@@ -146,6 +163,7 @@ supervisor_5 = SuperUser.new(
 juan.save!
 carlos.save!
 esteban.save!
+mosca.save!
 francisco.save!
 eduardo.save!
 supervisor_1.save!
@@ -157,8 +175,7 @@ auto_1.save!
 auto_2.save!
 
 CarUsageHistory.create(start: Time.now, end: Time.now.advance(hours:5), car_id: auto_1.id, user_id: juan.id)
-CarUsageHistory.create(start: Time.now, end: Time.now.advance(hours:3), car_id: auto_1.id, user_id: carlos.id)
-CarUsageHistory.create(start: Time.now, end: Time.now.advance(hours:3), car_id: auto_1.id, user_id: carlos.id)
+CarUsageHistory.create(start: Time.now.advance(hours:5), end: Time.now.advance(hours:15), car_id: auto_1.id, user_id: carlos.id)
 
 p "Created #{CarUsageHistory.count} histories"
 p "Created #{User.count} users"
