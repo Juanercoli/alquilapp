@@ -37,3 +37,7 @@
     </div>
   </article>
 </section>
+
+
+<%=link_to "Alquilar" , new_rental_path(@car.id),class: "mt-2 mx-2 text-orange-500 font-bold" if Current.user&.role? == 'client' && !Current.user.rentals.find_by(is_active:true) %>
+  

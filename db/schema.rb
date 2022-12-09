@@ -89,6 +89,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_25_024743) do
   create_table "rentals", force: :cascade do |t|
     t.integer "initial_hours_quantity"
     t.integer "extra_hours_quantity"
+    t.integer "multed_hours_quantity"
+    t.integer "price"
+    t.boolean "is_active", default: false
     t.bigint "car_id"
     t.bigint "user_id"
     t.datetime "created_at", null: false

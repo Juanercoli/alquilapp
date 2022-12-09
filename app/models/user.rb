@@ -3,7 +3,7 @@ class User < ApplicationRecord
   has_one :wallet , dependent: :destroy
   has_one :card , dependent: :destroy
   # Cada usuario tiene su historial de compra
-  has_many :rental, dependent: :destroy
+  has_many :rentals, dependent: :destroy
   # Cada usuario tiene su historial
   has_many :car_usage_history, dependent: :destroy
   # Cada usuario tiene su wallet

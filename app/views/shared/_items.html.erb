@@ -5,7 +5,7 @@
 <% end %>
 
 <!-- Botones del header -->
-
+<%= link_to t('.Viaje Actual'), car_tracking_path(Current.user.rentals.find_by(is_active:true).id), class: "mx-1 text-green-600 font-bold bg-orange-300 py-2 px-2 rounded hover:brightness-110 border border-black focus:border-orange-900 focus:outline-none focus:ring-orange-900" if Current.user&.role? == 'client' && Current.user.rentals.find_by(is_active:true)%>
 <%= link_to t('.home'), root_path, class: "mx-1 text-orange-600 font-bold bg-orange-300 py-2 px-2 rounded hover:brightness-110 border border-black focus:border-orange-900 focus:outline-none focus:ring-orange-900" %>
 <%= link_to t('.view_cars'), cars_path, class: "mx-1 text-orange-600 font-bold bg-orange-300 py-2 px-2 rounded hover:brightness-110 border border-black focus:border-orange-900 focus:outline-none focus:ring-orange-900" unless Current.user&.role? == "admin" || Current.user&.role? == "supervisor"%>
 <%= link_to t('.register'), new_user_path, class: "mx-1 text-orange-600 font-bold bg-orange-300 py-2 px-2 rounded hover:brightness-110 border border-black focus:border-orange-900 focus:outline-none focus:ring-orange-900" unless Current.user %>
