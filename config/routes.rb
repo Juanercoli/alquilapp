@@ -4,7 +4,12 @@ Rails.application.routes.draw do
       put :visible
     end
   end
-  
+  # Reportes
+  resources :reports
+  patch '/reports/:id/accept', to: 'report#accept', as: '/accept/report'
+  get '/reports/:id/create_report_message', to: 'reports#create_report_message', as: '/create_report_message/report'
+  delete '/reports/:id/reject', to: 'reports#reject', as: '/reject/report'
+
   resources :cars_usage_histories,only: [:show], path: '/history', path_names: { show: '/' }
   # Existe una jerarquia top-down
 

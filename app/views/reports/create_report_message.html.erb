@@ -1,0 +1,28 @@
+<section class="mx-4 mb-2 p-4 bg-gray-800 text-gray-200 rounded-b-lg border-2 border-black">
+  <h4 class="text-2xl uppercase text-center">
+    <%= 'Reporte' %>
+  </h4>
+</section>
+
+<section class="md:grid md:grid-cols-2 md:gap-6">
+  <article class="mt-1 md:col-span-2 md:mt-1">
+    <%= form_with url: reject_report_path(params[:id]), method: :delete do |form| %>
+          <div class="flex flex-col m-8">
+            <%= form.label :motive, t('.motive'), class: "block font-semibold" %>
+            <%# Si el tiempo es menor a 10 minutos entonces%>
+            <%= form.select :motive, ['Falta de nafta' , 'Tuve un accidente','Falla mécanica'], {}, { class: "w-full mt-1 rounded-md border border-black focus:z-10 focus:border-orange-700 focus:outline-none focus:ring-orange-700" } %>
+
+            <%= form.label :observations, t('.observations'), class: "mt-2 block font-semibold" %>
+            <%= form.text_area :observations, class: "w-full mt-1 rounded-md border border-black focus:z-10 focus:border-orange-700 focus:outline-none focus:ring-orange-700", placeholder: t('.placeholder_observations') %>
+            
+            <div class="bg-gray-50 text-right sm:px-6 mt-4 mx-8">
+              <%= button_tag(type: "submit", 
+                class: "w-full mt-2 sm:mt-0 mb-1 text-orange-100 font-bold bg-orange-500 py-2 px-2 rounded hover:brightness-110 border-2 border-black focus:z-10 focus:border-orange-900 focus:outline-none focus:ring-orange-900") do %>
+                <%= content_tag(:strong, t('.submit')) %>
+              <% end %>
+            </div>
+
+          </div>
+    <% end %>
+  </article>
+</section>
