@@ -1,0 +1,77 @@
+<section class="m-8">
+  <%# Se puede agregar algun elemento por aqui %>
+  <article class="overflow-auto rounded-lg shadow hidden md:block select-none">
+    <table class="w-full">
+      <thead class="text-xs uppercase bg-gray-800 text-gray-200">
+        <tr class="border-2 border-black">
+          <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= 't(.date)' %></th>
+          <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= 't(.report_type)' %></th>
+          <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= 'Estado' %></th>
+          <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= 'Acciones' %></th>
+      </thead>
+      <tbody class="divide-y divide-gray-100">  
+        <% if @reports.count > 0 %>
+          <%# En caso de haber reportes  %>
+          <% @reports.each do |report| %>
+            <tr class="hover:bg-gray-400">
+              <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"><%= report.date %></td>
+              <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"><%= report.report_type %></td>
+              <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"><%= 'soy un estado' %></td>
+              <td class="p-3 text-gray-700 whitespace-nowrap uppercase">
+                <%= link_to t('.view_details'), report_path(report.id), class: "p-1.5 focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm dark:focus:ring-yellow-900 border border-black" if Current.user&.role? == "supervisor" %>
+                <%= button_to t('.accept'), accept_report_path(report.id), method: :patch, form_class: "contents", class: "inline p-1 focus:outline-none text-white bg-violet-400 hover:bg-violet-500 focus:ring-4 focus:ring-violet-300 font-medium rounded-lg text-sm dark:focus:ring-violet-900 border border-black uppercase" if Current.user&.role? == "supervisor" %>
+                <%= link_to t('.reject'), reject_report_path(report.id), data: {
+                turbo_confirm: t('common.confirm')
+                }, class: "p-1.5 focus:outline-none text-white bg-red-400 hover:bg-red-500 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm dark:focus:ring-red-900 border border-black" if Current.user&.role? == "supervisor" %>     
+              </td>
+            </tr>
+          <% end %>
+        <% else %>
+          <%# En caso de no haber reportes %>
+          <tr>
+            <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"> <%= 't(.no_records_available)' %> </td>
+          </tr>
+        <% end %>
+      </tbody>  
+    </table>
+  </article>
+  
+  <%# Para la vista mobile %>
+  <article class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:hidden">
+    <% if @reports.count > 0 %>
+      <%# En caso de haber reportes %>
+      <% @reports.each do |report| %>
+        <div class="space-y-3 p-4 rounded-lg shadow border-2 border-black bg-gray-800">
+          <div class="text-sm text-gray-200 flex flex-col">
+            <p>
+              <span class="text-sm text-gray-200 uppercase font-bold"><%= 't(.date)' %>:</span>
+              <span class="text-sm text-gray-200 uppercase"><%= report.date %></span>
+            </p>
+            <p>
+              <span class="text-sm text-gray-200 uppercase font-bold"><%= 't(.end_time)' %>:</span>
+              <span class="text-sm text-gray-200 uppercase"><%= report.report_type %></span>
+            </p>
+            <p>
+              <span class="text-sm text-gray-200 uppercase font-bold"><%= 'Estado' %>:</span>
+              <span class="text-sm text-gray-200 uppercase"><%= 'Soy un estado' %></span>
+            </p>
+            <p>
+              <span class="text-sm text-gray-200 uppercase font-bold"><%= 'Acciones' %>:</span>
+              <span class="text-sm text-gray-200 uppercase"><%= 'Soy una acción' %></span>
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-2 uppercase">
+            <%= link_to t('.view_details'), report_path(report.id), class: "p-1.5 focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm dark:focus:ring-yellow-900 border border-black" if Current.user&.role? == "supervisor" %>
+            <%= button_to t('.accept'), accept_report_path(report.id), method: :patch, form_class: "contents", class: "inline p-1 focus:outline-none text-white bg-violet-400 hover:bg-violet-500 focus:ring-4 focus:ring-violet-300 font-medium rounded-lg text-sm dark:focus:ring-violet-900 border border-black uppercase" if Current.user&.role? == "supervisor" %>
+            <%= link_to t('.reject'), reject_message_report_path(report.id), data: {
+            turbo_confirm: t('common.confirm')
+            }, class: "p-1.5 focus:outline-none text-white bg-red-400 hover:bg-red-500 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm dark:focus:ring-red-900 border border-black" if Current.user&.role? == "supervisor" %>   
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <%# En caso de no haber reportes %>
+      <h4 class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"> <%= 't(.no_records_available)' %></h4>
+    <% end %>
+  </article>
+</section>
