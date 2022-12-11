@@ -325,3 +325,10 @@ en:
       accept:
         subject: 'Your registration has been accepted'
         accept_message: 'Hello %{name}, we want to inform you that the registration has been succesfully approved! You can already start using Alquilapp service, you have been gifted $%{amount} to your wallet, bye.'
+      accept_license:
+        subject: 'Request for driver license data change was approbed'
+        accept_license_message: 'Hello %{name}, we want to inform that the request for driver license data change was approbed!'
+      reject_license:
+        subject: 'Request for driver license data change was rejected'
+        reject_license_message: 'Hello %{name}, we want to inform that the request for driver license data change was rejected ¡Try making a new request!'
+
