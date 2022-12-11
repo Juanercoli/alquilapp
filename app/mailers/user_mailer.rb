@@ -34,6 +34,12 @@ class UserMailer < ApplicationMailer
 
     mail to: @user.email
   end
+  def reject_report
+    @user = params[:user]
+    @name = @user.name.capitalize
+    @motive = params[:motive]
+    mail to: @user.email
+  end
 
   def accept
     @user = params[:user]
@@ -41,5 +47,23 @@ class UserMailer < ApplicationMailer
     @amount = params[:amount]
 
     mail to: @user.email
+  end
+
+  def accept_report
+    @user = params[:user]
+    @name = @user.name.capitalize
+    @notify = params[:notify]
+
+    mail to: @user.email
+  end
+
+  def sent_car_insurance
+    @user = params[:user]
+    @name = @user.name.capitalize
+    @surname = @user.surname.capitalize
+    @dni = @user.dni
+    @message = params[:messege]
+    @content = params[:report_content]
+    mail to: "seguros@alqui.com"
   end
 end

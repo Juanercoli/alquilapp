@@ -49,8 +49,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_08_194521) do
   end
 
   create_table "car_usage_histories", force: :cascade do |t|
-    t.time "start"
-    t.time "end"
+    t.datetime "start"
+    t.datetime "end"
     t.bigint "car_id"
     t.bigint "user_id"
     t.datetime "created_at", null: false
@@ -101,9 +101,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_08_194521) do
   end
 
   create_table "reports", force: :cascade do |t|
-    t.time "date"
+    t.datetime "date"
     t.text "content"
     t.string "report_type"
+    t.boolean "state"
+    t.boolean "pending"
     t.bigint "car_id"
     t.bigint "user_id"
     t.datetime "created_at", null: false

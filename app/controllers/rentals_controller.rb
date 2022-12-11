@@ -2,7 +2,6 @@ class RentalsController < ApplicationController
   def new
     @rental = Rental.new()
     @car_id = params[:id]
-   # @car_patent=Car.find_by(id: @car_id).patent
     
   end
   def create
@@ -81,6 +80,7 @@ class RentalsController < ApplicationController
     rental.save!
     @wallet.balance=@wallet.balance - @rental.price
     @wallet.save!
+    CarUsageHistory.create!(start:rental.created_at, end:rental.updated_at, car_id: @rental.car.id, user_id: Current.user.id)
   end
 
 

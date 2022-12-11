@@ -1,0 +1,51 @@
+<section class="mx-4 mb-2 p-4 bg-gray-800 text-gray-200 rounded-b-lg border-2 border-black">
+  <h4 class="text-2xl uppercase text-center">
+    <%= 'Reporte' %>
+  </h4>
+</section>
+<section class="md:grid md:grid-cols-2 md:gap-6">
+  <article class="mt-1 md:col-span-2 md:mt-1">
+    <%= form_with(model: @report) do |form| %>
+      <div class="flex flex-col m-8">
+        <%= form.label :report_type, 'Motivo', class: "block font-semibold" %>
+        <%# Si el tiempo es menor a 10 minutos entonces%>
+        <%= form.select :report_type, ['Nafta' , 'Accidente','Falla mécanica'], {}, { class: "w-full mt-1 rounded-md border border-black focus:z-10 focus:border-orange-700 focus:outline-none focus:ring-orange-700" } %>
+        <% if @report.errors.full_messages_for(:report_type).each  do |error| %>
+          <ul class="list-disc list-inside">
+            <li class="text-xs text-red-500">
+              <%= error %>
+            </li>
+          </ul>
+        <% end %>
+      <% end %>
+      <%= form.label :content, t('.observations'), class: "mt-2 block font-semibold" %>
+      <%= form.text_area :content, class: "w-full mt-1 rounded-md border border-black focus:z-10 focus:border-orange-700 focus:outline-none focus:ring-orange-700", placeholder: t('.placeholder_observations') %>
+      <% if @report.errors.full_messages_for(:content).each  do |error| %>
+        <ul class="list-disc list-inside">
+          <li class="text-xs text-red-500">
+            <%= error %>
+          </li>
+        </ul>
+      <% end %>
+    <% end %>
+    <div class="col-span-6 sm:col-span-3">
+      <%= form.label :photo, class: "block font-semibold" %>
+      <%= form.file_field :photo, class: "border w-full px-3 mt-1 focus:z-10 focus:border-orange-700 focus:outline-none focus:ring-orange-700 rounded-md" %>
+      <% if @report.errors.full_messages_for(:photo).each  do |error| %>
+        <ul class="list-disc list-inside">
+          <li class="text-xs text-red-500">
+            <%= error %>
+          </li>
+        </ul>
+      <% end %>
+    <% end %>
+<div class="bg-gray-50 text-right sm:px-6 mt-4 mx-8">
+  <%= button_tag(type: "submit", 
+                  class: "w-full mt-2 sm:mt-0 mb-1 text-orange-100 font-bold bg-orange-500 py-2 px-2 rounded hover:brightness-110 border-2 border-black focus:z-10 focus:border-orange-900 focus:outline-none focus:ring-orange-900") do %>
+    <%= content_tag(:strong, t('.submit')) %>
+  <% end %>
+</div>
+<% end %>
+<%# Input para foto %>
+</article>
+</section>
