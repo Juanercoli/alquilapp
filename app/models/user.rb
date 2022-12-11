@@ -33,6 +33,7 @@ class User < ApplicationRecord
       message: :invalid
     }
   validates :password, length: { minimum: 6 }, unless: proc { |x| x.password.blank? }
+  validates :password, format: { without: /\s/ } # Valida que no haya blancos
   validates :driver_license_expiration, presence: true
   validate :driver_license_expiration_must_be_valid
   validates :driver_license, presence: true

@@ -20,6 +20,7 @@ es:
         user:
           attributes:
             password:
+              invalid: 'es inválida, revise que no contenga espacios'
               too_short: 'es demasiado corta (%{count} caracteres mínimo)'
             driver_license:
               blank: 'debe ser adjunta'
@@ -79,6 +80,7 @@ es:
       add_supervisor: 'Agregar supervisor'
       add_car: 'Agregar auto'
       view_cars: 'Ver autos'
+      view_profile: 'Ver perfil'
       view_users: 'Ver usuarios'
       view_pre_registered: 'Ver pre-registrados'
       view_supervisors: 'Ver supervisores'
@@ -141,6 +143,14 @@ es:
         title: 'Detalles de la billetera'
   authentication:
     users:
+      update_password:
+        updated: '¡Contraseña actualizada!'    
+        invalid_actual_password: '¡Debe ingresar correctamente su contraseña actual para cambiar sus datos!'
+        invalid_actual_password_validation: 'Debe coincidir con su contraseña actual'       
+      update:
+        updated: '¡Datos actualizados!'    
+        invalid_actual_password: '¡Debe ingresar correctamente su contraseña actual para cambiar sus datos!'
+        invalid_actual_password_validation: 'Debe coincidir con su contraseña actual'
       show:
         title: 'Detalles del usuario'
         name: 'Nombre'
@@ -150,6 +160,8 @@ es:
         email: 'Email'
         birthdate: 'Fecha de nacimiento'
         driver_license_expiration: 'Fecha de expiración de licencia'
+        edit_profile: 'Editar perfil'
+        change_password: 'Cambiar contraseña'
       destroy:
         destroyed: '¡El usuario ha sido eliminado!'
       accept:
@@ -205,7 +217,22 @@ es:
         title: 'Tabla de usuarios'
       create:
         created: '¡Tu cuenta ha sido creada, debes esperar a que un supervisor apruebe tu registro, revisa tu mail!'
-      new:
+      form_edit_password:
+        new_password: 'Nueva contraseña'
+        placeholder_new_password: 'Nueva contraseña'
+        actual_password: 'Contraseña actual'
+        placeholder_actual_password: 'Contraseña actual'
+        submit: 'Modificar'      
+      form_edit:
+        placeholder_name: 'Nombre'
+        placeholder_surname: 'Apellido'
+        placeholder_phone: 'Teléfono'
+        placeholder_dni: 'DNI'
+        placeholder_email: 'Email'
+        submit: 'Guardar'
+        placeholder_actual_password: 'Contraseña actual'
+        actual_password: 'Contraseña actual'
+      form:
         placeholder_name: 'Nombre'
         placeholder_surname: 'Apellido'
         placeholder_phone: 'Teléfono'

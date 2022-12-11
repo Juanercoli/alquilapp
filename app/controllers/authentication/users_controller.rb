@@ -54,6 +54,44 @@ class Authentication::UsersController < ApplicationController
 
     end
 
+    def edit
+      user
+    end
+    
+    def update
+      user
+      if user.authenticate(user_actual_password_param[:actual_password])
+        if user.update(user_edit_params)
+          redirect_to show_client_path(user.id), notice: t('.updated')
+        else
+          render :edit, status: :unprocessable_entity
+        end
+      else
+        flash.now[:error] = t('.invalid_actual_password_validation')
+        flash.now.alert = t('.invalid_actual_password')
+        render :edit, status: :unprocessable_entity
+      end
+    end
+
+    def edit_password
+      user
+    end
+
+    def update_password
+      user
+      if user.authenticate(user_actual_password_param[:actual_password])
+        if user.update(user_edit_password_params)
+          redirect_to show_client_path(user.id), notice: t('.updated')
+        else
+          render :edit_password, status: :unprocessable_entity
+        end
+      else
+        flash.now[:error] = t('.invalid_actual_password_validation')
+        flash.now.alert = t('.invalid_actual_password')
+        render :edit_password, status: :unprocessable_entity
+      end      
+    end
+
     def block
       user
       if (user.toggle(:is_blocked).save)
@@ -84,5 +122,17 @@ class Authentication::UsersController < ApplicationController
       # Se quiere que tenga un objeto User antes que todo el contenido de parámetros
       # Luego se hace el permit con todo lo que debe tener
       params.require(:user).permit(:dni, :name, :surname, :email, :phone, :password, :driver_license, :driver_license_expiration, :birthdate)
+    end
+
+    def user_edit_params
+      params.require(:user).permit(:dni, :name, :surname, :email, :phone, :birthdate)
+    end
+
+    def user_edit_password_params
+      params.require(:user).permit(:password)
+    end
+
+    def user_actual_password_param
+      params.require(:user).permit(:actual_password)
     end
 end 

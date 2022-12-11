@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     delete '/super_users/:id/delete', to: 'super_users#destroy', as: '/delete/supervisor'
 
     # Usuarios
+    resources :users, only: [:edit, :update]
     resources :users, only: [:new, :create], path: '/register', path_names: { new: '/' }
     get '/users', to: 'users#index', as: '/clients'
     get '/pre_registered', to: 'users#pre_registered', as: '/pre_registered'
@@ -27,6 +28,8 @@ Rails.application.routes.draw do
     delete '/users/:id/delete', to: 'users#destroy', as: '/delete/client'
     patch '/users/:id/accept', to: 'users#accept', as: '/accept/client'
     delete '/users/:id/reject', to: 'users#reject', as: '/reject/client'
+    get '/users/:id/edit_password', to: 'users#edit_password', as: '/edit_password/user'
+    patch '/users/:id/edit_password', to: 'users#update_password', as: '/update_password/user'
     get '/users/:id/reject_message', to: 'users#reject_message', as: '/reject_message/client'
     get '/users/:id/show', to: 'users#show', as: '/show/client'
     
