@@ -1,6 +1,6 @@
 <%= form_with(model: @rental) do |form| %>
   <%= hidden_field_tag(:car_id, @car_id) %>
-  <%# hidden_field_tag(:car_patent ,@car_patent) %>
+  
   <div>
     <%= form.label :initial_hours_quantity, class: "block text-sm font-medium text-gray-700" %>
     <%= form.select :initial_hours_quantity, options_for_select(1..24) %>
@@ -9,3 +9,4 @@
     <%= content_tag(:strong, t('.pagar')) %>
   <% end %>
 <% end %>
+

@@ -1,4 +1,3 @@
 <h1>Seguimiento del viaje</h1>
 <%=link_to "Finalizar", rental_path(@rental.id),class: "mt-2 mx-2 text-orange-500 font-bold" if Current.user&.role? == 'client'  %>
 <%=link_to "extender tiempo", edit_rental_path(@rental.id),class: "mt-2 mx-2 text-orange-500 font-bold" if Current.user&.role? == 'client'  %>
-<%#link_to "reportar", new_report_path(@car.id),class: "mt-2 mx-2 text-orange-500 font-bold" if Current.user&.role? == 'client'  %>

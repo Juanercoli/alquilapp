@@ -35,6 +35,14 @@ class UserMailer < ApplicationMailer
     mail to: @user.email
   end
 
+  def fined
+    @user = params[:user]
+    @name = @user.name.capitalize
+    @amount = params[:amount]
+    @description = params[:description]
+    mail to: @user.email
+  end
+
   def accept
     @user = params[:user]
     @name = @user.name.capitalize

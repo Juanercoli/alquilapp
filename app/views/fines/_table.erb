@@ -1,0 +1,89 @@
+
+<section class="m-8">
+  
+  <article class="overflow-auto rounded-lg shadow hidden md:block select-none">
+    <table class="w-full">
+      <thead class="text-xs uppercase bg-gray-800 text-gray-200">
+        <tr class="border-2 border-black">
+          <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.name') %></th>
+          <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.surname') %></th>
+          <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.dni') %></th>
+          <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.fine_price') %></th>
+          <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.fine_date') %></th>
+          <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.actions') %></th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-100">  
+        <% if fines.count > 0 %>
+          <%# En caso de haber multas  %>
+          <% fines.each do |fine| %>
+            <tr class="hover:bg-gray-400">
+              <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"><%= fine.user.name %></td>
+              <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"><%= fine.user.surname %></td>
+              <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"><%= fine.user.dni %></td>
+              <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"><%= fine.fine_price %></td>
+              <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"><%= fine.fine_date %></td>
+              <td>
+              <div class="flex flex-wrap gap-2 uppercase">
+              <%= link_to t('.cancel_fine'), delete_fine_path(fine.id), data: {
+                    turbo_method: :delete,
+                    turbo_confirm: t('common.confirm')
+                }, class: "p-1.5 focus:outline-none text-white bg-red-400 hover:bg-red-500 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm dark:focus:ring-red-900 border border-black" if Current.user&.role? == "supervisor" %>
+              </div>
+              </td>
+            </tr>
+          <% end %>
+        <% else %>
+          <%# En caso de no haber multas %>
+          <tr>
+            <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"> <%= t('.no_records_available') %> </td>
+          </tr>
+        <% end %>
+      </tbody>  
+    </table>
+  </article>
+  
+  <%# Para la vista mobile %>
+  <article class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:hidden">
+    <% if fines.count > 0 %>
+      <%# En caso de haber multas %>
+      <% fines.each do |fine| %>
+        <div class="space-y-3 p-4 rounded-lg shadow border-2 border-black bg-gray-800">
+          <div class="text-sm text-gray-200 flex flex-col">
+            <p>
+              <span class="text-sm text-gray-200 uppercase font-bold"><%= t('.name') %>:</span>
+              <span class="text-sm text-gray-200 uppercase"><%= fine.user.name %></span>
+            </p>
+            <p>
+              <span class="text-sm text-gray-200 uppercase font-bold"><%= t('.surname') %>:</span>
+              <span class="text-sm text-gray-200 uppercase"><%= fine.user.surname %></span>
+            </p>
+            <p>
+              <span class="text-sm text-gray-200 uppercase font-bold"><%= t('.dni') %>:</span>
+              <span class="text-sm text-gray-200 uppercase"><%= fine.user.dni %></span>
+            </p>
+            <p>
+              <span class="text-sm text-gray-200 uppercase font-bold"><%= t('.fine_price') %>:</span>
+              <span class="text-sm text-gray-200 uppercase"><%= fine.fine_price %></span>
+            </p>
+            <p>
+              <span class="text-sm text-gray-200 uppercase font-bold"><%= t('.fine_date') %>:</span>
+              <span class="text-sm text-gray-200 uppercase"><%= fine.fine_date %></span>
+            </p>
+            <p>
+            <div class="flex flex-wrap gap-2 uppercase">
+              <%= link_to t('.cancel_fine'), delete_fine_path(fine.id), data: {
+                    turbo_method: :delete,
+                    turbo_confirm: t('common.confirm')
+                }, class: "p-1.5 focus:outline-none text-white bg-red-400 hover:bg-red-500 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm dark:focus:ring-red-900 border border-black" if Current.user&.role? == "supervisor" %>
+              </div>
+            </p>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <%# En caso de no haber historial %>
+      <h4 class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"> <%= t('.no_records_available') %></h4>
+    <% end %>
+  </article>
+</section>

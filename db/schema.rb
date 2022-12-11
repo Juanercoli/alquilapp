@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_25_024743) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_10_034033) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -80,10 +80,22 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_25_024743) do
     t.string "color", null: false
     t.boolean "is_deleted", default: false, null: false
     t.boolean "is_visible", default: true, null: false
+    t.boolean "is_rented", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["patent"], name: "index_cars_on_patent", unique: true
     t.index ["vehicle_number"], name: "index_cars_on_vehicle_number", unique: true
+  end
+
+  create_table "fines", force: :cascade do |t|
+    t.text "description"
+    t.integer "fine_price"
+    t.datetime "fine_date"
+    t.bigint "user_id"
+    t.boolean "is_deleted", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_fines_on_user_id"
   end
 
   create_table "rentals", force: :cascade do |t|
@@ -153,6 +165,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_25_024743) do
   add_foreign_key "car_usage_histories", "cars"
   add_foreign_key "car_usage_histories", "users"
   add_foreign_key "cards", "users"
+  add_foreign_key "fines", "users"
   add_foreign_key "rentals", "cars"
   add_foreign_key "rentals", "users"
   add_foreign_key "wallets", "users"
