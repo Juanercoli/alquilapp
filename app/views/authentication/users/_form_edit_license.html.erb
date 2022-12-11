@@ -1,0 +1,65 @@
+<section class="md:grid md:grid-cols-2 md:gap-6">
+  <article class="mt-1 md:col-span-2 md:mt-1">
+    <%= form_with(model: user, url: update_license_user_path(user.id), method: :patch) do |form| %>
+      <div class="overflow-hidden shadow sm:rounded-md">
+        <div class="px-4 sm:mt-4 sm:px-40 flex justify-center">
+          <div class="grid grid-cols-1 gap-4 w-96">
+
+            <%# Input para driver license expiration %>
+            <div class="col-span-6 sm:col-span-2">
+              <%= form.label :driver_license_expiration, class: "block font-semibold" %>
+              <%= form.date_select :driver_license_expiration, { start_year: Time.now.year, end_year: Time.now.year + 30 }, { class: "mt-1 rounded-md border shadow-sm focus:z-10 focus:border-orange-700 focus:outline-none focus:ring-orange-700 sm:text-sm" } %>
+              <% if user.errors.full_messages_for(:driver_license_expiration).each  do |error| %>
+                  <ul class="list-disc list-inside">
+                    <li class="text-xs text-red-500">
+                      <%= error %>
+                    </li>
+                  </ul>
+                <% end %>
+              <% end %>
+            </div>
+
+            <%# Input para driver license %>
+            <div class="col-span-6 sm:col-span-3">
+              <%= form.label :driver_license, class: "block font-semibold" %>
+              <%= form.file_field :driver_license, class: "border w-full px-3 mt-1 focus:z-10 focus:border-orange-700 focus:outline-none focus:ring-orange-700 rounded-md",
+              required: true %>
+              <% if user.errors.full_messages_for(:driver_license).each  do |error| %>
+                  <ul class="list-disc list-inside">
+                    <li class="text-xs text-red-500">
+                      <%= error %>
+                    </li>
+                  </ul>
+                <% end %>
+              <% end %>
+            </div>
+
+            <%# Input para introducir contraseña actual %>
+            <div class="col-span-6 sm:col-span-1">
+              <%= form.label :actual_password, t('.actual_password'), class: "block font-semibold" %>
+              <%= form.password_field :actual_password, 
+                placeholder: t('.placeholder_actual_password'),
+                class: "border w-full h-5 px-3 py-5 mt-1 focus:z-10 focus:border-orange-700 focus:outline-none focus:ring-orange-700 rounded-md" %>
+              <% if flash[:error] %>
+                  <ul class="list-disc list-inside">
+                    <li class="text-xs text-red-500">
+                      <%= flash[:error] %>
+                    </li>
+                  </ul>
+              <% end %>
+
+            </div >            
+
+          </div>
+        </div>
+        <div class="flex justify-center text-right sm:px-6">
+          <%# Botón de submit %>
+          <%= button_tag(type: "submit", 
+            class: "mt-2 mb-1 text-orange-100 font-bold bg-orange-500 py-2 px-2 rounded hover:brightness-110 border-2 border-black focus:z-10 focus:border-orange-900 focus:outline-none focus:ring-orange-900") do %>
+            <%= content_tag(:strong, t('.submit')) %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </article>
+</section>

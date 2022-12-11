@@ -12,6 +12,10 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.boolean :is_blocked, default: false, null: false
       t.boolean :is_accepted, default: false, null: false
       t.boolean :is_deleted, default: false, null: false
+      t.string :rejected_motive, default: "", null: false
+      t.string :rejected_message, default: "", null: false
+      t.boolean :pending_license_modification, default: false, null: false
+      t.boolean :must_modify_license, default: false, null: false
 
       t.timestamps
     end

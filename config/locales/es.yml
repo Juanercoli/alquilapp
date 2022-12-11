@@ -143,6 +143,14 @@ es:
         title: 'Detalles de la billetera'
   authentication:
     users:
+      accept_license:
+        accepted: '¡Datos de licencia de conducir aceptados!'
+      reject_license:
+        rejected: '¡Datos de licencia de conducir rechazados!'
+      update_license:
+        updated: '¡Enviada solicitud de cambio de datos de licencia de conducir!'
+        invalid_actual_password: '¡Debe ingresar correctamente su contraseña actual para cambiar sus datos!'
+        invalid_actual_password_validation: 'Debe coincidir con su contraseña actual'            
       update_password:
         updated: '¡Contraseña actualizada!'    
         invalid_actual_password: '¡Debe ingresar correctamente su contraseña actual para cambiar sus datos!'
@@ -162,6 +170,7 @@ es:
         driver_license_expiration: 'Fecha de expiración de licencia'
         edit_profile: 'Editar perfil'
         change_password: 'Cambiar contraseña'
+        change_license: 'Cambiar datos de licencia de conducir'
       destroy:
         destroyed: '¡El usuario ha sido eliminado!'
       accept:
@@ -187,7 +196,7 @@ es:
         driver_license_expiration: 'Venc. licencia'
         actions: 'Acciones'
         not_accepted: 'No aceptado'
-        accepted: 'Aceptado'
+        pending: 'Pendiente'
         view_details: 'Ver detalles'
         accept: 'Aceptar'
         reject: 'Rechazar' 
@@ -200,23 +209,33 @@ es:
       table:
         driver_license: 'Licencia'
         state: 'Estado'
+        license_state: 'Cambio de licencia'
+        pending_license_modification: 'Pendiente'
+        not_pending_license_modification: 'No pendiente'        
         name: 'Nombre'
         surname: 'apellido'
         dni: 'DNI'
         email: 'Email'
-        phone: 'Tel.'
-        driver_license_expiration: 'Venc. licencia'
+        must_modify_license: 'Debe cambiar licencia'
+        must_modify_license_true: 'Afirmativo'
+        must_modify_license_false: 'Negativo'
         actions: 'Acciones'
         non_blocked: 'No bloqueado'
         blocked: 'Bloqueado'
         view_details: 'Ver detalles' 
         block: 'Bloquear/Desbloquear'
+        accept_license: 'Aceptar licencia'
+        reject_license: 'Rechazar licencia'
         delete: 'Eliminar'
         no_records_available: 'No hay usuarios disponibles'
       index:
         title: 'Tabla de usuarios'
       create:
         created: '¡Tu cuenta ha sido creada, debes esperar a que un supervisor apruebe tu registro, revisa tu mail!'
+      form_edit_license:
+        submit: 'Enviar'
+        actual_password: 'Contraseña actual'
+        placeholder_actual_password: 'Contraseña actual'
       form_edit_password:
         new_password: 'Nueva contraseña'
         placeholder_new_password: 'Nueva contraseña'
@@ -316,3 +335,10 @@ es:
       accept:
         subject: 'Su registro fue aprobado'
         accept_message: 'Hola %{name}, le informamos que su registro ha sido aprobado exitosamente! Ya puede utilizar el servicio de Alquilapp, se le han cargado $%{amount} a la billetera virtual, saludos.'
+      accept_license:
+        subject: 'Solicitud de cambio de datos de licencia fue aprobada'
+        accept_license_message: 'Hola %{name}, le informamos que su solicitud de cambio de datos de licencia de conducir fue aprobada!'
+      reject_license:
+        subject: 'Solicitud de cambio de datos de licencia fue rechazada'
+        reject_license_message: 'Hola %{name}, le informamos que su solicitud de cambio de datos de licencia de conducir fue rechazada, los datos de la solicitud deben ser válidos ¡Intentelo de nuevo!'
+

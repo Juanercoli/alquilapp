@@ -9,8 +9,6 @@ class Authentication::SessionsController < ApplicationController
     if(@user.nil?)
       @user = SuperUser.find_by("email = :login", {login: params[:login] })
     end
-    pp @user&.instance_of? User
-    pp @user
     # Establece cuando un usuario es válido
     valid_user = @user&.is_valid? params[:password]
 
@@ -18,24 +16,20 @@ class Authentication::SessionsController < ApplicationController
     # Se usa el authenticate porque está encriptado
     # El & es para decir: si user es nil entonces retorno falso
     if valid_user.nil?
-      pp "NIL INVALIDO"
       # El usuario es invalido porque no existe
       redirect_to new_session_path, alert: t('.failed_not_exists') 
     elsif valid_user
       # Cuando el usuario se autentica también creamos la sesión
+      if @user.driver_license_expirated?
+        @user.update_attribute(:must_modify_license, true)
+      end
       session[:user_id] = @user.id
       session[:user_role] = @user.role?
       redirect_to main_index_path, notice: t('.created')
     elsif @user&.is_blocked
       # Si el usuario esta bloqueado del sistema
       redirect_to new_session_path, alert: t('.failed_is_blocked')      
-    elsif @user&.role? == "client" && !(@user&.is_accepted)
-      # Si el usuario esta en lista de pre-registro
-      pp "NO ACEPTADO"
-      pp (@user&.is_accepted)
-      redirect_to new_session_path, alert: t('.failed_not_accepted')
     else
-      pp "INVALIDO"
       # El usuario es invalido porque introdujo mal los datos
       redirect_to new_session_path, alert: t('.failed_not_valid') 
     end

@@ -6,12 +6,12 @@
         <tr class="border-2 border-black">
           <th class="w-16 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.driver_license') %></th>
           <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.state') %></th>
+          <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.license_state') %></th>
           <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.name') %></th>
           <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.surname') %></th>
           <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.dni') %></th>
           <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.email') %></th>
-          <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.phone') %></th>
-          <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.driver_license_expiration') %></th>
+          <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.must_modify_license') %></th>
           <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.actions') %></th>
         </tr>
       </thead>
@@ -19,24 +19,30 @@
         <% if users.count > 0 %>
           <%# En caso de haber usuarios %>
           <% users.each do |user| %>
-            <tr class="<%= class_names('hover:bg-gray-400', {'bg-red-200': user.is_blocked}) %>">
+            <tr class="<%= class_names('hover:bg-gray-400', {'bg-red-200': user.is_blocked}, {'bg-yellow-200': user.pending_license_modification || user.must_modify_license}) %>">
               <td class="p-3 text-sm">
                 <%= link_to rails_blob_url(user.driver_license), target: :blank do %>
                   <%= image_tag user.driver_license, alt: "driver license", class: "w-10 h-10 object-cover border border-black max-w-none" %>
                 <% end %>
               </td>
               <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase">
-                <span class="<%= class_names('p-1.5 text-xs font-medium uppercase tracking-wider text-gray-200 rounded-lg bg-green-400 border-2 border-black', {'bg-red-500': user.is_blocked}) %>"><%= user.is_blocked ? t('.blocked') : t('.non_blocked') %></span>
+                <span class="<%= class_names('p-1.5 text-xs font-medium uppercase tracking-wider text-gray-200   rounded-lg bg-green-400 border-2 border-black', {'bg-red-500': user.is_blocked}) %>"><%= user.is_blocked ? t('.blocked') : t('.non_blocked') %></span>
               </td>
+              <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase">
+                <span class="<%= class_names('p-1.5 text-xs font-medium uppercase tracking-wider text-gray-200 rounded-lg bg-green-400 border-2 border-black', {'bg-yellow-500': user.pending_license_modification}) %>"><%= user.pending_license_modification ? t('.pending_license_modification') : t('.not_pending_license_modification') %></span>
+              </td>              
               <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"><%= user.name %></td>
               <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"><%= user.surname %></td>
               <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"><%= user.dni %></td>
               <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"><%= user.email %></td>
-              <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"><%= user.phone %></td>
-              <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"><%= user.driver_license_expiration %></td>
+              <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase">
+                <span class="<%= class_names('p-1.5 text-xs font-medium uppercase tracking-wider text-gray-200 rounded-lg bg-green-400 border-2 border-black', {'bg-yellow-500': user.must_modify_license}) %>"><%= user.must_modify_license ? t('.must_modify_license_true') : t('.must_modify_license_false') %></span>
+              </td>
               <td class="p-3 text-gray-700 whitespace-nowrap uppercase">
                 <%= link_to t('.view_details'), show_client_path(user.id), class: "p-1.5 focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm dark:focus:ring-yellow-900 border border-black" if Current.user&.role? == "supervisor" %>
-                <%= button_to t('.block'), block_client_path(user.id), method: :patch, form_class: "contents", class: "inline p-1 focus:outline-none text-white bg-violet-400 hover:bg-violet-500 focus:ring-4 focus:ring-violet-300 font-medium rounded-lg text-sm dark:focus:ring-violet-900 border border-black uppercase" if Current.user&.role? == "supervisor" %>
+                <%= button_to t('.block'), block_client_path(user.id), method: :patch, form_class: "contents", class: "inline p-1 focus:outline-none text-white bg-violet-400 hover:bg-violet-500 focus:ring-4 focus:ring-violet-300 font-medium rounded-lg text-sm dark:focus:ring-violet-900 border border-black uppercase" if Current.user&.role? == "supervisor" %>                            
+                <%= button_to t('.accept_license'), accept_license_user_path(user.id), method: :patch, form_class: "contents", class: "inline p-1 focus:outline-none text-white bg-purple-300 hover:bg-purple-500 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm dark:focus:ring-purple-900 border border-black uppercase" if Current.user&.role? == "supervisor" && user.pending_license_modification %>
+                <%= button_to t('.reject_license'), reject_license_user_path(user.id), method: :patch, form_class: "contents", class: "inline p-1 focus:outline-none text-white bg-pink-400 hover:bg-pink-500 focus:ring-4 focus:ring-pink-300 font-medium rounded-lg text-sm dark:focus:ring-pink-900 border border-black uppercase" if Current.user&.role? == "supervisor" && user.pending_license_modification %>
                 <%= link_to t('.delete'), delete_client_path(user.id), data: {
                                   turbo_method: :delete,
                                   turbo_confirm: t('common.confirm')
@@ -67,7 +73,7 @@
                 <% end %>
               </div>
               <div>
-                <span class="<%= class_names('p-1.5 text-xs font-medium uppercase tracking-wider text-gray-200 rounded-lg bg-green-400 border-2 border-black whitespace-nowrap', {'bg-red-500': user.is_blocked}) %>"><%= user.is_blocked ? t('.blocked') : t('.non_blocked') %></span>
+                <span class="<%= class_names('p-1.5 text-xs font-medium uppercase tracking-wider text-gray-500 rounded-lg bg-green-400 border-2 border-black whitespace-nowrap', {'bg-red-500': user.is_blocked}) %>"><%= user.is_blocked ? t('.blocked') : t('.non_blocked') %></span>
                 </span>
               </div>
           </div>

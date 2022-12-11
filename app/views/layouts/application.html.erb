@@ -20,6 +20,8 @@
     <%= render 'shared/flash' %>
     <%= render 'shared/header' %>
     <%= render partial: 'shared/tool_items' %>
+    <%= render 'shared/not_accepted_message' if Current.user&.role? == "client" && !Current.user&.is_accepted%>
+    <%= render 'shared/license_message' if Current.user&.role? == "client" && (Current.user&.must_modify_license || Current.user&.pending_license_modification) %>
     <%= yield %>
   </body>
 </html>

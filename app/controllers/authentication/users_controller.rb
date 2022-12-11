@@ -17,18 +17,29 @@ class Authentication::UsersController < ApplicationController
     def accept
       user
       @amount = 400
-      user.wallet.balance = @amount
+      user.update_attribute(:pending_license_modification, false)
+      user.update_attribute(:must_modify_license, false)         
+      user.wallet.update_attribute(:balance, @amount)
       user.update_attribute(:is_accepted, true)
-      user.wallet.save
       UserMailer.with(user: user, amount: @amount).accept.deliver_later
       redirect_to pre_registered_path, notice: t('.accepted')
     end
 
     def reject
       # Enviar mail de por qué rechaza el pre-registro
-      UserMailer.with(user: user, motive: params[:motive], observations: params[:observations]).reject.deliver_now
-      user.destroy
-      redirect_to pre_registered_path, notice: t('.rejected')
+      UserMailer.with(user: user, motive: params[:motive], observations: params[:observations]).reject.deliver_later
+      ##user.destroy
+      user.rejected_motive = params[:motive]
+      user.rejected_message = params[:observations]
+      user.update_attribute(:pending_license_modification, false)
+      user.update_attribute(:must_modify_license, true)      
+      if user.save
+        redirect_to pre_registered_path, notice: t('.rejected')
+      else
+        flash.now[:notice] = t('unexpected_error')
+        render :pre_registered, status: :unprocessable_entity
+      end
+
     end
 
     def new
@@ -62,6 +73,7 @@ class Authentication::UsersController < ApplicationController
       user
       if user.authenticate(user_actual_password_param[:actual_password])
         if user.update(user_edit_params)
+          clear_rejected_messages
           redirect_to show_client_path(user.id), notice: t('.updated')
         else
           render :edit, status: :unprocessable_entity
@@ -90,6 +102,44 @@ class Authentication::UsersController < ApplicationController
         flash.now.alert = t('.invalid_actual_password')
         render :edit_password, status: :unprocessable_entity
       end      
+    end
+
+    def edit_license
+      user
+    end
+
+    def update_license
+      user
+      if user.authenticate(user_actual_password_param[:actual_password])
+        if user.update(user_edit_license_params)
+          user.update_attribute(:pending_license_modification, true)
+          redirect_to show_client_path(user.id), notice: t('.updated')
+        else
+          render :edit_license, status: :unprocessable_entity
+        end
+      else
+        flash.now[:error] = t('.invalid_actual_password_validation')
+        flash.now.alert = t('.invalid_actual_password')
+        render :edit_license, status: :unprocessable_entity
+      end      
+    end
+
+    def accept_license
+      user
+      UserMailer.with(user: user).accept_license.deliver_later
+      user.update_attribute(:pending_license_modification, false)
+      user.update_attribute(:must_modify_license, false)
+      clear_rejected_messages
+      redirect_to clients_path, notice: t('.accepted')      
+    end
+    
+    def reject_license
+      user
+      UserMailer.with(user: user).reject_license.deliver_later
+      user.update_attribute(:pending_license_modification, false)
+      user.update_attribute(:must_modify_license, true)
+      clear_rejected_messages
+      redirect_to clients_path, alert: t('.rejected')            
     end
 
     def block
@@ -132,7 +182,16 @@ class Authentication::UsersController < ApplicationController
       params.require(:user).permit(:password)
     end
 
+    def user_edit_license_params
+      params.require(:user).permit(:driver_license, :driver_license_expiration)
+    end
+
     def user_actual_password_param
       params.require(:user).permit(:actual_password)
+    end
+
+    def clear_rejected_messages
+      user.update_attribute(:rejected_motive, "")
+      user.update_attribute(:rejected_message, "")
     end
 end 

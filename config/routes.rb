@@ -30,6 +30,10 @@ Rails.application.routes.draw do
     delete '/users/:id/reject', to: 'users#reject', as: '/reject/client'
     get '/users/:id/edit_password', to: 'users#edit_password', as: '/edit_password/user'
     patch '/users/:id/edit_password', to: 'users#update_password', as: '/update_password/user'
+    get '/users/:id/edit_license', to: 'users#edit_license', as: '/edit_license/user'
+    patch '/users/:id/edit_license', to: 'users#update_license', as: '/update_license/user'
+    patch '/users/:id/accept_license', to: 'users#accept_license', as: '/accept_license/user'
+    patch '/users/:id/reject_license', to: 'users#reject_license', as: '/reject_license/user'
     get '/users/:id/reject_message', to: 'users#reject_message', as: '/reject_message/client'
     get '/users/:id/show', to: 'users#show', as: '/show/client'
     

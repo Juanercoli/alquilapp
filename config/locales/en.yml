@@ -90,7 +90,7 @@ en:
       name: 'Nombre'
       surname: 'Apellido'
       dni: 'DNI'
-      no_records_available: 'No se encontraron movimientos'      
+      no_records_available: 'No movements found'      
   cars:
     visible:
       visible_toggled: 'Toggled visibility!'
@@ -121,10 +121,10 @@ en:
     destroy:
       destroyed: 'The car has been deleted!'
     show:
-      brand: 'Marca'
-      model: 'Modelo'
-      patent: 'Patente'
-      vehicle_number: 'Número de vehículo'
+      brand: 'Brand'
+      model: 'Model'
+      patent: 'Patent'
+      vehicle_number: 'Vehicle number'
       color: 'Color' 
       title: 'Car details'
     form:
@@ -140,6 +140,10 @@ en:
         title: 'Bill details'
   authentication:
     users:
+      update_license:
+        updated: 'Sent request to change driver license data!'
+        invalid_actual_password: '¡You must insert correctly your actual password to change your profile data!'
+        invalid_actual_password_validation: 'Must be the same as your actual password'     
       update_password:
         updated: 'Updated profile!'    
         invalid_actual_password: '¡You must insert correctly your actual password to change your profile data!'
@@ -159,6 +163,7 @@ en:
         driver_license_expiration: 'Driver license expiration'
         edit_profile: 'Edit profile'
         change_password: 'Change password'
+        change_license: 'Cambiar datos de licencia de conducir'
       destroy:
         destroyed: 'The user has been deleted!'
       accept:
@@ -183,9 +188,9 @@ en:
         phone: 'Phone.'
         driver_license_expiration: 'License expiration'
         actions: 'Actions'
-        not_accepted: 'No aceptado'
-        accepted: 'Accepted'
-        view_details: 'Ver detalles'
+        not_accepted: 'Not accepted'
+        pending: 'Pending'
+        view_details: 'View details'
         accept: 'Accept'
         reject: 'Reject' 
       pre_registered:
@@ -196,21 +201,31 @@ en:
       table:
         driver_license: 'License'
         state: 'State'
+        license_state: 'License change'        
+        pending_license_modification: 'Pending'
+        not_pending_license_modification: 'Not pending'               
         name: 'Name'
         surname: 'Surname'
         dni: 'DNI'
         email: 'Email'
-        phone: 'Phone.'
-        driver_license_expiration: 'License expiration'
+        must_modify_license: 'Must change license'
+        must_modify_license_true: 'Affirmative'
+        must_modify_license_false: 'Negative'
         actions: 'Actions'
         non_blocked: 'Non blocked'
         blocked: 'Blocked'
         block: 'Block/Unblock'
+        accept_license: 'Accept license'
+        reject_license: 'Reject license'        
         delete: 'Delete'
       index:
         title: 'Users table'
       create:
         created: 'Your account has been created!'
+      form_edit_license:
+        submit: 'Send'
+        actual_password: 'Actual password'
+        placeholder_actual_password: 'Actual password'        
       form_edit_password:
         new_password: 'New password'
         placeholder_new_password: 'New password'

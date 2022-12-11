@@ -19,14 +19,14 @@
         <% if users.count > 0 %>
           <%# En caso de haber usuarios %>
           <% users.each do |user| %>
-            <tr class="<%= class_names('hover:bg-gray-400', {'bg-red-200': !user.is_accepted}) %>">
+            <tr class="<%= class_names('hover:bg-gray-400', {'bg-red-200': !user.is_accepted}, {'bg-yellow-200': user.rejected_motive != ""}) %>">
               <td class="p-3 text-sm">
                 <%= link_to rails_blob_url(user.driver_license), target: :blank do %>
                   <%= image_tag user.driver_license, alt: "driver license", class: "w-10 h-10 object-cover border border-black max-w-none" %>
                 <% end %>
               </td>
               <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase">
-                <span class="<%= class_names('p-1.5 text-xs font-medium uppercase tracking-wider text-gray-200 rounded-lg bg-green-400 border-2 border-black', {'bg-red-500': !user.is_accepted}) %>"><%= user.is_accepted ? t('.accepted') : t('.not_accepted') %></span>
+                <span class="<%= class_names('p-1.5 text-xs font-medium uppercase tracking-wider text-white rounded-lg border-2 border-black', {'bg-red-500': !user.is_accepted}, {'bg-yellow-500': user.rejected_motive != ""}) %>"><%= user.rejected_motive != "" ? t('.pending') : t('.not_accepted') %></span>
               </td>
               <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"><%= user.name %></td>
               <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"><%= user.surname %></td>

@@ -1,0 +1,21 @@
+<div id="message" class="z-30 fixed right-0 bottom-0 m-4 p-4 border-2 font-bold border-black bg-red-400 flex gap-4 items-start w-96 bg-opacity-70 pointer-events-none">
+  <ul class="flex flex-col gap-2 text-white text-sm break-normal text-opacity-80 bg-opacity-90">
+    <li><%= Current.user.name.capitalize %></li>
+    <% if Current.user.rejected_motive == "" %>
+      <li>Debes esperar a que un supervisor te acepte</li>
+    <% else %>
+      <li>El supervisor ha rechazado tu registro, debido a <%= Current.user.rejected_motive.downcase %>, puedes modificar tus datos desde el botón "Ver perfil"</li>
+      <% if Current.user.rejected_message != "" %>
+        <li>Las observaciónes que ha hecho son: <%= Current.user.rejected_message.downcase %></li>
+      <% end %>
+    <% end %>
+  </ul>
+  <a href="#" onclick="hide(message);" class="hover:bg-white rounded-full p-1 pointer-events-auto">X</a>
+</div>
+
+<script>
+  function hide(hideID) 
+  {
+    hideID.style.display = "none"; 
+  }
+</script>

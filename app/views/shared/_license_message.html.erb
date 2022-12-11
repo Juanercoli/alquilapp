@@ -1,0 +1,18 @@
+<div id="license_message" class="z-30 fixed left-0 m-4 p-4 border-2 font-bold border-black bg-red-400 flex gap-4 items-start w-96 bg-opacity-70 pointer-events-none">
+  <ul class="flex flex-col gap-2 text-white text-sm break-normal text-opacity-80 bg-opacity-90">
+    <li><%= Current.user.name.capitalize %></li>
+    <% if Current.user.pending_license_modification %>
+      <li>Tus nuevos datos de licencia de conducir fueron enviados para que un supervisor los revise, debe esperar su respuesta</li>
+    <% else %>
+      <li>Debes modificar los datos de la licencia de conducir debido a que es inválida o ha expirado</li>
+    <% end %>
+  </ul>
+  <a href="#" onclick="hide(license_message);" class="hover:bg-white rounded-full p-1 pointer-events-auto">X</a>
+</div>
+
+<script>
+  function hide(hideID) 
+  {
+    hideID.style.display = "none"; 
+  }
+</script>

@@ -47,7 +47,7 @@ class User < ApplicationRecord
   # Métodos para validar login 
   def is_valid? (password)
     # Un usuario es valido cuando:
-    self.authenticate(password) && !self.is_blocked && self.is_accepted && !self.is_deleted
+    self.authenticate(password) && !self.is_blocked && !self.is_deleted
   end
 
   # Retorna si el usuario es administrador
@@ -55,6 +55,10 @@ class User < ApplicationRecord
     "client"
   end
 
+  def driver_license_expirated?
+    self.driver_license_expiration.present? && self.driver_license_expiration <= Date.current
+  end
+  
   # Métodos privados
   private
 
@@ -74,7 +78,7 @@ class User < ApplicationRecord
 
   def driver_license_expiration_must_be_valid
     # Valida que la licencia de expiración sea valida
-    if driver_license_expiration.present? && driver_license_expiration <= Date.today
+    if driver_license_expiration.present? && driver_license_expiration <= Date.current
       errors.add(:driver_license_expiration, :bad_driver_license_expiration)
     end
   end
