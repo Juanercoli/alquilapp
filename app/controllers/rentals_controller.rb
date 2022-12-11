@@ -23,7 +23,8 @@ class RentalsController < ApplicationController
         pp @rental     
         redirect_to find_car_path(@rental.id), notice: t('El auto ha sido alquilado exitosamente')
       else
-        redirect_to new_rental_path, alert: t('Usted no posee el saldo suficiente , recargue su saldo')
+        # Posible error , creo q ya esta arreglado
+        redirect_to new_rental_path(params[:car_id]), alert: t('Usted no posee el saldo suficiente , recargue su saldo')
       end
     end
   end
@@ -88,7 +89,9 @@ class RentalsController < ApplicationController
     @rental.car.update_attribute(:is_rented, false)
   end
 
-
+  def index
+    @rentals=Rental.order(created_at: :desc).where(user_id: Current.user.id)
+  end
   
 
   private

@@ -43,7 +43,7 @@ class FinesController < ApplicationController
         @fines = Fine.where(is_deleted: false).where(user_id: params[:id])
         if Current.user&.role? == "admin" || Current.user&.role? == "supervisor"
           # Se muestran los autos que no están borrados
-          @fines.order(fine_date: :asc)
+          @fines.order(fine_date: :desc)
         else 
           # Se muestran los autos que están visibles
           @fines = @fines.where(is_deleted: true)
