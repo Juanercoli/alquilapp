@@ -174,8 +174,7 @@ supervisor_5.save!
 auto_1.save!
 auto_2.save!
 
-CarUsageHistory.create(start: Time.now, end: Time.now.advance(hours:5), car_id: auto_1.id, user_id: juan.id)
-CarUsageHistory.create(start: Time.now.advance(hours:5), end: Time.now.advance(hours:15), car_id: auto_1.id, user_id: carlos.id)
+CarUsageHistory.create(start: DateTime.now, end: DateTime.now.advance(hours:5), car_id: auto_1.id, user_id: juan.id)
 
 p "Created #{CarUsageHistory.count} histories"
 p "Created #{User.count} users"

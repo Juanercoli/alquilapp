@@ -6,5 +6,6 @@
     <%= link_to t('shared.items.add_supervisor'), new_super_user_path, class: "font-bold bg-gray-400 px-2 py-2 rounded-full hover:bg-gray-200 hover:text-gray-800 border border-black focus:z-10 focus:border-gray-900 focus:outline-none focus:ring-gray-900" if Current.user&.role? == "admin" %>
     <%= link_to t('shared.items.view_users'), clients_path, class: "font-bold bg-gray-400 px-2 py-2 rounded-full hover:bg-gray-200 hover:text-gray-800 border border-black focus:z-10 focus:border-gray-900 focus:outline-none focus:ring-gray-900" if Current.user&.role? == "supervisor" %>
     <%= link_to t('shared.items.view_pre_registered'), pre_registered_path, class: "font-bold bg-gray-400 px-2 py-2 rounded-full hover:bg-gray-200 hover:text-gray-800 border border-black focus:z-10 focus:border-gray-900 focus:outline-none focus:ring-gray-900" if Current.user&.role? == "supervisor" %>
+    <%= link_to t('shared.items.view_reports'), reports_path, class: "font-bold bg-gray-400 px-2 py-2 rounded-full hover:bg-gray-200 hover:text-gray-800 border border-black focus:z-10 focus:border-gray-900 focus:outline-none focus:ring-gray-900" if Current.user&.role? == "supervisor" %>
   </div>
 <% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_25_024743) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_08_194521) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -49,8 +49,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_25_024743) do
   end
 
   create_table "car_usage_histories", force: :cascade do |t|
-    t.time "start"
-    t.time "end"
+    t.datetime "start"
+    t.datetime "end"
     t.bigint "car_id"
     t.bigint "user_id"
     t.datetime "created_at", null: false
@@ -89,12 +89,29 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_25_024743) do
   create_table "rentals", force: :cascade do |t|
     t.integer "initial_hours_quantity"
     t.integer "extra_hours_quantity"
+    t.integer "multed_hours_quantity"
+    t.integer "price"
+    t.boolean "is_active", default: false
     t.bigint "car_id"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["car_id"], name: "index_rentals_on_car_id"
     t.index ["user_id"], name: "index_rentals_on_user_id"
+  end
+
+  create_table "reports", force: :cascade do |t|
+    t.datetime "date"
+    t.text "content"
+    t.string "report_type"
+    t.boolean "state"
+    t.boolean "pending"
+    t.bigint "car_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["car_id"], name: "index_reports_on_car_id"
+    t.index ["user_id"], name: "index_reports_on_user_id"
   end
 
   create_table "super_users", force: :cascade do |t|
@@ -156,5 +173,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_25_024743) do
   add_foreign_key "cards", "users"
   add_foreign_key "rentals", "cars"
   add_foreign_key "rentals", "users"
+  add_foreign_key "reports", "cars"
+  add_foreign_key "reports", "users"
   add_foreign_key "wallets", "users"
 end

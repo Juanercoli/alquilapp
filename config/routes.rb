@@ -4,7 +4,14 @@ Rails.application.routes.draw do
       put :visible
     end
   end
+  # Reportes
+  resources :reports
+  patch '/reports/:id/reject', to: 'reports#reject', as: '/reject/report'
+  patch '/reports/:id/accept', to: 'reports#accept', as: '/accept/report'
   
+  ##get '/reports/:id/create_report_message', to: 'reports#create_report_message', as: '/create_report_message/report'
+  
+
   resources :cars_usage_histories,only: [:show], path: '/history', path_names: { show: '/' }
   # Existe una jerarquia top-down
 
@@ -52,8 +59,18 @@ Rails.application.routes.draw do
     resources :cards
   end
 
+  get 'rentals/new(/:id)' , to: 'rentals#new' ,as: '/new/rental'
+  get 'rentals/find_car(/:id)', to: 'rentals#find_car' ,as: "/find_car"
+  get 'rentals/car_tracking(/:id)', to: 'rentals#car_tracking' ,as: "/car_tracking"
+  post 'rentals/find_car(/:id)', to: 'rentals#car_unlock'
+  #path 'rentals/edit_rental_path(/:id)', to: 'rentals#update'
+  #post'rentals/car_tracking(/:id)', to: 'rentals#finish_trip'
   resources :rentals
+  
+  
   # La ruta principal es:
   root "main#index"
+
+
   
 end

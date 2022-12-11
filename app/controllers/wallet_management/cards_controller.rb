@@ -12,7 +12,7 @@ class WalletManagement::CardsController < ApplicationController
       # Se filtran los parámetros instanciando de nuevo
       
       @card = Card.new(card_params)
-      @card.card_balance = 1000
+      @card.card_balance = 520000
       @card.user_id=Current.user.id
       if @card.save
         redirect_to wallet_path(Current.user.id), notice:"La tarjeta se ingreso con éxito"

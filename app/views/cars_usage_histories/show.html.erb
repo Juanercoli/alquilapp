@@ -24,8 +24,8 @@
           <%# En caso de haber historial  %>
           <% @history.each do |history| %>
             <tr class="hover:bg-gray-400">
-              <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"><%= history.start %></td>
-              <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"><%= history.end %></td>
+              <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"><%= history.start.localtime.to_formatted_s(:db) %></td>
+              <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"><%= history.end.localtime.to_formatted_s(:db) %></td>
               <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"><%= history.user.name %></td>
               <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"><%= history.user.surname %></td>
               <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"><%= history.user.dni %></td>
