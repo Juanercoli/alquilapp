@@ -11,17 +11,20 @@ class RentalsController < ApplicationController
       @rental.price = @rental.initial_hours_quantity * 200
       
       if (@rental.price <= @wallet.balance)
+        @wallet.balance=@wallet.balance - @rental.initial_hours_quantity * 200
         @wallet.save!
         @rental.car_id = params[:car_id]
         @rental.user_id = Current.user.id
         @rental.extra_hours_quantity = 0
         @rental.multed_hours_quantity = 0
         @rental.is_active=true
-        @rental.save!   
+        @rental.save!  
+        @rental.car.update_attribute(:is_rented, true) 
         pp @rental     
         redirect_to find_car_path(@rental.id), notice: t('El auto ha sido alquilado exitosamente')
       else
-        redirect_to new_rental_path, alert: t('Usted no posee el saldo suficiente , recargue su saldo')
+        # Posible error , creo q ya esta arreglado
+        redirect_to new_rental_path(params[:car_id]), alert: t('Usted no posee el saldo suficiente , recargue su saldo')
       end
     end
   end
@@ -42,21 +45,24 @@ class RentalsController < ApplicationController
 
   end
 
-  #agregar mas tiempo
+  # Agregar mas tiempo
   def edit
     rental
   end
 
   def update
     rental
+    @wallet=Current.user.wallet
     aux=rental_params[:extra_hours_quantity].to_i
-    aux=@rental.extra_hours_quantity + aux
-    aux2=@rental.initial_hours_quantity
-    if (aux+aux2 <= 24 )
-      if (Current.user.wallet.balance >= aux*250+aux2*200)
-         @rental.extra_hours_quantity=aux
+    sumatoria=@rental.extra_hours_quantity + aux
+    
+    if (sumatoria+@rental.initial_hours_quantity <= 24 )
+      if (Current.user.wallet.balance >= aux*250)
+         @rental.extra_hours_quantity=sumatoria
          redirect_to car_tracking_path(@rental.id), notice: t("Tiempo agregado")
+         @wallet.balance= @wallet.balance - aux* 250
          @rental.save!
+         @wallet.save!
      else
         redirect_to edit_rental_path(@rental.id), alert: t("saldo insuficiente")
       end
@@ -71,19 +77,22 @@ class RentalsController < ApplicationController
       rental
   end
 
-  #saca la cuenta final y muestra el resumen
+  # Saca la cuenta final y muestra el resumen
   def show
     rental
     @wallet=Current.user.wallet
     @rental.price = @rental.initial_hours_quantity * 200 + @rental.extra_hours_quantity*250 + @rental.multed_hours_quantity*100*4
     @rental.is_active=false
     rental.save!
-    @wallet.balance=@wallet.balance - @rental.price
+    @wallet.balance=@wallet.balance - @rental.multed_hours_quantity*100*4
     @wallet.save!
     CarUsageHistory.create!(start:rental.created_at, end:rental.updated_at, car_id: @rental.car.id, user_id: Current.user.id)
+    @rental.car.update_attribute(:is_rented, false)
   end
 
-
+  def index
+    @rentals=Rental.order(created_at: :desc).where(user_id: Current.user.id)
+  end
   
 
   private

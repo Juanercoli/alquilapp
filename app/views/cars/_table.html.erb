@@ -6,6 +6,7 @@
         <tr class="border-2 border-black">
           <th class="w-16 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"></th>
           <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.state') %></th>
+          <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.is_rended') %></th>
           <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.brand') %></th>
           <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.model') %></th>
           <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.patent') %></th>
@@ -23,6 +24,9 @@
               </td>
               <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase">
                 <span class="<%= class_names('p-1.5 text-xs font-medium uppercase tracking-wider text-gray-200 rounded-lg bg-green-400 border-2 border-black', {'bg-red-500': !car.is_visible}) %>"><%= car.is_visible ? t('.visible') : t('.non_visible') %></span>
+              </td>
+              <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase">
+                <span class="<%= class_names('p-1.5 text-xs font-medium uppercase tracking-wider text-gray-200 rounded-lg bg-green-400 border-2 border-black', {'bg-red-500': car.is_rented}) %>"><%= car.is_rented ? t('.is_rented') : t('.not_rented') %></span>
               </td>
               <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"><%= car.brand %></td>
               <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"><%= car.model %></td>

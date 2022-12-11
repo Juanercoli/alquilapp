@@ -1,0 +1,69 @@
+<section class="m-8">
+  
+  <article class="overflow-auto rounded-lg shadow hidden md:block select-none">
+    <table class="w-full">
+      <thead class="text-xs uppercase bg-gray-800 text-gray-200">
+        <tr class="border-2 border-black">
+          
+          <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.price') %></th>
+          <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.vehicle_number') %></th>
+          <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.start time') %></th>
+          <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.final hour') %></th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-100">  
+        <% if rentals.count > 0 %>
+          <%# En caso de haber multas  %>
+          <% rentals.each do |rental| %>
+            <tr class="hover:bg-gray-400">
+              <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"><%= rental.price %></td>
+              <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"><%= rental.car.vehicle_number %></td>
+              <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"><%= rental.created_at.localtime.to_formatted_s(:db) %></td>
+              <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"><%= rental.updated_at.localtime.to_formatted_s(:db) %></td>
+              
+            </tr>
+          <% end %>
+        <% else %>
+          <%# En caso de no haber multas %>
+          <tr>
+            <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"> <%= t('.no_records_available') %> </td>
+          </tr>
+        <% end %>
+      </tbody>  
+    </table>
+  </article>
+  
+  <%# Para la vista mobile %>
+  <article class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:hidden">
+    <% if rentals.count > 0 %>
+      <%# En caso de haber multas %>
+      <% rentals.each do |rental| %>
+        <div class="space-y-3 p-4 rounded-lg shadow border-2 border-black bg-gray-800">
+          <div class="text-sm text-gray-200 flex flex-col">
+        
+            <p>
+              <span class="text-sm text-gray-200 uppercase font-bold"><%= t('.price') %>:</span>
+              <span class="text-sm text-gray-200 uppercase"><%= rental.price %></span>
+            </p>
+            <p>
+              <span class="text-sm text-gray-200 uppercase font-bold"><%= t('.dni') %>:</span>
+              <span class="text-sm text-gray-200 uppercase"><%= rental.car.vehicle_number %></span>
+            </p>
+            <p>
+              <span class="text-sm text-gray-200 uppercase font-bold"><%= t('.rental_price') %>:</span>
+              <span class="text-sm text-gray-200 uppercase"><%= rental.created_at.localtime.to_formatted_s(:db) %></span>
+            </p>
+            <p>
+              <span class="text-sm text-gray-200 uppercase font-bold"><%= t('.rental_date') %>:</span>
+              <span class="text-sm text-gray-200 uppercase"><%= rental.updated_at.localtime.to_formatted_s(:db) %></span>
+            </p>
+            
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <%# En caso de no haber historial %>
+      <h4 class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"> <%= t('.no_records_available') %></h4>
+    <% end %>
+  </article>
+</section>

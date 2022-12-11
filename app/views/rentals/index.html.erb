@@ -1,0 +1,23 @@
+<section class="mx-4 mb-2 p-4 bg-gray-800 text-gray-200 rounded-b-lg border-2 border-black">
+  <h4 class="text-2xl uppercase text-center">
+    <%= t('.movimientos') %>
+  </h4>
+</section>
+
+<% if Current.user&.role? == "client" %>
+  <%# Renderizo tabla %>
+  <%= render "table", rentals: @rentals %>
+<% else %>
+  <%# Renderizar solo multas disponible al cliente %>
+  <% if(@rental.count > 0)%>
+        <% @rental.each do |rental| %>
+
+          <%= render "rental", rental: rental %>
+          
+        <% end %>
+  <% else %>
+    <section class="mx-4 mb-2 p-4">
+      <h4> <%= t('.no_records_available') %> </h4>
+    </section>
+  <% end %>
+<% end %>

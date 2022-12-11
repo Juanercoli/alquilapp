@@ -63,9 +63,14 @@ Rails.application.routes.draw do
   get 'rentals/find_car(/:id)', to: 'rentals#find_car' ,as: "/find_car"
   get 'rentals/car_tracking(/:id)', to: 'rentals#car_tracking' ,as: "/car_tracking"
   post 'rentals/find_car(/:id)', to: 'rentals#car_unlock'
-  #path 'rentals/edit_rental_path(/:id)', to: 'rentals#update'
-  #post'rentals/car_tracking(/:id)', to: 'rentals#finish_trip'
   resources :rentals
+
+  get 'fines/new(/:id)' , to: 'fines#new' ,as: '/new/fine'
+  post 'fines/new(/:id)' , to: 'fines#create' 
+  get 'fines/(/:id)' , to: 'fines#index' ,as: '/fines'
+  delete '/fines/(/:id)/delete', to: 'fines#destroy', as: '/delete/fine'
+  resources :fines 
+  
   
   
   # La ruta principal es:

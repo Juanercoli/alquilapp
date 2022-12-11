@@ -51,6 +51,9 @@
 
     <%=link_to "Añadir tarjeta" , new_card_path ,class: "mt-2 mx-2 text-orange-500 font-bold" if Current.user&.role? == 'client' && !Current.user.card %>
     <%=link_to "Editar tarjeta" ,edit_card_path(Current.user.id) ,class: "mt-2 mx-2 text-orange-500 font-bold" if Current.user&.role? == 'client' && Current.user.card %>
+    <%=link_to "ver movimientos" ,rentals_path,class: "mt-2 mx-2 text-orange-500 font-bold" if Current.user&.role? == 'client' %>
   </article>
+
+  
 </section>
 

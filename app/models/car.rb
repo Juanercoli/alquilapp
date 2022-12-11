@@ -1,6 +1,7 @@
 class Car < ApplicationRecord
   has_many :reports, dependent: :destroy
   has_many :rental, dependent: :destroy
+  has_many :fine, dependent: :destroy
   has_many :car_usage_history, dependent: :destroy
   # Imagen del autos
   has_one_attached :photo, dependent: :destroy
