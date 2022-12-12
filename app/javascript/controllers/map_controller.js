@@ -19,9 +19,7 @@ export default class extends Controller {
            iconSize: [42, 42],
         }
       });
-      alert(this.data.get("cars"))
       const array = JSON.parse(this.data.get("cars"))
-      alert(array.length)
 
       var carIcon = new MarkerIcon({
         iconUrl: 'https://cdn-icons-png.flaticon.com/512/744/744465.png'
@@ -35,7 +33,6 @@ export default class extends Controller {
 
       for (let i = 0; i < array.length; i++) {
         const car = array[i];
-        alert(getDistanceFromLatLonInKm(person.lat, person.lng, car.lat, car.lng).toFixed(2) + "KM")
         if (!car.is_rented && getDistanceFromLatLonInKm(person.lat, person.lng, car.lat, car.lng).toFixed(2)<=0.5){
           const marker = L.marker([car.lat, car.lng], {icon: carIcon}).addTo(this.map);
           marker.addEventListener('click', function() { window.open(url + car.id, "_self") }); 
