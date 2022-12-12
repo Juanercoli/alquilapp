@@ -34,6 +34,7 @@ es:
       car: Auto
       super_user: SuperUsuario
       card: Tarjeta
+      rental: Alquiler
     attributes:
       user:
         dni: 'DNI'
@@ -66,6 +67,8 @@ es:
         expiration_date: 'Fecha de expiración'
         security_code: 'Código de seguridad'
         card_balance: 'Balance de tarjeta'
+      rental:
+        initial_hours_quantity: 'Cantidad de horas de alquiler' 
   common: 
     confirm: '¿Quieres realizar esta acción?'
     back: 'Ir atras'
@@ -130,6 +133,7 @@ es:
       vehicle_number: 'Número de vehículo'
       color: 'Color'
       title: 'Detalles del auto'
+      rent: 'Alquilar'
     form:
       placeholder_brand: 'Marca'
       placeholder_model: 'Modelo'
@@ -141,6 +145,18 @@ es:
     wallets:
       show:
         title: 'Detalles de la billetera'
+        add_card: 'Agregar tarjeta'
+        edit_card: 'Editar tarjeta'
+        view_rental_activity: 'Ver movimientos de alquiler'
+  rentals:
+    new:
+      title: 'Seleccion de horas de alquiler'
+      pay: 'Pagar'
+    find_car:
+      title: 'Desbloqueo de auto'
+      patent: 'Patente'        
+      placeholder_patent: 'Por ejemplo: aaa111 o aa111bb'
+      unlock: 'Desbloquear'
   authentication:
     users:
       accept_license:

@@ -34,9 +34,11 @@ class ReportsController < ApplicationController
     if(report.report_type == "Nafta")
       ##Acciones correspondientes al reporte de nafta
       report.user.wallet.balance += 3000 ## Se le suma 3000 al que reporto
-      previous_wallet = CarUsageHistory.where(car_id:report.car.id).order("created_at").last.user.wallet
-      previous_wallet.update_attribute(:balance, previous_wallet.balance - 3000) ## Se le resta 3000 al que se mando la makana
       report.user.wallet.save!
+      previous_user = CarUsageHistory.where(car_id:report.car.id).order("created_at").last.user
+      previous_user.wallet.update_attribute(:balance, previous_user.wallet.balance - 3000) ## Se le resta 3000 al que se mando la makana
+      @fine = Fine.create(user_id: previous_user.id, fine_price: 3000, fine_date: Time.now, description: 'Multa por falta de nafta')
+      UserMailer.with(user: @fine.user,amount: @fine.fine_price ,description: @fine.description ).fined.deliver_later
 
     elsif (report.report_type == "Accidente")
       ##Acciones correspondientes al reporte de un accidente

@@ -25,33 +25,17 @@
                       <%= form.label "Cantidad" %>
                     </div>
                     <%= form.number_field :charge_wallet, class: "form-control", min: "0", required: true %>
-                    <%= form.submit "Cargar con tarjeta de débito", class: "mt-2 mx-1 text-orange-100 font-bold bg-orange-500 py-2 px-2 rounded hover:brightness-110 border-2 border-black focus:z-10 focus:border-orange-900 focus:outline-none focus:ring-orange-900 cursor-pointer" %>
+                    <%= form.submit t('.charge_with_card'), class: "mt-2 mx-1 text-orange-100 font-bold bg-orange-500 py-2 px-2 rounded hover:brightness-110 border-2 border-black focus:z-10 focus:border-orange-900 focus:outline-none focus:ring-orange-900 cursor-pointer" %>
                   </div>
                 </div>
               </div>
             </div>
       <% end %>
-    <% end %>
-    <%# el mete la cantidad que quiere cargar o descontar el supervisor %>
-    <% if Current.user&.role? == "supervisor" %>
-      <%= form_for(@wallet, as: :wallet, url: "/wallets/#{@wallet.user_id}" , html: { method: :put, id:"form2" } ) do |form| %>
-            <div class="row m-4" >
-              <div class="col-7">
-                <div class="form-outline">
-                  <div class="input-group mb-3">
-                  <span class="input-group-text" id="basic-addon1">$</span>
-                  <%= form.text_field :charge_wallet, class: "form-control" , min: "0", required: true %>
-                  </div>
-                  <%= form.label "Cantidad" %>
-                </div>
-              </div>
-            </div>
-      <% end %>
-    <% end %>
+    <% end %> 
 
-    <%=link_to "Añadir tarjeta" , new_card_path ,class: "mt-2 mx-2 text-orange-500 font-bold" if Current.user&.role? == 'client' && !Current.user.card %>
-    <%=link_to "Editar tarjeta" ,edit_card_path(Current.user.id) ,class: "mt-2 mx-2 text-orange-500 font-bold" if Current.user&.role? == 'client' && Current.user.card %>
-    <%=link_to "ver movimientos" ,rentals_path,class: "mt-2 mx-2 text-orange-500 font-bold" if Current.user&.role? == 'client' %>
+    <%=link_to t('.add_card'), new_card_path ,class: "mt-2 mx-1 text-white font-bold bg-cyan-600 py-2 px-2 rounded hover:brightness-110 border-2 border-black focus:border-cyan-900 focus:outline-none focus:ring-cyan-900 cursor-pointer" if Current.user&.role? == 'client' && !Current.user.card %>
+    <%=link_to t('.edit_card'),edit_card_path(Current.user.id) ,class: "mt-2 mx-1 text-white font-bold bg-cyan-600 py-2 px-2 rounded hover:brightness-110 border-2 border-black focus:border-cyan-900 focus:outline-none focus:ring-cyan-900 cursor-pointer" if Current.user&.role? == 'client' && Current.user.card %>
+    <%=link_to t('.view_rental_activity'),rentals_path,class: "mt-2 mx-1 text-white font-bold bg-pink-600 py-2 px-2 rounded hover:brightness-150 border-2 border-black focus:border-pink-900 focus:outline-none focus:ring-pink-900 cursor-pointer" if Current.user&.role? == 'client' %>
   </article>
 
   

@@ -14,7 +14,6 @@ class FinesController < ApplicationController
         @fine.user.wallet.update_attribute(:balance, fine.user.wallet.balance - fine.fine_price)
         
        if @fine.save
-          # Si el auto se guarda correctamente
         UserMailer.with(user: @fine.user,amount: @fine.fine_price ,description: @fine.description ).fined.deliver_later
         redirect_to clients_path, notice: t('.created')
         

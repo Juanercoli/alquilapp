@@ -127,6 +127,7 @@ en:
       vehicle_number: 'Vehicle number'
       color: 'Color' 
       title: 'Car details'
+      rent: 'Rent'
     form:
       placeholder_brand: 'Brand'
       placeholder_model: 'Model'
@@ -138,6 +139,18 @@ en:
     wallets:
       show:
         title: 'Bill details'
+        add_card: 'Add card'
+        edit_card: 'Edit card'
+        view_rental_activity: 'View rental activity'
+  rentals:
+    new:
+      title: 'Select hours for rental'
+      pay: 'Pay'             
+    find_car:
+      title: 'Unlock car'
+      patent: 'Patent'        
+      placeholder_patent: 'Example: aaa111 o aa111bb'
+      unlock: 'Unlock'         
   authentication:
     users:
       update_license:

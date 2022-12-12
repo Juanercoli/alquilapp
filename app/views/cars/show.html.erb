@@ -36,8 +36,8 @@
       </ul>
     </div>
   </article>
+  <div class="flex justify-center text-center font-bold text-5xl stroke-black">
+    <%=link_to t('.rent'), new_rental_path(@car.id),class: "mt-2 mx-2 text-white font-bold p-4 bg-orange-600 rounded-lg w-96 hover:brightness-150 border-2 border-black" if Current.user&.role? == 'client' && !Current.user.rentals.find_by(is_active:true) %>
+  </div>
 </section>
-
-
-<%=link_to "Alquilar" , new_rental_path(@car.id),class: "mt-2 mx-2 text-orange-500 font-bold" if Current.user&.role? == 'client' && !Current.user.rentals.find_by(is_active:true) %>
   
