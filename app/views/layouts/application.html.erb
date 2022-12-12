@@ -10,6 +10,7 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <%# Para poder agregar elementos al <head> utilizo un yield %>
     <% if content_for? :head %>
       <%= yield :head %>

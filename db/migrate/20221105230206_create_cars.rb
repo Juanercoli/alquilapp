@@ -9,6 +9,7 @@ class CreateCars < ActiveRecord::Migration[7.0]
       t.boolean :is_deleted, null: false, default: false
       t.boolean :is_visible, null: false, default: true
       t.boolean :is_rented, null: false, default: false
+      t.boolean :is_unlocked, null: false, default: false
       t.decimal :lat, precision: 10, scale: 6, default: -34.903545
       t.decimal :lng, precision: 10, scale: 6, default: -57.937685
       t.timestamps

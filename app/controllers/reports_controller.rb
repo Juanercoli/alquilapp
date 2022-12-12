@@ -9,16 +9,28 @@ class ReportsController < ApplicationController
     @report.date = Time.now
     @report.user_id = Current.user.id
     @report.pending = true
-    @report.car_id = Current.user.rentals.find_by(is_active:true).car.id
     @report.state = true
-    if @report.save
-      redirect_to car_tracking_path(Current.user.rentals.find_by(is_active:true).id), notice: t('.sent')
+    
+    @rental = Current.user.rentals.find_by(is_active: true)
+    @report.car_id = @rental.car.id
+    # Manejo de tiempo de falta de nafta
+    @start_date = @rental.created_at
+    # Si es negativo, penalizado
+    # Si es positivo, todo en orden
+    @seconds = (@start_date.to_time.to_i - Time.now.to_time.to_i).abs
+    @minutes = @seconds / 60
+
+    if (@report.report_type == "Nafta") && @minutes > 1
+      redirect_to new_report_path, alert: t('.error_nafta')
+    elsif @report.save
+      redirect_to car_tracking_path(@rental.id), notice: t('.sent')
     else
       # Sino se renderiza de nuevo el formulario new
       # Se pasa como status unprocessable_entity para que TURBO entienda que el formulario no es correcto y se vuelva a renderizar (convención de turbo)
       render :new, status: :unprocessable_entity
     end
   end
+
   def index
     @reports = Report.all
   end

@@ -5,6 +5,63 @@
   </h4>
 </section>
 
+<div id="message" class="bg-orange-500" style="visibility: hidden;">
+  Se acabo el tiempo de alquiler debe finalizar el viaje o cada 15 minutos se le cobrará una penalización de $100. 
+</div>
+
+<div id="counter" class="counter bg-orange-500">
+  <span class='e-m-days hidden'>0</span>
+  <span class='e-m-hours'>0</span> Horas |
+  <span class='e-m-minutes'>0</span> Minutos |
+  <span class='e-m-seconds'><%= @seconds %></span> Segundos
+</div>
+
+<script>
+var time_finished = false
+$(function() {
+  function getCounterData(obj) {
+    var days = parseInt($('.e-m-days', obj).text());
+    var hours = parseInt($('.e-m-hours', obj).text());
+    var minutes = parseInt($('.e-m-minutes', obj).text());
+    var seconds = parseInt($('.e-m-seconds', obj).text());
+    return seconds + (minutes * 60) + (hours * 3600) + (days * 3600 * 24);
+  }
+
+  function setCounterData(s, obj) {
+    var days = Math.floor(s / (3600 * 24));
+    var hours = Math.floor((s % (60 * 60 * 24)) / (3600));
+    var minutes = Math.floor((s % (60 * 60)) / 60);
+    var seconds = Math.floor(s % 60);
+
+    console.log(days, hours, minutes, seconds);
+
+    $('.e-m-days', obj).html(days);
+    $('.e-m-hours', obj).html(hours);
+    $('.e-m-minutes', obj).html(minutes);
+    $('.e-m-seconds', obj).html(seconds);
+  }
+
+  var count = getCounterData($(".counter"));
+
+  var timer = setInterval(function() {
+    count--;
+    if (count == 0) {
+      clearInterval(timer);
+      time_finished = true
+      document.getElementById("counter").style.visibility = "hidden"; 
+      document.getElementById("message").style.visibility = "visible"; 
+      return;
+    }
+    setCounterData(count, $(".counter"));
+  }, 1000);
+});
+</script>
+
+<div class="flex justify-center align-center mt-4 mb-4">
+  <div data-controller="car-unlock-map" data-car-unlock-map-person="<%= Current.user.to_json %>" data-car-unlock-map-car="<%= @car %>" data-map-url="/cars/" data-car-unlock-map-target="placeholder class="leaflet-container" class="border-2 border-black rounded-lg" style="width: 400px; height: 200px; position: relative; outline: none;" >
+  </div>
+</div>
+
 <section>
   <article class="flex flex-col sm:flex-row text-2xl font-bold gap-10 justify-center items-center">
   <div class="flex flex-col gap-4 sm:flex-row">

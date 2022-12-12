@@ -5,6 +5,11 @@
   </h4>
 </section>
 
+<div class="flex justify-center align-center mt-4">
+  <div data-controller="car-unlock-map" data-car-unlock-map-person="<%= Current.user.to_json %>" data-car-unlock-map-car="<%= @car %>" data-map-url="/cars/" data-car-unlock-map-target="placeholder class="leaflet-container" class="border-2 border-black rounded-lg" style="width: 400px; height: 200px; position: relative; outline: none;" >
+  </div>
+</div>
+
 <%= form_with(url: find_car_path(@rental.id)) do |form| %>
   <div class="flex flex-col items-center justify-center mt-4">
     <div>

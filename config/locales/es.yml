@@ -154,6 +154,8 @@ es:
     cards:
       edit:
         submit: 'Editar'
+      update:
+        updated: '!La tarjeta fue editada con éxito!'
     wallets:
       cargar_saldo:
         successfully_charged: '¡Billetera cargada exitosamente!'
@@ -168,6 +170,7 @@ es:
     update:
       added_time: '¡Tiempo agregado exitosamente!'
       exceds_rental_time: '¡La cantidad de horas de alquiler de un auto no puede exceder las 24hs!'
+      not_enough_balance: '¡No posee el saldo suficiente!'
     table:
       title: 'Movimientos de alquiler'
       price: 'Precio'
@@ -207,6 +210,8 @@ es:
       date_end: 'Fecha de fin'
       back_to_home: 'Volver al inicio'
       print: 'Imprimir'
+    index:
+      no_records_available: 'No se encontraron movimientos'
   reports:
     index:
       title: 'Tabla de reportes'
@@ -221,6 +226,7 @@ es:
       reject: 'Rechazar'
     create:
       sent: '¡Reporte enviado!'
+      error_nafta: '!No se aceptan reportes de nafta pasados los 10 minutos!'
     new:
       title: 'Crear nuevo reporte'
       motive: 'Motivo'
@@ -258,7 +264,7 @@ es:
       reject_license:
         rejected: '¡Datos de licencia de conducir rechazados!'
       update_license:
-        updated: '¡Enviada solicitud de cambio de datos de licencia de conducir!'
+        updated: '¡Su solicitud de cambio de datos de licencia de conducir fue enviada!'
         invalid_actual_password: '¡Debe ingresar correctamente su contraseña actual para cambiar sus datos!'
         invalid_actual_password_validation: 'Debe coincidir con su contraseña actual'            
       update_password:

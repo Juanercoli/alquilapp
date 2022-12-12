@@ -36,10 +36,10 @@
               <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"><%= user.driver_license_expiration %></td>
               <td class="p-3 text-gray-700 whitespace-nowrap uppercase">
                 <%= link_to t('.view_details'), show_client_path(user.id), class: "p-1.5 focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm dark:focus:ring-yellow-900 border border-black" if Current.user&.role? == "supervisor" %>
-                <%= button_to t('.accept'), accept_client_path(user.id), method: :patch, form_class: "contents", class: "inline p-1 focus:outline-none text-white bg-violet-400 hover:bg-violet-500 focus:ring-4 focus:ring-violet-300 font-medium rounded-lg text-sm dark:focus:ring-violet-900 border border-black uppercase" if Current.user&.role? == "supervisor" %>
+                <%= button_to t('.accept'), accept_client_path(user.id), method: :patch, form_class: "contents", class: "inline p-1 focus:outline-none text-white bg-violet-400 hover:bg-violet-500 focus:ring-4 focus:ring-violet-300 font-medium rounded-lg text-sm dark:focus:ring-violet-900 border border-black uppercase" if Current.user&.role? == "supervisor" && user.rejected_motive == "" %>
                 <%= link_to t('.reject'), reject_message_client_path(user.id), data: {
                 turbo_confirm: t('common.confirm')
-                }, class: "p-1.5 focus:outline-none text-white bg-red-400 hover:bg-red-500 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm dark:focus:ring-red-900 border border-black" if Current.user&.role? == "supervisor" %>     
+                }, class: "p-1.5 focus:outline-none text-white bg-red-400 hover:bg-red-500 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm dark:focus:ring-red-900 border border-black" if Current.user&.role? == "supervisor" && user.rejected_motive == "" %>     
               </td>
             </tr>
           <% end %>

@@ -30,7 +30,7 @@ class WalletManagement::CardsController < ApplicationController
   def update
     @card = Card.find_by(id: params[:id])
     if @card.update(card_params)
-      redirect_to wallet_path, notice: "Tarjeta editada"
+      redirect_to wallet_path, notice: t('.updated')
     else
       render :edit, status: :unprocessable_entity
     end

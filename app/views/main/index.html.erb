@@ -1,6 +1,6 @@
-<% if Current.user&.role? == "client" && Current.user&.is_accepted %>
+<% if Current.user&.role? == "client" && Current.user&.is_accepted && !Current.user.rentals.find_by(is_active:true) %>
   <div class="flex justify-center align-center mt-4">
-    <div data-controller="map" data-map-cars="<%= @cars %>" data-map-url="/cars/" data-map-target="placeholder class="leaflet-container" class="border-2 border-black rounded-lg" style="width: 600px; height: 400px; position: relative; outline: none;" >
+    <div data-controller="map" data-map-person="<%= Current.user.to_json %>" data-map-cars="<%= @cars %>" data-map-url="/cars/" data-map-target="placeholder class="leaflet-container" class="border-2 border-black rounded-lg" style="width: 600px; height: 400px; position: relative; outline: none;" >
     </div>
   </div>
 <% end %>

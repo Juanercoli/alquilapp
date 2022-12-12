@@ -7,7 +7,7 @@ class CarsController < ApplicationController
       @cars.order(vehicle_number: :asc)
     else 
       # Se muestran los autos que están visibles
-      @cars = @cars.where(is_visible: true)
+      @cars = @cars.where(is_visible: true).where(is_rented: false)
     end
   end
 

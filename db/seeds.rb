@@ -16,7 +16,9 @@ auto_1 = Car.new(
       patent: "ABC111",
       model: "AX2010",
       vehicle_number: "1234",
-      color: "Rojo"
+      color: "Rojo",
+      lat: -34.904338,
+      lng: -57.938363
 )
 auto_1.photo.attach(io: File.open(Rails.root.join("public/images/auto_1.jpg")), filename: "auto_1.jpg")
 
@@ -25,9 +27,23 @@ auto_2 = Car.new(
   patent: "AA111CD",
   model: "2022",
   vehicle_number: "12",
-  color: "Azul"
+  color: "Azul",
+  lat: -34.903193,
+  lng: -57.937029
 )
 auto_2.photo.attach(io: File.open(Rails.root.join("public/images/auto_2.png")), filename: "auto_2.png")
+
+auto_3 = Car.new(
+  brand: "Volkswagen",
+  patent: "AA111AA",
+  model: "Polo 2020",
+  vehicle_number: "19",
+  color: "Azul",
+  lat: -34.909283, 
+  lng: -57.943324
+)
+auto_3.photo.attach(io: File.open(Rails.root.join("public/images/autito_ecologico.png")), filename: "autito_ecologico.png")
+
 
 wallet_1 = Wallet.new(balance: 400 )
 wallet_2 = Wallet.new(balance: 1000 )
@@ -173,6 +189,7 @@ supervisor_4.save!
 supervisor_5.save!
 auto_1.save!
 auto_2.save!
+auto_3.save!
 
 CarUsageHistory.create(start: DateTime.now, end: DateTime.now.advance(hours:5), car_id: auto_1.id, user_id: juan.id)
 

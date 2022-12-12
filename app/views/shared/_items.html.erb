@@ -6,7 +6,7 @@
 
 <!-- Botones del header -->
 <% if Current.user&.role? == 'client' && Current.user.rentals.find_by(is_active:true) %>
-  <% if Current.user.rentals.find_by(is_active:true).car.is_rented %>
+  <% if Current.user.rentals.find_by(is_active:true).car.is_rented && Current.user.rentals.find_by(is_active:true).car.is_unlocked %>
     <%= link_to t('.car_tracking'), car_tracking_path(Current.user.rentals.find_by(is_active:true).id), class: "mx-1 text-white font-bold bg-green-500 py-2 px-2 rounded hover:brightness-110 border border-black focus:border-orange-900 focus:outline-none focus:ring-orange-900" %>
   <% else %>
     <%= link_to t('.car_tracking'), find_car_path(Current.user.rentals.find_by(is_active:true).id), class: "mx-1 text-white font-bold bg-green-500 py-2 px-2 rounded hover:brightness-110 border border-black focus:border-orange-900 focus:outline-none focus:ring-orange-900" %>
