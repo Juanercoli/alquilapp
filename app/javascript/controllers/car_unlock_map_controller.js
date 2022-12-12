@@ -19,7 +19,6 @@ export default class extends Controller {
            iconSize: [42, 42],
         }
       });
-      alert(this.data.get("car"))
       const car = JSON.parse(this.data.get("car"))
 
       var carIcon = new MarkerIcon({
