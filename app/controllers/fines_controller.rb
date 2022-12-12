@@ -3,7 +3,6 @@ class FinesController < ApplicationController
     def new
         @fine= Fine.new
         @user_id=params[:id]
-      
     end
 
     def create
@@ -11,17 +10,17 @@ class FinesController < ApplicationController
         @fine = Fine.new(fine_params)
         @fine.user_id=params[:user_id]
         @fine.fine_date=Time.now
-        @fine.user.wallet.update_attribute(:balance, fine.user.wallet.balance - fine.fine_price)
         
-       if @fine.save
-        UserMailer.with(user: @fine.user,amount: @fine.fine_price ,description: @fine.description ).fined.deliver_later
+        if @fine.save
+          @fine.user.wallet.update_attribute(:balance, fine.user.wallet.balance - fine_params[:fine_price].to_i)
+          UserMailer.with(user: @fine.user,amount: @fine.fine_price ,description: @fine.description ).fined.deliver_later
         redirect_to clients_path, notice: t('.created')
         
         else
           # Sino se renderiza de nuevo el formulario new
           # Se pasa como status unprocessable_entity para que TURBO entienda que el formulario no es correcto y se vuelva a renderizar (convención de turbo)
-        redirect_to new_fine_path(params[:user_id]), alert: t('.error los parametros no puede estar vacios')
-        #render :new,status: :unprocessable_entity
+          redirect_to new_fine_path(params[:user_id]), alert: t('.params_cant_be_empty')
+          #render :new,status: :unprocessable_entity
         end
         
     end

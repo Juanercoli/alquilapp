@@ -34,10 +34,13 @@ class UserMailer < ApplicationMailer
 
     mail to: @user.email
   end
+
   def reject_report
     @user = params[:user]
     @name = @user.name.capitalize
     @motive = params[:motive]
+    @report_type = params[:report_type]
+
     mail to: @user.email
   end
 
@@ -46,6 +49,7 @@ class UserMailer < ApplicationMailer
     @name = @user.name.capitalize
     @amount = params[:amount]
     @description = params[:description]
+    
     mail to: @user.email
   end
 
@@ -75,7 +79,11 @@ class UserMailer < ApplicationMailer
     @user = params[:user]
     @name = @user.name.capitalize
     @notify = params[:notify]
+    @report_type = params[:report_type]
 
+    if @report_type == "Nafta"
+      @notify = "Se le cargaran $3000 a la billetera para cargar la nafta"
+    end
     mail to: @user.email
   end
 
@@ -84,8 +92,9 @@ class UserMailer < ApplicationMailer
     @name = @user.name.capitalize
     @surname = @user.surname.capitalize
     @dni = @user.dni
-    @message = params[:messege]
+    @message = params[:message]
     @content = params[:report_content]
-    mail to: "seguros@alquilapp.com"
+
+    mail to: "seguros@argentina.com"
   end
 end

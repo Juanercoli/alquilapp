@@ -32,10 +32,13 @@
             </div>
       <% end %>
     <% end %> 
-
-    <%=link_to t('.add_card'), new_card_path ,class: "mt-2 mx-1 text-white font-bold bg-cyan-600 py-2 px-2 rounded hover:brightness-110 border-2 border-black focus:border-cyan-900 focus:outline-none focus:ring-cyan-900 cursor-pointer" if Current.user&.role? == 'client' && !Current.user.card %>
-    <%=link_to t('.edit_card'),edit_card_path(Current.user.id) ,class: "mt-2 mx-1 text-white font-bold bg-cyan-600 py-2 px-2 rounded hover:brightness-110 border-2 border-black focus:border-cyan-900 focus:outline-none focus:ring-cyan-900 cursor-pointer" if Current.user&.role? == 'client' && Current.user.card %>
-    <%=link_to t('.view_rental_activity'),rentals_path,class: "mt-2 mx-1 text-white font-bold bg-pink-600 py-2 px-2 rounded hover:brightness-150 border-2 border-black focus:border-pink-900 focus:outline-none focus:ring-pink-900 cursor-pointer" if Current.user&.role? == 'client' %>
+    <div class="flex flex-col justify-center items-center m-2 mt-4 whitespace-nowrap">
+      <div>
+        <%=link_to t('.add_card'), new_card_path ,class: "mt-2 mx-1 text-white font-bold bg-cyan-600 py-2 px-2 rounded hover:brightness-110 border-2 border-black focus:border-cyan-900 focus:outline-none focus:ring-cyan-900 cursor-pointer" if Current.user&.role? == 'client' && !Current.user.card %>
+        <%=link_to t('.edit_card'),edit_card_path(Current.user.id) ,class: "mt-2 mx-1 text-white font-bold bg-cyan-600 py-2 px-2 rounded hover:brightness-110 border-2 border-black focus:border-cyan-900 focus:outline-none focus:ring-cyan-900 cursor-pointer" if Current.user&.role? == 'client' && Current.user.card %>
+        <%=link_to t('.view_rental_activity'),rentals_path,class: "mt-2 mx-1 text-white font-bold bg-pink-600 py-2 px-2 rounded hover:brightness-150 border-2 border-black focus:border-pink-900 focus:outline-none focus:ring-pink-900 cursor-pointer" if Current.user&.role? == 'client' %>
+      </div>
+    </div>
   </article>
 
   

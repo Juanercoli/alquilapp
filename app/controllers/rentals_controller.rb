@@ -19,12 +19,11 @@ class RentalsController < ApplicationController
         @rental.multed_hours_quantity = 0
         @rental.is_active=true
         @rental.save!  
-        @rental.car.update_attribute(:is_rented, true) 
         pp @rental     
-        redirect_to find_car_path(@rental.id), notice: t('El auto ha sido alquilado exitosamente')
+        redirect_to find_car_path(@rental.id), notice: t('.rented')
       else
         # Posible error , creo q ya esta arreglado
-        redirect_to new_rental_path(params[:car_id]), alert: t('Usted no posee el saldo suficiente , recargue su saldo')
+        redirect_to new_rental_path(params[:car_id]), alert: t('.not_enough_balance')
       end
     end
   end
@@ -38,9 +37,10 @@ class RentalsController < ApplicationController
       rental
       pp rental.car.patent
       if rental.car.patent == params[:patent]
-        redirect_to car_tracking_path(@rental.id), notice: t('Se ha desbloqueado exitosamente el vehículo')
+        @rental.car.update_attribute(:is_rented, true) 
+        redirect_to car_tracking_path(@rental.id), notice: t('.unlocked')
       else
-        redirect_to find_car_path(@rental.id), alert: t('La patente ingresada es invalida. Ingrésela nuevamente')
+        redirect_to find_car_path(@rental.id), alert: t('.invalid_patent')
       end
 
   end
@@ -59,15 +59,15 @@ class RentalsController < ApplicationController
     if (sumatoria+@rental.initial_hours_quantity <= 24 )
       if (Current.user.wallet.balance >= aux*250)
          @rental.extra_hours_quantity=sumatoria
-         redirect_to car_tracking_path(@rental.id), notice: t("Tiempo agregado")
+         redirect_to car_tracking_path(@rental.id), notice: t('.added_time')
          @wallet.balance= @wallet.balance - aux* 250
          @rental.save!
          @wallet.save!
      else
-        redirect_to edit_rental_path(@rental.id), alert: t("saldo insuficiente")
+        redirect_to edit_rental_path(@rental.id), alert: t('.not_enough_balance')
       end
     else 
-      redirect_to edit_rental_path(@rental.id), alert: t('Se ha excedido el tiempo máximo de alquiler')
+      redirect_to edit_rental_path(@rental.id), alert: t('.exceds_rental_time')
     end
   end
 

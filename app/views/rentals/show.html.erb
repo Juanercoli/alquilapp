@@ -1,53 +1,53 @@
-<!-- Título detalles de auto -->
+<!-- Título detalles de renta -->
 <section class="mx-4 mb-2 p-4 bg-gray-800 text-gray-200 rounded-b-lg border-2 border-black">
   <h4 class="text-2xl uppercase text-center">
-    <%= t('Resumen del viaje') %>
+    <%= t('.title') %>
   </h4>
 </section>
 
-<!-- Detalles de auto -->
+<!-- Detalles de renta -->
 <section class="flex flex-col p-2 pt-4 md:px-4 md:pt-4 mx-4">
   <article class="bg-gray-600 text-gray-200 flex rounded-lg shadow-xl overflow-hidden mb-8 bg-gradient-to-r from-orange-800 to-orange-400 md:flex-nowrap flex-wrap border-2 border-black">
     <%= image_tag @rental.car.photo, alt: "car", class: "relative w-full md:max-w-xs md:max-h-full max-h-48 object-cover border-1 border-black print:hidden" %>
     <div class="flex flex-col w-full justify-center">
       <ul class="flex flex-col gap-2 px-2 my-2">
         <li class="bg-gray-600 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 rounded-lg border-2 border-black">
-          <dt class="text-sm font-medium text-orange-300"><%= t('Horas Rentadas') %></dt>
+          <dt class="text-sm font-medium text-orange-300"><%= t('.rented_hours') %></dt>
           <dd class="mt-1 text-sm text-gray-200 sm:col-span-2 sm:mt-0"><%= @rental.initial_hours_quantity %></dd>
         </li>
         <li class="bg-gray-600 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 rounded-lg border-2 border-black">
-          <dt class="text-sm font-medium text-orange-300"><%= t('Horas Extras') %></dt>
+          <dt class="text-sm font-medium text-orange-300"><%= t('.rented_extra_hours') %></dt>
           <dd class="mt-1 text-sm text-gray-200 sm:col-span-2 sm:mt-0"><%= @rental.extra_hours_quantity %></dd>
         </li>
         
           <li class="bg-gray-600 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 rounded-lg border-2 border-black">
-            <dt class="text-sm font-medium text-orange-300"><%= t('.penalizacion') %></dt>
+            <dt class="text-sm font-medium text-orange-300"><%= t('.penalization') %></dt>
             <dd class="mt-1 text-sm text-gray-200 sm:col-span-2 sm:mt-0"><%= @rental.multed_hours_quantity*100*4 %>$</dd>
           </li>
           <li class="bg-gray-600 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 rounded-lg border-2 border-black">
-            <dt class="text-sm font-medium text-orange-300"><%= t('Precio Final') %></dt>
+            <dt class="text-sm font-medium text-orange-300"><%= t('.final_price') %></dt>
             <dd class="mt-1 text-sm text-gray-200 sm:col-span-2 sm:mt-0"><%= @rental.price %>$</dd>
           </li>
         
         <li class="bg-gray-600 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 rounded-lg border-2 border-black">
-          <dt class="text-sm font-medium text-orange-300"><%= t('Numero Vehiculo') %></dt>
+          <dt class="text-sm font-medium text-orange-300"><%= t('.vehicle_number') %></dt>
           <dd class="mt-1 text-sm text-gray-200 sm:col-span-2 sm:mt-0"><%= @rental.car.vehicle_number %></dd>
         </li>
         <li class="bg-gray-600 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 rounded-lg border-2 border-black">
-          <dt class="text-sm font-medium text-orange-300"><%= t('Fecha inicio') %></dt>
+          <dt class="text-sm font-medium text-orange-300"><%= t('.date_start') %></dt>
           <dd class="mt-1 text-sm text-gray-200 sm:col-span-2 sm:mt-0"><%= @rental.created_at.localtime.to_formatted_s(:db) %></dd>
         </li>
         <li class="bg-gray-600 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 rounded-lg border-2 border-black">
-          <dt class="text-sm font-medium text-orange-300"><%= t('Fecha final') %></dt>
+          <dt class="text-sm font-medium text-orange-300"><%= t('.date_end') %></dt>
           <dd class="mt-1 text-sm text-gray-200 sm:col-span-2 sm:mt-0"><%= @rental.updated_at.localtime.to_formatted_s(:db) %></dd>
+        </li>
+        <li>
+          <div class="flex m-2">
+            <%=link_to t('.back_to_home'), root_path, class: "mx-1 text-orange-100 font-bold bg-yellow-500 py-2 px-2 rounded hover:brightness-110 border-2 border-black focus:z-10 focus:border-orange-900 focus:outline-none focus:ring-orange-900 print:hidden" if Current.user&.role? == 'client' && !Current.user.rentals.find_by(is_active:true) %>
+            <%= link_to t('.print'), "#", onclick: "window.print()", class: "mx-1 text-orange-100 font-bold bg-blue-500 py-2 px-2 rounded hover:brightness-110 border-2 border-black focus:z-10 focus:border-orange-900 focus:outline-none focus:ring-orange-900 print:hidden" if Current.user&.role? == 'client' && !Current.user.rentals.find_by(is_active:true) %>
+          </div>          
         </li>
       </ul>
     </div>
   </article>
 </section>
-
-<%=link_to "Volver al Inicio", root_path,class: "mt-2 mx-2 text-orange-500 font-bold print:hidden" if Current.user&.role? == 'client' %>
-<%= link_to "Imprimir",
-      "#",
-      class: "mt-2 mx-2 text-blue-500 font-bold print:hidden",
-      onclick: "window.print()" %>

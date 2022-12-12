@@ -7,8 +7,8 @@
           
           <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.price') %></th>
           <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.vehicle_number') %></th>
-          <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.start time') %></th>
-          <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.final hour') %></th>
+          <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.start_date') %></th>
+          <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.end_date') %></th>
         </tr>
       </thead>
       <tbody class="divide-y divide-gray-100">  
@@ -16,7 +16,7 @@
           <%# En caso de haber multas  %>
           <% rentals.each do |rental| %>
             <tr class="hover:bg-gray-400">
-              <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"><%= rental.price %></td>
+              <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase">$<%= rental.price %></td>
               <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"><%= rental.car.vehicle_number %></td>
               <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"><%= rental.created_at.localtime.to_formatted_s(:db) %></td>
               <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"><%= rental.updated_at.localtime.to_formatted_s(:db) %></td>

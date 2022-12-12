@@ -15,9 +15,9 @@ class WalletManagement::WalletsController < ApplicationController
           @card.card_balance=@card.card_balance - wallet_params[:charge_wallet].to_i
           @card.save
           @wallet.save
-          redirect_to wallet_path(params[:id]), notice:"Saldo cargado exitosamente"
+          redirect_to wallet_path(params[:id]), notice: t('.successfully_charged')
       else 
-          redirect_to wallet_path(params[:id]), alert:"El saldo de su tarjeta no es suficiente para realizar esta carga"
+          redirect_to wallet_path(params[:id]), alert: t('.not_enough_balance')
       end
   end
 

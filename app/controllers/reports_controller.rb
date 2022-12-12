@@ -12,7 +12,7 @@ class ReportsController < ApplicationController
     @report.car_id = Current.user.rentals.find_by(is_active:true).car.id
     @report.state = true
     if @report.save
-      redirect_to car_tracking_path(Current.user.rentals.find_by(is_active:true).id), notice: 'Reporte enviado'
+      redirect_to car_tracking_path(Current.user.rentals.find_by(is_active:true).id), notice: t('.sent')
     else
       # Sino se renderiza de nuevo el formulario new
       # Se pasa como status unprocessable_entity para que TURBO entienda que el formulario no es correcto y se vuelva a renderizar (convención de turbo)
@@ -37,14 +37,14 @@ class ReportsController < ApplicationController
       report.user.wallet.save!
       previous_user = CarUsageHistory.where(car_id:report.car.id).order("created_at").last.user
       previous_user.wallet.update_attribute(:balance, previous_user.wallet.balance - 3000) ## Se le resta 3000 al que se mando la makana
-      @fine = Fine.create(user_id: previous_user.id, fine_price: 3000, fine_date: Time.now, description: 'Multa por falta de nafta')
+      @fine = Fine.create(user_id: previous_user.id, fine_price: 3000, fine_date: Time.now, description: 'no cargar la nafta')
       UserMailer.with(user: @fine.user,amount: @fine.fine_price ,description: @fine.description ).fined.deliver_later
 
     elsif (report.report_type == "Accidente")
       ##Acciones correspondientes al reporte de un accidente
       @report.car.is_visible = false ##El auto se volvera invisible para los usuarios
       @report.car.save!
-      UserMailer.with(user: report.user, message: 'ha habido un accidente con el auto los datos adjunto los datos los datos requeridos para solicitar el seguro: ', report_content: report.content).sent_car_insurance.deliver_later
+      UserMailer.with(user: report.user, message: 'Ha habido un accidente con un auto de la empresa, le adjunto datos del conductor', report_content: report.content).sent_car_insurance.deliver_later
     elsif (report.report_type == "Falla mécanica")
       ##acciones correspondientes al reporte de una falla mécanica
       @report.car.is_visible = false
@@ -52,7 +52,7 @@ class ReportsController < ApplicationController
 
     end
     report.save!
-    UserMailer.with(user: report.user, notify: 'su reporte fue aceptado, recibira soporte a la brevedad').accept_report.deliver_later
+    UserMailer.with(user: report.user, report_type: report.report_type, notify: 'Recibira soporte a la brevedad').accept_report.deliver_later
     redirect_to reports_path
   end
   
@@ -62,7 +62,7 @@ class ReportsController < ApplicationController
     report.state = false
     report.save!
     # Enviar mail de por qué rechaza el reporte
-    UserMailer.with(user: report.user, motive: 'reporte rechazado').reject_report.deliver_later
+    UserMailer.with(user: report.user, report_type: report.report_type, motive: 'el contenido del reporte es invalido').reject_report.deliver_later
     redirect_to reports_path
   end
   private

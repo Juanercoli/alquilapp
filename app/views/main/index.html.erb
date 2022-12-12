@@ -1,1 +1,6 @@
- 
+<% if Current.user&.role? == "client" && Current.user&.is_accepted %>
+  <div class="flex justify-center align-center mt-4">
+    <div data-controller="map" data-map-cars="<%= @cars %>" data-map-url="/cars/" data-map-target="placeholder class="leaflet-container" class="border-2 border-black rounded-lg" style="width: 600px; height: 400px; position: relative; outline: none;" >
+    </div>
+  </div>
+<% end %>

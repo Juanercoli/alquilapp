@@ -31,6 +31,7 @@ en:
       car: Car
       super_user: SuperUser
       card: Card
+      rental: Rental
     attributes:
       user:
         dni: 'DNI'
@@ -63,6 +64,9 @@ en:
         expiration_date: 'Expiration date'
         security_code: 'Security code'
         card_balance: 'Balance'   
+      rental:
+        initial_hours_quantity: 'Initial hours quantity' 
+        extra_hours_quantity: 'Extra hours quantity'         
   common: 
     confirm: 'Are you sure?'
     back: 'Go back'
@@ -82,6 +86,7 @@ en:
       view_pre_registered: 'View pre-registered'  
       view_supervisors: 'View supervisors'
       view_wallet: 'View wallet'
+      car_tracking: 'Car tracking'
   cars_usage_histories:
     show:
       title: 'Historial de movimientos del auto'
@@ -150,7 +155,34 @@ en:
       title: 'Unlock car'
       patent: 'Patent'        
       placeholder_patent: 'Example: aaa111 o aa111bb'
-      unlock: 'Unlock'         
+      unlock: 'Unlock'
+    car_tracking:
+      title: 'Car tracking display'
+      finish: 'Finish rent'
+      extend_time: 'Extend rent'
+      report: 'Report'
+    edit:
+      title: 'Extend rental hours'
+      extend_time: 'Extend time'
+    show:
+      title: 'Trip resume'
+      rented_hours: 'Initial hours'
+      rented_extra_hours: 'Extended hours'
+      penalization: 'Penalization'
+      final_price: 'Final price'
+      vehicle_number: 'Vehicle number'
+      date_start: 'Initial date'
+      date_end: 'Final date'
+      back_to_home: 'Back to home'
+      print: 'Print'      
+  reports:
+    new:
+      title: 'Create new report'
+      motive: 'Motive'
+      observations: 'Observations'
+      placeholder_observations: 'Insert here your observations'
+      photo: 'Attached photo'
+      submit: 'Send'                     
   authentication:
     users:
       update_license:

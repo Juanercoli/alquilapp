@@ -9,7 +9,7 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
-    
+
     <%# Para poder agregar elementos al <head> utilizo un yield %>
     <% if content_for? :head %>
       <%= yield :head %>

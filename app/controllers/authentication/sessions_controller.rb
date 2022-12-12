@@ -20,8 +20,10 @@ class Authentication::SessionsController < ApplicationController
       redirect_to new_session_path, alert: t('.failed_not_exists') 
     elsif valid_user
       # Cuando el usuario se autentica también creamos la sesión
-      if @user.driver_license_expirated?
-        @user.update_attribute(:must_modify_license, true)
+      if @user.role? == "client" 
+        if @user&.driver_license_expirated?
+          @user.update_attribute(:must_modify_license, true)
+        end
       end
       session[:user_id] = @user.id
       session[:user_role] = @user.role?

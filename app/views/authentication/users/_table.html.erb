@@ -43,12 +43,12 @@
                 <%= button_to t('.block'), block_client_path(user.id), method: :patch, form_class: "contents", class: "inline p-1 focus:outline-none text-white bg-violet-400 hover:bg-violet-500 focus:ring-4 focus:ring-violet-300 font-medium rounded-lg text-sm dark:focus:ring-violet-900 border border-black uppercase" if Current.user&.role? == "supervisor" %>                            
                 <%= button_to t('.accept_license'), accept_license_user_path(user.id), method: :patch, form_class: "contents", class: "inline p-1 focus:outline-none text-white bg-purple-300 hover:bg-purple-500 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm dark:focus:ring-purple-900 border border-black uppercase" if Current.user&.role? == "supervisor" && user.pending_license_modification %>
                 <%= button_to t('.reject_license'), reject_license_user_path(user.id), method: :patch, form_class: "contents", class: "inline p-1 focus:outline-none text-white bg-pink-400 hover:bg-pink-500 focus:ring-4 focus:ring-pink-300 font-medium rounded-lg text-sm dark:focus:ring-pink-900 border border-black uppercase" if Current.user&.role? == "supervisor" && user.pending_license_modification %>
+                <%= link_to t('.view_fines'), fines_path(user.id), class: "p-1.5 focus:outline-none text-white bg-pink-400 hover:bg-pink-500 focus:ring-4 focus:ring-pink-300 font-medium rounded-lg text-sm dark:focus:ring-pink-900 border border-black" if Current.user&.role? == "supervisor" %>
+                <%= link_to t('.create_fine'), new_fine_path(user.id) , class: "p-1.5 focus:outline-none text-white bg-blue-400 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm dark:focus:ring-blue-900 border border-black" if Current.user&.role? == "supervisor" %>
                 <%= link_to t('.delete'), delete_client_path(user.id), data: {
                                   turbo_method: :delete,
                                   turbo_confirm: t('common.confirm')
                                   }, class: "p-1.5 focus:outline-none text-white bg-red-400 hover:bg-red-500 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm dark:focus:ring-red-900 border border-black" if Current.user&.role? == "supervisor" %>
-                <%= link_to t('.ver multas'), fines_path(user.id), class: "p-1.5 focus:outline-none text-white bg-pink-400 hover:bg-pink-500 focus:ring-4 focus:ring-pink-300 font-medium rounded-lg text-sm dark:focus:ring-yellow-900 border border-black" if Current.user&.role? == "supervisor" %>
-                <%= link_to t('.hacer multa'), new_fine_path(user.id) , class: "p-1.5 focus:outline-none text-white bg-blue-400 hover:bg-pink-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm dark:focus:ring-yellow-900 border border-black" if Current.user&.role? == "supervisor" %>
               </td>
             </tr>
           <% end %>
@@ -112,8 +112,8 @@
             turbo_method: :delete,
             turbo_confirm: t('common.confirm')
             }, class: "p-1.5 focus:outline-none text-white bg-red-400 hover:bg-red-500 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm dark:focus:ring-red-900 border border-black" if Current.user&.role? == "supervisor" %>
-            <%= link_to t('.ver multas'), fines_path(user.id), class: "p-1.5 focus:outline-none text-white bg-pink-400 hover:bg-pink-500 focus:ring-4 focus:ring-pink-300 font-medium rounded-lg text-sm dark:focus:ring-yellow-900 border border-black" if Current.user&.role? == "supervisor" %>
-            <%= link_to t('.hacer multa'), new_fine_path(user.id) , class: "p-1.5 focus:outline-none text-white bg-blue-400 hover:bg-pink-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm dark:focus:ring-yellow-900 border border-black" if Current.user&.role? == "supervisor" %>
+            <%= link_to t('.ver multas'), fines_path(user.id), class: "p-1.5 focus:outline-none text-white bg-pink-400 hover:bg-pink-500 focus:ring-4 focus:ring-pink-300 font-medium rounded-lg text-sm dark:focus:ring-pink-900 border border-black" if Current.user&.role? == "supervisor" %>
+            <%= link_to t('.hacer multa'), new_fine_path(user.id) , class: "p-1.5 focus:outline-none text-white bg-blue-400 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm dark:focus:ring-blue-900 border border-black" if Current.user&.role? == "supervisor" %>
           </div>
         </div>
       <% end %>

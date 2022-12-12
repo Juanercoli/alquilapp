@@ -35,6 +35,7 @@ es:
       super_user: SuperUsuario
       card: Tarjeta
       rental: Alquiler
+      report: Reporte
     attributes:
       user:
         dni: 'DNI'
@@ -69,6 +70,10 @@ es:
         card_balance: 'Balance de tarjeta'
       rental:
         initial_hours_quantity: 'Cantidad de horas de alquiler' 
+        extra_hours_quantity: 'Cantidad de horas de alquiler extra' 
+      report:
+        content: 'Observaciones'
+        photo: 'Foto'
   common: 
     confirm: '¿Quieres realizar esta acción?'
     back: 'Ir atras'
@@ -88,6 +93,8 @@ es:
       view_pre_registered: 'Ver pre-registrados'
       view_supervisors: 'Ver supervisores'
       view_wallet: 'Ver billetera'
+      car_tracking: 'Viaje actual'
+      view_reports: 'Ver reportes'
   cars_usage_histories:
     show:
       title: 'Historial de movimientos del auto'
@@ -115,6 +122,8 @@ es:
       edit: 'Editar'
       visibility: 'Visibilidad'
       delete: 'Eliminar'
+      is_rented: 'Alquilado'
+      not_rented: 'No alquilado'
     index:
       title: 'Flota de autos'
       no_records_available: 'No hay autos disponibles'
@@ -142,13 +151,35 @@ es:
       placeholder_color: 'Color'
       submit: "Guardar"
   wallet_management:
+    cards:
+      edit:
+        submit: 'Editar'
     wallets:
+      cargar_saldo:
+        successfully_charged: '¡Billetera cargada exitosamente!'
+        not_enough_balance: '¡No tienes suficiente dinero en la tarjeta!'
       show:
         title: 'Detalles de la billetera'
+        charge_with_card: 'Cargar con tarjeta'
         add_card: 'Agregar tarjeta'
         edit_card: 'Editar tarjeta'
         view_rental_activity: 'Ver movimientos de alquiler'
   rentals:
+    update:
+      added_time: '¡Tiempo agregado exitosamente!'
+      exceds_rental_time: '¡La cantidad de horas de alquiler de un auto no puede exceder las 24hs!'
+    table:
+      title: 'Movimientos de alquiler'
+      price: 'Precio'
+      vehicle_number: 'Número de vehículo'
+      start_date: 'Fecha de inicio'
+      end_date: 'Fecha de fin'
+    car_unlock:
+      invalid_patent: '¡La patente ingresada no corresponde con el auto alquilado!'
+      unlocked: '¡Auto desbloqueado!'
+    create:
+      not_enough_balance: '¡Saldo insuficiente, recargue la billetera e intentelo nuevamente!'
+      rented: '¡Auto alquilado!'
     new:
       title: 'Seleccion de horas de alquiler'
       pay: 'Pagar'
@@ -157,6 +188,69 @@ es:
       patent: 'Patente'        
       placeholder_patent: 'Por ejemplo: aaa111 o aa111bb'
       unlock: 'Desbloquear'
+    car_tracking:
+      title: 'Pantalla de seguimiento del auto'
+      finish: 'Finalizar viaje'
+      extend_time: 'Extender alquiler'
+      report: 'Reportar'
+    edit:
+      title: 'Extensión de horas de alquiler'
+      extend_time: 'Extender tiempo'
+    show:
+      title: 'Resumen del viaje'
+      rented_hours: 'Horas iniciales'
+      rented_extra_hours: 'Horas extendidas'
+      penalization: 'Penalización'
+      final_price: 'Precio final'
+      vehicle_number: 'Número de vehículo'
+      date_start: 'Fecha de inicio'
+      date_end: 'Fecha de fin'
+      back_to_home: 'Volver al inicio'
+      print: 'Imprimir'
+  reports:
+    index:
+      title: 'Tabla de reportes'
+    table:
+      dni: 'DNI'
+      date: 'Fecha de reporte'
+      report_type: 'Tipo de reporte'
+      state: 'Estado'
+      actions: 'Acciones'
+      view_details: 'Ver detalles'
+      accept: 'Aceptar'
+      reject: 'Rechazar'
+    create:
+      sent: '¡Reporte enviado!'
+    new:
+      title: 'Crear nuevo reporte'
+      motive: 'Motivo'
+      observations: 'Observaciones'
+      placeholder_observations: 'Ingrese aqui sus observaciones'
+      photo: 'Foto adjunta'
+      submit: 'Enviar'
+  fines:
+    new:
+      description: 'Descripción'
+      placeholder_description: 'Ingrese aqui una descripción de la multa'
+      fine_price: 'Precio de multa'
+      placeholder_fine_price: 'Precio de multa'
+      submit: 'Multar'
+    create:
+      created: '¡Multa realizada exitosamente!'
+      params_cant_be_empty: '¡Debes ingresar algun valor válido!'
+    index:
+      title: 'Multas'
+    table:
+      name: 'Nombre'
+      surname: 'Apellido'
+      dni: 'DNI'
+      fine_price: 'Precio de multa'
+      fine_date: 'Fecha de multa'
+      actions: 'Acciones'
+      cancel_fine: 'Deshacer multa'
+      no_records_available: 'No hay multas realizadas'
+    destroy:
+      destroyed: '¡Multa deshecha, se le ha reintegrado el dinero al usuario!'
   authentication:
     users:
       accept_license:
@@ -242,6 +336,8 @@ es:
         block: 'Bloquear/Desbloquear'
         accept_license: 'Aceptar licencia'
         reject_license: 'Rechazar licencia'
+        view_fines: 'Ver multas'
+        create_fine: 'Crear multa'
         delete: 'Eliminar'
         no_records_available: 'No hay usuarios disponibles'
       index:
@@ -357,4 +453,15 @@ es:
       reject_license:
         subject: 'Solicitud de cambio de datos de licencia fue rechazada'
         reject_license_message: 'Hola %{name}, le informamos que su solicitud de cambio de datos de licencia de conducir fue rechazada, los datos de la solicitud deben ser válidos ¡Intentelo de nuevo!'
-
+      reject_report:
+        subject: 'Reporte rechazado'
+        reject_report_message: 'Hola %{name}, le informamos que su reporte de tipo: %{report_type}, ha sido rechazado porque %{motive}'
+      accept_report:
+        subject: 'Reporte aceptado'
+        accept_report_message: 'Hola %{name}, le informamos que su reporte de tipo: %{report_type}, ha sido aceptado. %{notify}'
+      fined:
+        subject: 'Usted ha sido multado'
+        fined_message: 'Hola %{name}, le informos que se le han descontado $%{amount} por %{description}'
+      sent_car_insurance:
+        subject: 'Accidente de auto | ALQUILAPP'
+        secure_message: 'Hola seguro de autos. %{message}. DNI: %{dni}, NOMBRE: %{name}, APELLIDO: %{surname}. Le paso copia del reporte del usuario: %{content}'

@@ -81,6 +81,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_10_034033) do
     t.boolean "is_deleted", default: false, null: false
     t.boolean "is_visible", default: true, null: false
     t.boolean "is_rented", default: false, null: false
+    t.decimal "lat", precision: 10, scale: 6, default: "-34.903545"
+    t.decimal "lng", precision: 10, scale: 6, default: "-57.937685"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["patent"], name: "index_cars_on_patent", unique: true
@@ -159,6 +161,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_10_034033) do
     t.string "rejected_message", default: "", null: false
     t.boolean "pending_license_modification", default: false, null: false
     t.boolean "must_modify_license", default: false, null: false
+    t.decimal "lat", precision: 10, scale: 6, default: "-34.903545"
+    t.decimal "lng", precision: 10, scale: 6, default: "-57.937685"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["dni"], name: "index_users_on_dni", unique: true

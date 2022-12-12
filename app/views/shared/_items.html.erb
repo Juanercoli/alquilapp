@@ -5,7 +5,13 @@
 <% end %>
 
 <!-- Botones del header -->
-<%= link_to t('.Viaje Actual'), car_tracking_path(Current.user.rentals.find_by(is_active:true).id), class: "mx-1 text-green-600 font-bold bg-orange-300 py-2 px-2 rounded hover:brightness-110 border border-black focus:border-orange-900 focus:outline-none focus:ring-orange-900" if Current.user&.role? == 'client' && Current.user.rentals.find_by(is_active:true)%>
+<% if Current.user&.role? == 'client' && Current.user.rentals.find_by(is_active:true) %>
+  <% if Current.user.rentals.find_by(is_active:true).car.is_rented %>
+    <%= link_to t('.car_tracking'), car_tracking_path(Current.user.rentals.find_by(is_active:true).id), class: "mx-1 text-white font-bold bg-green-500 py-2 px-2 rounded hover:brightness-110 border border-black focus:border-orange-900 focus:outline-none focus:ring-orange-900" %>
+  <% else %>
+    <%= link_to t('.car_tracking'), find_car_path(Current.user.rentals.find_by(is_active:true).id), class: "mx-1 text-white font-bold bg-green-500 py-2 px-2 rounded hover:brightness-110 border border-black focus:border-orange-900 focus:outline-none focus:ring-orange-900" %>
+  <% end %>
+<% end %>
 <%= link_to t('.home'), root_path, class: "mx-1 text-orange-600 font-bold bg-orange-300 py-2 px-2 rounded hover:brightness-110 border border-black focus:border-orange-900 focus:outline-none focus:ring-orange-900" %>
 <%= link_to t('.view_cars'), cars_path, class: "mx-1 text-orange-600 font-bold bg-orange-300 py-2 px-2 rounded hover:brightness-110 border border-black focus:border-orange-900 focus:outline-none focus:ring-orange-900" if Current.user&.role? == "client" && Current.user&.is_accepted && !(Current.user&.must_modify_license || Current.user&.pending_license_modification )%>
 <%= link_to t('.view_profile'), show_client_path(Current.user.id), class: "mx-1 text-orange-600 font-bold bg-orange-300 py-2 px-2 rounded hover:brightness-110 border border-black focus:border-orange-900 focus:outline-none focus:ring-orange-900" if Current.user&.role? == "client" %>

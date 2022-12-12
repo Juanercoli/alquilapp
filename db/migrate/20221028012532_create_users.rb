@@ -16,6 +16,8 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.string :rejected_message, default: "", null: false
       t.boolean :pending_license_modification, default: false, null: false
       t.boolean :must_modify_license, default: false, null: false
+      t.decimal :lat, precision: 10, scale: 6, default: -34.903545
+      t.decimal :lng, precision: 10, scale: 6, default: -57.937685      
 
       t.timestamps
     end

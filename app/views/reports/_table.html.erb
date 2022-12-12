@@ -4,17 +4,19 @@
     <table class="w-full">
       <thead class="text-xs uppercase bg-gray-800 text-gray-200">
         <tr class="border-2 border-black">
-          <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= 't(.date)' %></th>
-          <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= 't(.report_type)' %></th>
-          <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= 'Estado' %></th>
-          <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= 'Acciones' %></th>
+          <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.dni') %></th>
+          <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.date') %></th>
+          <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.report_type') %></th>
+          <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.state') %></th>
+          <th class="w-20 p-3 text-sm font-bold tracking-wide text-left whitespace-nowrap"><%= t('.actions') %></th>
       </thead>
       <tbody class="divide-y divide-gray-100">  
         <% if @reports.count > 0 %>
           <%# En caso de haber reportes  %>
           <% @reports.each do |report| %>
             <tr class="<%= class_names('hover:bg-gray-400', {'bg-red-200': !report.state}) %>">
-              <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"><%= report.date %></td>
+              <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"><%= report.user.dni %></td>
+              <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"><%= report.date.localtime.to_formatted_s(:db) %></td>
               <td class="p-3 text-sm text-gray-700 whitespace-nowrap uppercase"><%= report.report_type %></td>
               <%# Si el reporte no fue visto%>
               <% if report.pending %>
